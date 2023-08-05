@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "c59e378a3530bef3",
+        "id": "d32e006cb55f1a04",
         "type": "tabs",
         "children": [
           {
-            "id": "2c5a1080c2f8e9ff",
+            "id": "aeb5fffd25747b23",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "General/General.md",
+                "file": "General/Meetings/General.M01.md",
                 "mode": "source",
                 "source": false
               }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "General/General.md",
+                "file": "General/Meetings/General.M01.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "General/General.md",
+                "file": "General/Meetings/General.M01.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "General/General.md"
+                "file": "General/Meetings/General.M01.md"
               }
             }
           }
@@ -156,12 +156,15 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "2c5a1080c2f8e9ff",
+  "active": "aeb5fffd25747b23",
   "lastOpenFiles": [
-    "General/Meetings/General.M01.md",
     "General/General.md",
-    "Templates/% course-note.md",
+    "General/Meetings/General.M01.md",
     "Templates/% meeting-note.md",
+    "Templates/% course-note.md",
+    "General/Meetings",
+    "Untitled 1",
+    "Untitled",
     "General/Meetings/General.M07.md",
     "General/Meetings/General.M06.md",
     "General/Meetings/General.M05.md",
@@ -186,13 +189,9 @@
     "MATH2302/Lectures/MATH2302.L01.md",
     "MATH2302/MATH2302.md",
     "Excalidraw/Drawing 2023-07-28 12.40.19.excalidraw.md",
-    "DECO3801/Lectures/DECO3801.L01.md",
     "Excalidraw",
     "MATH2302/Lectures",
     "STAT3006/Lectures",
-    "STAT3006",
-    "MATH2302",
-    "DECO3801/Lectures",
-    "DECO3801"
+    "STAT3006"
   ]
 }

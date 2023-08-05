@@ -7,38 +7,11 @@ tags: [meeting]
 topics:
  - <% tp.file.cursor(2) %>
 ---
-# General Meeting 1
+# Project Brief Overview Meeting
 - [i] course:: [[General]]
 - [i] date:: 2023-08-05T16:39:38
 - [i] meeting:: 1
-
-
-
-## Bad Ones ##
-
-
-## Ok Ones ##
-
-## Good Ones ##
-- 2 
-- 5
-- 10
-- 11
-- 14
-- 17
-- 28
-- 29
-- 30
-- 33
-- 35
-- 40
-
-### 8 Biosecurity Awareness
-Interest: 
-Qualified: 
-Feasibility: 
-
-- 
+ 
 ---
 ### 40- Big Data for Social Change
 Interest: 4
