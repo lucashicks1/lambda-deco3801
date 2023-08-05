@@ -15,17 +15,17 @@ topics:
 ---
 ### 40- Big Data for Social Change
 Interest: 4
-Qualified: 1~2
-Feasibility: 1~2
+Qualified: 1\~2
+Feasibility: 1\~2
 
 - IoT - sensors to pick up data 
 - Installation over use of AR
 - Temperature, pH, salinity, and the presence of pollutants
 
 ### 35 - Collective Community Spaces
-Interest: 3~4
-Qualified: 4~5
-Feasibility: 4~5
+Interest: 3\~4
+Qualified: 4\~5
+Feasibility: 4\~5
 
 - Talking about improving general health of area
 - Quite vague which could be beneficial as we could adapt the problem space/solution
@@ -40,9 +40,9 @@ Feasibility: 1
 - A lot of work is modelling
 
 ### 29 - Remote Participation in Sporting Events
-Interest: 0~1
-Qualified: 0~1
-Feasibility: 1~2
+Interest: 0\~1
+Qualified: 0\~1
+Feasibility: 1\~2
 
 - Not very open
 - Seems to be networking (emphasis on performance for video)
@@ -59,15 +59,15 @@ Feasibility: 4
 - A lot of DECOness for accessibility 
 
 ### 21 Engaged Events - Olympic Memories
-Interest: 2~3
-Qualified: 1~2
+Interest: 2\~3
+Qualified: 1\~2
 Feasibility: 2
 
 - Retelling a story with recreation of footage
 - Emphasis on video editing potentially??
 
 ### 17 Collaborative Asymmetrical Serious Game
-Interest: 4~5
+Interest: 4\~5
 Qualified: 4
 Feasibility: 4
 
@@ -90,7 +90,7 @@ Feasibility: 5 !!!!!
 ### 11 Aphasia AI Reading Support:
 Interest: 2
 Qualified: 2
-Feasibility: 2~3
+Feasibility: 2\~3
 
 - LLM + Interface
 - Not much wiggle room - clear end/result
@@ -100,17 +100,17 @@ Feasibility: 2~3
 
 ### 10 Deep Fakes - Seeing is unbelieving
 Interest: 4
-Qualified: 1~2
-Feasibility: 1~2
+Qualified: 1\~2
+Feasibility: 1\~2
 
 - Video Data Processing could be a worry
 - Live Video !!!!
 - System with video forensic tools
 
 ### 9 Unmasking Dark Patterns ~ Dylan's Project
-Interest: 2~3
-Qualified: 4~5
-Feasibility: 4~5
+Interest: 2\~3
+Qualified: 4\~5
+Feasibility: 4\~5
 
 - A lot of room for growth
 - Not really an experience though
@@ -120,7 +120,7 @@ Feasibility: 4~5
 - Stats tracking + visualisations to show many / common design patterns
 
 ### 8 Biosecurity Awareness
-Interest: 2~3
+Interest: 2\~3
 Qualified: 4
 Feasibility: 4
 
@@ -142,17 +142,17 @@ Feasibility: 3
 
 ### 5 What is Music
 Interest: 3
-Qualified: 3~4 
-Feasibility: 3~4 
+Qualified: 3\~4 
+Feasibility: 3\~4 
 
 - Making more inclusive could be a challenge
 - Physical Fabrication involved too
 - Electronic tones??
 > The instrument must have the ability to produce notes, no recorded music being played at the press of a button.
 ### 2 What's the rush
-Interest: 4~5
+Interest: 4\~5
 Qualified: 3
-Feasibility: 1~2
+Feasibility: 1\~2
 
 - Game engine
 - Hardware involved
