@@ -158,3 +158,50 @@ Feasibility: 1\~2
 - Hardware involved
 - Physical construction also involved
 - Fair bit of work
+
+
+# Final Choices and Justification
+
+### 14.
+Our team comes from a strong human-computer interaction background that we feel positions us very well to approach the ambient interface problem 
+space in a compelling and effective way. The majority of our team are very experienced in conducting user research, user testing, and UX prototyping
+according to design principles; as such, we believe that we are well equipped to ideate and design a solution to the Social Family project brief that 
+is grounded in a strong understanding of the relevant user values and needs, and that we are capable of carrying out all necessary research to this 
+end. Moreover, all of our team's members are proficient in multiple high-level programming languages (particularly Python and Java) and are 
+knowledgeable about key data structures, algorithms, and design patterns to an extent that we feel will ensure we are prepared to handle the actual 
+implementation of the project back-end and integration with any peripherals. We also have several members who bring data processing and visualisation 
+skills that will serve us well as far as presenting users' calendar data in a way that facilitates enjoyable ambient interactions. Additionally, 
+across the team we have a strong capacity to handle the high level of physical fabrication that we feel could be explored in this project, as well 
+as proficiency with microcontrollers such that we feel incorporating Arduinos and other sensors in order to successfully realise these physical 
+elements of the project should be entirely feasible for us. We therefore believe that we meet all required expected skills for this project brief 
+and are confident that we will be able to deliver a solution that meets the success criteria.Finally, we are also unanimously interested in this 
+project, with all team members having contributed several ideas for different calendar management options and ambient interface designs in even 
+our earliest review of the brief; each of us feel extremely positive about the future ideation process that would come with this project and would
+be very excited to see where implementing it takes us.
+
+
+### 17.
+We feel that as a team our skill set satisfy the expected skills for this project, and our mutual interests further set us up well to ideate
+productively and expand innovatively on this project brief.  All members of the team have strong skills in high-level programming that we feel 
+position each of us to capably handle implementing different features of the collaborative game. Several of us have some level of experience with
+game engines and asset design, and those in the team who do not have prior experience have indicated that they are very interested in developing
+these skills further, drawing on strong existing programming skills to do so. All of us are also at least capable at network programming, and
+feel that between the six of us we will be able to support each other across developing further in this area and meeting the requirements of the
+brief. Additionally, some members of the team are well-equipped to implement the AI component of the game, through prior familiarity with 
+state-machine-based AI. Finally, we also feel that our broader background and experiences as a team align with this project, as we all have 
+direct experience dealing with key health and safety concerns in retail, hospitality, or other workplace environments that gives us valuable 
+insight into this problem space.
+
+
+### 35.
+Our team has a broad technical skillset that satisfies the full range of this project's expected skills, including the ability to process large 
+datasets, familiarity across the full tech stack, and competency working with geolocated data. In particular, several of our team members have a 
+high level of proficiency in various different forms of data science and visualisation that align well with the requirement for a physical interactive
+display. In terms of the full tech stack, all of us are confident with back-end programming in Java and Python, and the majority of us are familiar
+with JavaScript and React, and are inerested in building on these skills. We are also comfortable with geolocated data and proximity-triggered 
+events, and feel we have the capacity as a team to develop these skills further as needed. Additionally, we feel that our strong human-computer
+interaction background means we are well equipped to navigate the complex user needs at play in this problem space and conduct insightful user 
+research and testing that ensures our solution will reflect inclusive and community-oriented social motivation strategies that facilitate emotional 
+connection to a communal space.
+
+
