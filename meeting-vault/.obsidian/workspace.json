@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "General/Meetings/General.M01.md",
+                "file": "General/General.md",
                 "mode": "source",
                 "source": false
               }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "General/Meetings/General.M01.md",
+                "file": "General/General.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "General/Meetings/General.M01.md",
+                "file": "General/General.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "General/Meetings/General.M01.md"
+                "file": "General/General.md"
               }
             }
           }
@@ -158,8 +158,8 @@
   },
   "active": "aeb5fffd25747b23",
   "lastOpenFiles": [
-    "General/General.md",
     "General/Meetings/General.M01.md",
+    "General/General.md",
     "Templates/% meeting-note.md",
     "Templates/% course-note.md",
     "General/Meetings",

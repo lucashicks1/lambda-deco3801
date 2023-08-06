@@ -5,7 +5,8 @@ modified: 2023-08-05T16:39:38
 course: General
 tags: [meeting]
 topics:
- - <% tp.file.cursor(2) %>
+ - Project Briefs
+ - Project Justifications
 ---
 # Project Brief Overview Meeting
 - [i] course:: [[General]]
