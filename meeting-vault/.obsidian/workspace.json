@@ -11,11 +11,24 @@
             "id": "aeb5fffd25747b23",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "canvas",
               "state": {
-                "file": "General/General.md",
-                "mode": "source",
-                "source": false
+                "file": "Project Brief Ideation/Brief Breakdown Canvas.canvas",
+                "viewState": {
+                  "x": 374.20557834575305,
+                  "y": 197.54204410940082,
+                  "zoom": -1.5
+                }
+              }
+            }
+          },
+          {
+            "id": "639396f49481f7d4",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "Project Brief Ideation/Annotated Project Brief.pdf"
               }
             }
           }
@@ -93,7 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "General/General.md",
+                "file": "Project Brief Ideation/Brief Breakdown Canvas.canvas",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "General/General.md",
+                "file": "Project Brief Ideation/Brief Breakdown Canvas.canvas",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "General/General.md"
+                "file": "Project Brief Ideation/Brief Breakdown Canvas.canvas"
               }
             }
           }
@@ -156,15 +169,23 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "aeb5fffd25747b23",
+  "active": "f0763e9a223bab37",
   "lastOpenFiles": [
+    "Project Brief Ideation/AmbientDayplanner.pdf",
+    "Project Brief Ideation/p1307-sellen.pdf",
+    "Project Brief Ideation/978-1-84882-477-5.pdf",
+    "Project Brief Ideation/Using_digital_but_physical_surrogates_to.pdf",
+    "Project Brief Ideation/Annotated Project Brief.pdf",
+    "Project Brief Ideation/Brief Breakdown Canvas.canvas",
+    "Project Brief Ideation/An ambient interface, that seamlessly integrates into the background in a home environment, which enables the facilitation of social engagement among family members by managing the convergence and divergence of individual calendars..md",
+    "Project Brief Ideation",
     "General/Meetings/General.M01.md",
+    "Kanban.md",
     "General/General.md",
     "Templates/% meeting-note.md",
     "Templates/% course-note.md",
     "General/Meetings",
     "Untitled 1",
-    "Untitled",
     "General/Meetings/General.M07.md",
     "General/Meetings/General.M06.md",
     "General/Meetings/General.M05.md",
@@ -172,7 +193,6 @@
     "General/Meetings/General.M03.md",
     "General/Meetings/General.M02.md",
     "General/Meetings.md",
-    "Kanban.md",
     "General/Meetings/General.01.md",
     "General",
     "Meetings/General.01.md",
@@ -187,11 +207,6 @@
     "STAT3006/Lectures/STAT3006.L03.md",
     "MATH2302/Lectures/MATH2302.L02.md",
     "MATH2302/Lectures/MATH2302.L01.md",
-    "MATH2302/MATH2302.md",
-    "Excalidraw/Drawing 2023-07-28 12.40.19.excalidraw.md",
-    "Excalidraw",
-    "MATH2302/Lectures",
-    "STAT3006/Lectures",
-    "STAT3006"
+    "MATH2302/MATH2302.md"
   ]
 }
