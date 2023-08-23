@@ -1,4 +1,3 @@
-
 ---
 created: 2023-08-16T12:25:48
 modified: 2023-08-16T12:25:48
@@ -19,11 +18,11 @@ topics:
 - Create initial github issues and assign people to them
 - Review communication plan
 # Action Items:
-- [ ] join  Zotero @Ali @David
-- [ ] expand on technical assumptions @Alex
+- [x] join  Zotero @Ali @David
+- [x] expand on technical assumptions @Alex
 - [x] Create team documentation file @Maya
-- [ ] create discord channels and roles @Alex
-- [ ] submit first draft of SoW @Ali
+- [x] create discord channels and roles @Alex
+- [x] submit first draft of SoW @Ali
 ### Timeline graph review
 https://miro.com/app/board/uXjVMu12AoE=/
 KEY:
