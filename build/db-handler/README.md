@@ -42,6 +42,10 @@ To install MongoDB on Windows see [here](https://www.mongodb.com/docs/manual/tut
 
 ## Microservice API
 
+## Notes
+
+* Have a localhost:8000/updates GET endpoint that returns either 0 or 1 to see if updates have been made
+
 ### Overview
 
 Planning to use the FastAPI library in Python to create the web-based API. This will be running on a ASGI web server (probably Uvicorn). 
