@@ -3,24 +3,26 @@
 ## Family events
 
 * Torn on how to display time, mongo has DateTime but date is ugly
-
+```JSON
 {
     "day": "monday",
     "start_time": "09:15",
     "end_time": "09:45",
     "description:
 }
-
+```
 
 ## Individual events
 
 * Assume that for the individual events, blocks are always 15 minutes long (eg: start at 9:15, go till 9:30)
 
+```JSON
 {
     "day": "monday",
     "time": "09:15",
     "booked_users": ["user_1", "user_3"]
 }
+```
 
 ## Data use-cases
 
