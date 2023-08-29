@@ -8,7 +8,7 @@
     "day": "monday",
     "start_time": "09:15",
     "end_time": "09:45",
-    "description:
+    "description: "Timmy's birthday"
 }
 ```
 
