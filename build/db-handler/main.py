@@ -1,13 +1,20 @@
 from fastapi import FastAPI
+from app.routers import figures_router
 
-app = FastAPI()
+tags_metadata = [
+    {
+        "name": "Figure Display Endpoints",
+        "description": "All endpoints will be used by the figurine display"
+    }
+]
 
+app = FastAPI(
+    title="Lambda DB Handler",
+    openapi_tags=tags_metadata
+)
+
+app.include_router(figures_router.router)
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
-
-
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
+    return {"message": "Dylan loves deco"}
