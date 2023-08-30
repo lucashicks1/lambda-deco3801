@@ -1,6 +1,6 @@
 from uuid import uuid4
 
-from fastapi import FastAPI
+from fastapi import FastAPI, responses
 from app.routers import figures_router
 from app.dependencies.database import cal_col
 
@@ -18,8 +18,8 @@ app = FastAPI(
 
 app.include_router(figures_router.router)
 
-@app.get("/")
-async def test():
-    test_dict = {"name": str(uuid4())}
-    cal_col.insert_one(test_dict)
-    return {"message": "Dylan loves deco!!!"}
+
+@app.get("/", summary="Default landing page which will redirect you to the docs")
+async def main():
+    # Redirects you to doc page
+    return responses.RedirectResponse("/docs")
