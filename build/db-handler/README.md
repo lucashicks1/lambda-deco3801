@@ -64,9 +64,12 @@ Run the following to install the needed dependencies:
 
 #### Running the server
 
-To run the server that is serving the API, run the following:
+To run the server that is serving the API, run the following: 
 
-`uvicorn {main}:{app} --reload`
+`uvicorn app.main:app --reload`
+
+*Note: If you have issues where uvicorn can't be found, run* `python -m uvicorn app.main:app --reload`
+
 
 - *{main}* - name of the python file that has the FastAPI app instance
 - *{app}* - name of the FastAPI instance
@@ -87,3 +90,47 @@ data = {"key1": 1, "key2": 2}
 # Send data as request body through json parameter
 response = requests.post("localhost:8000/testEndpoint", json=data)
 ```
+
+# Overview on db structure
+
+## Events
+
+Both individual events and family events will be stored in the database in the same collection.
+
+```JSON
+{
+    "day": "monday",
+    "time_slot": "09:45",
+    "booked_users": ["user_1", "user_3"]
+}
+```
+
+For family events, the `"family"` string will be stored in array stored under the `booked_users` key. Additionally, for family events with a description, a `"description"` key-value pair will be added to the timeslot document.
+```JSON
+{
+    "day": "monday",
+    "time_slot": "09:45",
+    "booked_users": ["user_1", "user_3", "family"],
+    "description": "Timmy's birthday"
+}
+```
+
+## Data use-cases
+
+### Figures
+
+* GET endpoint to check if any updates were made -> if so figure display
+* Get all booked users for a specific timeslot
+
+### Clock Face Display Screen
+
+
+### Family lambda-board
+
+* GET aggregated calendar info -> could transform data into time chunks (eg: 1 document per 15 minute block)
+* POST timeslots to block out everyones availability
+
+### Individual lambda-board
+
+* GET an individuals timeslots (eg: find timeslots were a user is busy/booked)
+* POST a timeslot for a specific user
