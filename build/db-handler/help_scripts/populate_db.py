@@ -17,6 +17,8 @@ for day in DAYS:
             minute = 0
             hour += 1
 
+cal_col.update_many(filter={}, update={"$set": {"booked_users": ["lucas"]}})
+
 cursor = cal_col.find({})
 
 for doc in cursor:
