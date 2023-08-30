@@ -26,7 +26,7 @@ for day in constants.DAYS:
 cal_col.update_many(filter={}, update={"$set": {"booked_users": [constants.USERS[0]]}})
 
 for user in constants.USERS:
-    user_col.insert_one({"user": user})
+    user_col.insert_one({"user_id": user})
 
 cursor = cal_col.find({})
 
