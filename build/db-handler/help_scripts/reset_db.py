@@ -1,12 +1,11 @@
 from app.dependencies.database import cal_col, user_col
 import app.constants as constants
 
-DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
 
 cal_col.delete_many({})
 user_col.delete_many({})
 
-for day in DAYS:
+for day in constants.DAYS:
     minute: int = 0
     hour: int = 0
     timeslot_num: int = 0
