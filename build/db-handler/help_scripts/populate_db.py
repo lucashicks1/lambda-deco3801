@@ -1,6 +1,6 @@
-from app.dependencies.database import cal_col
+from app.dependencies.database import cal_col, user_col
+import app.constants as constants
 
-TIMESLOT_INCREMENT = 15
 DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
 
 for day in DAYS:
@@ -12,12 +12,15 @@ for day in DAYS:
             "time": f"{hour:02}:{minute:02}",
             "booked_users": []
         })
-        minute += 15
+        minute += constants.TIMESLOT_LEN
         if minute == 60:
             minute = 0
             hour += 1
 
-cal_col.update_many(filter={}, update={"$set": {"booked_users": ["lucas"]}})
+cal_col.update_many(filter={}, update={"$set": {"booked_users": [constants.USERS[0]]}})
+
+for user in constants.USERS:
+    user_col.insert_one({"user": user})
 
 cursor = cal_col.find({})
 
