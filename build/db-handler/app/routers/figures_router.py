@@ -15,9 +15,8 @@ router = APIRouter(
 async def get_available():
     print(utils.current_to_timeslot_num())
     users: dict = {}
-    day: str = time_lib.strftime("%A").lower()
     timeslot: str = utils.current_to_timeslot()
-    booked_users = cal_col.find_one({"day": day, "time": timeslot}).get("booked_users")
+    booked_users = cal_col.find_one({"day": time_lib.strftime("%A").lower(), "time": timeslot}).get("booked_users")
     for user in user_col.distinct("user"):
         status = 0 if user in booked_users else 1
         users[user] = status
