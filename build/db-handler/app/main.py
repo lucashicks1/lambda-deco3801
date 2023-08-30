@@ -7,7 +7,7 @@ from app.dependencies.database import cal_col
 tags_metadata = [
     {
         "name": "Figure Display Endpoints",
-        "description": "All endpoints will be used by the figurine display"
+        "description": "All endpoints used by the figurine display"
     }
 ]
 
