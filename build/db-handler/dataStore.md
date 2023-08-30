@@ -1,28 +1,18 @@
 # Overview on db structure
 
-## Family events
+## Events
 
-* Torn on how to display time, mongo has DateTime but date is ugly
-```JSON
-{
-    "day": "monday",
-    "start_time": "09:15",
-    "end_time": "09:45",
-    "description: "Timmy's birthday"
-}
-```
-
-## Individual events
-
-* Assume that for the individual events, blocks are always 15 minutes long (eg: start at 9:15, go till 9:30)
+Both individual events and family events will be stored in the database in the same collection.
 
 ```JSON
 {
     "day": "monday",
-    "time": "09:15",
+    "start_time": "09:45",
     "booked_users": ["user_1", "user_3"]
 }
 ```
+
+For family events, the `"family"` string will be stored in array stored under the `booked_users` key. Additionally, for family events with a description, a `"description"` key-value pair will be added to the timeslot document.
 
 ## Data use-cases
 
