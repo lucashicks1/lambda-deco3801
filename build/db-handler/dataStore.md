@@ -13,6 +13,14 @@ Both individual events and family events will be stored in the database in the s
 ```
 
 For family events, the `"family"` string will be stored in array stored under the `booked_users` key. Additionally, for family events with a description, a `"description"` key-value pair will be added to the timeslot document.
+```JSON
+{
+    "day": "monday",
+    "start_time": "09:45",
+    "booked_users": ["user_1", "user_3", "family"],
+    "description": "Timmy's birthday"
+}
+```
 
 ## Data use-cases
 
