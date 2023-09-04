@@ -1,4 +1,4 @@
-from PIL import image
+from PIL import Image
 import json
 import numpy as np
 
