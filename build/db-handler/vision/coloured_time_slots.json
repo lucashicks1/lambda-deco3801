@@ -1,0 +1,67 @@
+[
+    {
+        "day": "Monday",
+        "time_slot": 0,
+        "data": "u Tye |\n"
+    },
+    {
+        "day": "Tuesday",
+        "time_slot": 1,
+        "data": ""
+    },
+    {
+        "day": "Tuesday",
+        "time_slot": 2,
+        "data": ""
+    },
+    {
+        "day": "Wednesday",
+        "time_slot": 0,
+        "data": ""
+    },
+    {
+        "day": "Wednesday",
+        "time_slot": 1,
+        "data": ""
+    },
+    {
+        "day": "Wednesday",
+        "time_slot": 2,
+        "data": ""
+    },
+    {
+        "day": "Wednesday",
+        "time_slot": 3,
+        "data": ""
+    },
+    {
+        "day": "Thursday",
+        "time_slot": 1,
+        "data": ""
+    },
+    {
+        "day": "Thursday",
+        "time_slot": 2,
+        "data": ""
+    },
+    {
+        "day": "Thursday",
+        "time_slot": 3,
+        "data": ""
+    },
+    {
+        "day": "Saturday",
+        "time_slot": 3,
+        "data": ""
+    },
+    {
+        "day": "Saturday",
+        "time_slot": 4,
+        "data": ""
+    },
+    {
+        "day": "Sunday",
+        "time_slot": 4,
+        "data": ""
+    }
+]
