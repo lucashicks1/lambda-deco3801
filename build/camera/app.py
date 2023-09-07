@@ -1,7 +1,7 @@
 import cv2 as cv
 import imutils.video
 
-cam_port = 1
+cam_port = 0
 cam = cv.VideoCapture(cam_port)
 
 result, image = cam.read()
