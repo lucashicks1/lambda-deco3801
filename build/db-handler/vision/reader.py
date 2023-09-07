@@ -16,28 +16,21 @@ days_of_the_week = {
 
 
 def main(image: Image):
-    threshold = 100  # TODO This is summed RGB values. Think of intensity
-    rgb_image = image.convert("RGB")
-    # TODO Once opened, or maybe after closed. We should move image out of this
-    # folder
+    threshold = 100
 
-    """
-    This will contain real tuples of start x, y and end x, y defining top
-    left and bottom right corners of pixel locations for each time slot.
-    TODO: Consider a way to automate this? Maybe using a class approach?
-    """
     day_time_slots = [
-        ((420 * 0, 0), (420 * 1, 480)),
-        ((420 * 1, 0), (420 * 2, 480)),
-        ((420 * 2, 0), (420 * 3, 480)),
-        ((420 * 3, 0), (420 * 4, 480)),
-        ((420 * 4, 0), (420 * 5, 480)),
-        ((420 * 5, 0), (420 * 6, 480)),
-        ((420 * 6, 0), (420 * 7, 480)),
+        # TODO: Make these the actual top left and bottom right coords
+        ((420 * 0, 0), (420 * 1, 490)),
+        ((420 * 1, 0), (420 * 2, 490)),
+        ((420 * 2, 0), (420 * 3, 490)),
+        ((420 * 3, 0), (420 * 4, 490)),
+        ((420 * 4, 0), (420 * 5, 490)),
+        ((420 * 5, 0), (420 * 6, 490)),
+        ((420 * 6, 0), (420 * 7, 490)),
     ]
     day_time_crops = []
     coloured_time_slots = []
-    time_slot_height = 480
+    time_slot_height = 490
 
     for day, (top_left, bottom_right) in enumerate(day_time_slots):
         time_crops = []
@@ -71,7 +64,10 @@ def main(image: Image):
     print("Mon\tTue\tWed\tThu\tFri\tSat\tSun")
     for time in range(5):
         print(
-            f"{day_time_crops[0][time][1]}\t{day_time_crops[1][time][1]}\t{day_time_crops[2][time][1]}\t{day_time_crops[3][time][1]}\t{day_time_crops[4][time][1]}\t{day_time_crops[5][time][1]}\t{day_time_crops[6][time][1]}"
+            f"{day_time_crops[0][time][1]}\t{day_time_crops[1][time][1]}\t"
+            + f"{day_time_crops[2][time][1]}\t{day_time_crops[3][time][1]}\t"
+            + f"{day_time_crops[4][time][1]}\t{day_time_crops[5][time][1]}\t"
+            + f"{day_time_crops[6][time][1]}"
         )
     for i in range(5):
         for j in range(7):

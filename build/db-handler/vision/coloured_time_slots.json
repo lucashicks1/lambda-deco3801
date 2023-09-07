@@ -2,7 +2,12 @@
     {
         "day": "Monday",
         "time_slot": 0,
-        "data": "u Tye |\n"
+        "data": ""
+    },
+    {
+        "day": "Monday",
+        "time_slot": 4,
+        "data": ""
     },
     {
         "day": "Tuesday",
@@ -22,7 +27,7 @@
     {
         "day": "Wednesday",
         "time_slot": 1,
-        "data": ""
+        "data": "ns\n"
     },
     {
         "day": "Wednesday",
@@ -37,7 +42,7 @@
     {
         "day": "Thursday",
         "time_slot": 1,
-        "data": ""
+        "data": "wy\n\naS\n"
     },
     {
         "day": "Thursday",
