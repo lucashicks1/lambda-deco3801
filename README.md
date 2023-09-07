@@ -13,7 +13,7 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://gitlab.com/DylanFleming45313345/lambda-deco3801.git
+git remote add origin https://github.com/lucashicks1/lambda-deco3801
 git branch -M main
 git push -uf origin main
 ```

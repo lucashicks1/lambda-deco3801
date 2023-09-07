@@ -1,7 +1,7 @@
 from uuid import uuid4
 
 from fastapi import FastAPI, responses
-from app.routers import figures_router
+from app.routers import figures_router, whiteboard_router
 from app.dependencies.database import cal_col
 
 tags_metadata = [
@@ -17,6 +17,7 @@ app = FastAPI(
 )
 
 app.include_router(figures_router.router)
+app.include_router(whiteboard_router.router)
 
 
 @app.get("/", summary="Default landing page which will redirect you to the docs")
