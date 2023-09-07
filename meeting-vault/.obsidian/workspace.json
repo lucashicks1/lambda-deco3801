@@ -18,8 +18,19 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "70d75770aff5d88e",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.4.5"
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -156,7 +167,7 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "aeb5fffd25747b23",
+  "active": "70d75770aff5d88e",
   "lastOpenFiles": [
     "General/Meetings/General.M01.md",
     "General/General.md",
