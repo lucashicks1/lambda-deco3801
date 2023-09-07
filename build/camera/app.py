@@ -1,5 +1,4 @@
 import cv2 as cv
-import imutils.video
 
 cam_port = 1
 cam = cv.VideoCapture(cam_port)
