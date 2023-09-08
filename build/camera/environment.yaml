@@ -82,4 +82,4 @@ dependencies:
   - xz=5.4.2=h80987f9_0
   - zlib=1.2.13=h5a0b063_0
   - zstd=1.5.5=hd90d995_0
-prefix: /Users/lucas/miniconda3/envs/camera-handler
+prefix: camera-handler
