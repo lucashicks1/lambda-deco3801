@@ -2,6 +2,7 @@ from PIL import Image
 import json
 import matplotlib.pyplot as plt
 import numpy as np
+from tqdm import tqdm
 import pytesseract
 
 days_of_the_week = {
@@ -20,21 +21,22 @@ def main(image: Image):
 
     day_time_slots = [
         # TODO: Make these the actual top left and bottom right coords
-        ((420 * 0, 0), (420 * 1, 490)),
-        ((420 * 1, 0), (420 * 2, 490)),
-        ((420 * 2, 0), (420 * 3, 490)),
-        ((420 * 3, 0), (420 * 4, 490)),
-        ((420 * 4, 0), (420 * 5, 490)),
-        ((420 * 5, 0), (420 * 6, 490)),
-        ((420 * 6, 0), (420 * 7, 490)),
+        ((148 * 0, 0), (148 * 1, 50)),
+        ((148 * 1, 0), (148 * 2, 50)),
+        ((148 * 2, 0), (148 * 3, 50)),
+        ((148 * 3, 0), (148 * 4, 50)),
+        ((148 * 4, 0), (148 * 5, 50)),
+        ((148 * 5, 0), (148 * 6, 50)),
+        ((148 * 6, 0), (148 * 7, 50)),
     ]
     day_time_crops = []
     coloured_time_slots = []
-    time_slot_height = 490
+    time_slot_height = 50
 
     for day, (top_left, bottom_right) in enumerate(day_time_slots):
         time_crops = []
-        for time_slot in range(0, 5):
+        print(f"On day {day}")
+        for time_slot in tqdm(range(0, 35)):
             time_slot_crop = image.crop(
                 (
                     top_left[0],
@@ -59,7 +61,7 @@ def main(image: Image):
                     }
                 )
         day_time_crops.append(time_crops)
-    fig, axes = plt.subplots(5, 7, figsize=(8, 12))
+    fig, axes = plt.subplots(35, 7, figsize=(8, 12))
     axis_index = 0
     print("Mon\tTue\tWed\tThu\tFri\tSat\tSun")
     for time in range(5):
@@ -69,7 +71,7 @@ def main(image: Image):
             + f"{day_time_crops[4][time][1]}\t{day_time_crops[5][time][1]}\t"
             + f"{day_time_crops[6][time][1]}"
         )
-    for i in range(5):
+    for i in range(35):
         for j in range(7):
             axes.flat[axis_index].imshow(day_time_crops[j][i][0])
             axes.flat[axis_index].axis("off")
@@ -81,13 +83,18 @@ def main(image: Image):
 
 
 def normalise_image() -> Image:
-    img_path = "./PXL_20230905_085907760.MP.jpg"
+    """
+    normalise_image()
+    -----------------
+    method for normalising our input image.
+    """
+    img_path = "./images/test1.jpg"
     img = Image.open(img_path)
 
-    left = 73
-    top = 809
-    bottom = 3258
-    right = 3010
+    left = 1013
+    top = 219
+    bottom = 1940
+    right = 1990
 
     img = img.crop((left, top, right, bottom))
     img_array = np.array(img)
@@ -104,6 +111,5 @@ def normalise_image() -> Image:
 if __name__ == "__main__":
     image = normalise_image()
     # plt.imshow(image)
-    # plt.grid("on")
     # plt.show()
     main(image)
