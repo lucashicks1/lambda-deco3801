@@ -3,6 +3,7 @@ from app.dependencies.database import cal_col, user_col
 import time as time_lib
 import app.utils as utils
 from typing import Annotated
+from app.examples.whiteboard_payloads import POST_WHITEBOARD
 
 router = APIRouter(
     prefix="/whiteboard",
@@ -11,24 +12,7 @@ router = APIRouter(
 
 
 @router.post("/{user}")
-def modify_calendar(user: str, payload: Annotated[dict, Body(
-    examples=[
-        {
-            "body": [
-                {
-                    "day": "Monday",
-                    "time_slot": 0,
-                    "data": "captured text"
-                },
-                {
-                    "day": "Tuesday",
-                    "time_slot": 0,
-                    "data": "text"
-                }
-            ]
-        }
-    ]
-)]):
+def modify_calendar(user: str, payload: Annotated[dict, Body(examples=[POST_WHITEBOARD])]):
     users = user_col.distinct("user_id")
     users.append("family")
     if user not in users:
