@@ -7,6 +7,11 @@ def reset_db():
     cal_col.delete_many({})
     user_col.delete_many({})
 
+    # Adds users
+    for user in constants.USERS:
+        user_col.insert_one({"user_id": user})
+
+    # Adds timeslots
     for day in constants.DAYS:
         minute: int = 0
         hour: int = 0
@@ -16,7 +21,7 @@ def reset_db():
                 "day": day,
                 "time": f"{hour:02}:{minute:02}",
                 "slot_num": timeslot_num,
-                "booked_users": []
+                "booked_users": random.sample(constants.USERS, random.randint(0, len(constants.USERS)))
             }
             cal_col.insert_one(document)
             minute += constants.TIMESLOT_LEN
@@ -25,20 +30,13 @@ def reset_db():
                 hour += 1
             timeslot_num += 1
 
+
+    print("\nTIMESLOTS")
     cursor = cal_col.find({})
-    for doc in cursor:
-        cal_col.update_one(filter={"day": doc.get("day"), "time": doc.get("time")}, update={
-            "$set": {"booked_users": [random.sample(constants.USERS, random.randint(0, len(constants.USERS)))]}})
-
-    for user in constants.USERS:
-        user_col.insert_one({"user_id": user})
-
-    cursor = cal_col.find({})
-
     for doc in cursor:
         print(doc)
 
+    print("\nUSERS")
     cursor = user_col.find({})
-
     for doc in cursor:
         print(doc)
