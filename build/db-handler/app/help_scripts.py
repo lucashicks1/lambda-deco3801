@@ -1,5 +1,7 @@
-from dependencies.database import cal_col, user_col
+from app.dependencies.database import cal_col, user_col
 import app.constants as constants
+import random
+
 
 def reset_db():
     cal_col.delete_many({})
@@ -23,7 +25,10 @@ def reset_db():
                 hour += 1
             timeslot_num += 1
 
-    cal_col.update_many(filter={}, update={"$set": {"booked_users": [constants.USERS[0]]}})
+    cursor = cal_col.find({})
+    for doc in cursor:
+        cal_col.update_one(filter={"day": doc.get("day"), "time": doc.get("time")}, update={
+            "$set": {"booked_users": [random.sample(constants.USERS, random.randint(0, len(constants.USERS)))]}})
 
     for user in constants.USERS:
         user_col.insert_one({"user_id": user})

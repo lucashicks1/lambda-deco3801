@@ -36,3 +36,5 @@ def modify_calendar(user: str, payload: Annotated[dict, Body(
     for calendar_slot in payload.get("body"):
         print(calendar_slot)
     return {"message": user}
+
+
