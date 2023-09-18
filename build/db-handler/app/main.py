@@ -1,5 +1,6 @@
 from fastapi import FastAPI, responses
 from app.routers import figures_router, whiteboard_router, display_router
+from app.dependencies.database import cal_col
 from app import help_scripts
 
 tags_metadata = [
@@ -37,3 +38,7 @@ async def main():
 async def reset(reset: bool = False):
     if reset:
         help_scripts.reset_db()
+
+@app.get("/dump", summary="DUMPS THE MONGODB FOR TESTING")
+async def dump():
+    return {"body": list(cal_col.find({}, {"_id": 0}))}
