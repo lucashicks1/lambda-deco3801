@@ -1,8 +1,6 @@
 /*************************************************
 
-
  * Public Constants
-
 
  *************************************************/
 
@@ -97,12 +95,11 @@
 #define NOTE_DS8 4978
 #define REST 0
 
-
-// Notes in the melody for "Never Gonna Give You Up" by Rick Astley. Obtained from library created
+// Notes in the melody for "Never Gonna Give You Up" by Rick Astley. Obtained from library created 
 // by Robson Couto https://github.com/robsoncouto/arduino-songs/tree/master
 int familyMelody[] = {
   REST,8, NOTE_B4,8, NOTE_B4,8, NOTE_CS5,8, NOTE_D5,8, NOTE_B4,4, NOTE_A4,8, //7
-  NOTE_A5,8, REST,8, NOTE_A5,8, NOTE_E5,-4, REST,4,
+  NOTE_A5,8, REST,8, NOTE_A5,8, NOTE_E5,-4, REST,4, 
   NOTE_B4,8, NOTE_B4,8, NOTE_CS5,8, NOTE_D5,8, NOTE_B4,8, NOTE_D5,8, NOTE_E5,8, REST,8,
   REST,8, NOTE_CS5,8, NOTE_B4,8, NOTE_A4,-4, REST,4,
   REST,8, NOTE_B4,8, NOTE_B4,8, NOTE_CS5,8, NOTE_D5,8, NOTE_B4,8, NOTE_A4,4,
@@ -115,32 +112,25 @@ int familyMelody[] = {
   NOTE_FS5,-8, NOTE_FS5,-8, NOTE_E5,-4, NOTE_A4,16, NOTE_B4,16, NOTE_D5,16, NOTE_B4,16
 };
 
-
 // change this to make the song slower or faster
 int familyTempo = 114;
 int familyNotes = sizeof(familyMelody) / sizeof(familyMelody[0]) / 2;
 
-
 // this calculates the duration of a whole note in ms
 int wholenote = (60000 * 4) / familyTempo;
 
-
 int divider = 0, familyNoteDuration = 0;
-
 
 const int numOfTones = 6;
 
-
 // notes in the melody
-int userMelody[][numOfTones] = {{NOTE_C4, NOTE_G3, NOTE_G3, NOTE_A3, NOTE_G3, NOTE_C4},
-                            {NOTE_C4, NOTE_B3, NOTE_G4, NOTE_A4, NOTE_F4, NOTE_D4},
-                            {NOTE_C4, NOTE_G3, NOTE_A3, NOTE_E3, NOTE_D3, NOTE_C4},
+int userMelody[][numOfTones] = {{NOTE_C4, NOTE_G3, NOTE_G3, NOTE_A3, NOTE_G3, NOTE_C4}, 
+                            {NOTE_C4, NOTE_B3, NOTE_G4, NOTE_A4, NOTE_F4, NOTE_D4}, 
+                            {NOTE_C4, NOTE_G3, NOTE_A3, NOTE_E3, NOTE_D3, NOTE_C4}, 
                             {NOTE_G3, NOTE_A3, NOTE_D6, NOTE_C4, NOTE_C2, NOTE_A4}};
 
-
 // note durations: 4 = quarter note, 8 = eighth note, etc.:
-int userNoteDurations[][numOfTones] = {{4, 8, 8, 4, 4, 4},
-                                   {4, 4, 8, 8, 4, 4},
-                                   {4, 4, 4, 4, 4, 8},
+int userNoteDurations[][numOfTones] = {{4, 8, 8, 4, 4, 4}, 
+                                   {4, 4, 8, 8, 4, 4}, 
+                                   {4, 4, 4, 4, 4, 8}, 
                                    {8, 8, 8, 4, 8, 4}};
-
