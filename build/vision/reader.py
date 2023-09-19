@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from tqdm import tqdm
 import pytesseract
+from collections import namedtuple
 
 days_of_the_week = {
     0: "Monday",
@@ -15,38 +16,42 @@ days_of_the_week = {
     6: "Sunday",
 }
 
+Point = namedtuple("Point", ["X", "Y"])
+TimeSlot = namedtuple("TimeSlot", ["top_left", "bottom_right"])
+
+time_slot_width = 141
+time_slot_height = 49
+time_slot_size = time_slot_width * time_slot_height
+num_time_slots = 35
+num_days = 7
+
 
 def main(image: Image):
     threshold = 100
 
-    day_time_slots = [
-        # TODO: Make these the actual top left and bottom right coords
-        ((148 * 0, 0), (148 * 1, 50)),
-        ((148 * 1, 0), (148 * 2, 50)),
-        ((148 * 2, 0), (148 * 3, 50)),
-        ((148 * 3, 0), (148 * 4, 50)),
-        ((148 * 4, 0), (148 * 5, 50)),
-        ((148 * 5, 0), (148 * 6, 50)),
-        ((148 * 6, 0), (148 * 7, 50)),
+    day_time_slots = [  # yay list comprehension :)
+        TimeSlot(
+            top_left=Point(time_slot_width * i, 0),
+            bottom_right=Point(time_slot_width * (i + 1), time_slot_height),
+        )
+        for i in range(num_days)
     ]
     day_time_crops = []
     coloured_time_slots = []
-    time_slot_height = 50
 
     for day, (top_left, bottom_right) in enumerate(day_time_slots):
         time_crops = []
         print(f"On day {day}")
-        for time_slot in tqdm(range(0, 35)):
+        for time_slot in tqdm(range(0, num_time_slots)):
             time_slot_crop = image.crop(
                 (
-                    top_left[0],
-                    top_left[1] + time_slot * time_slot_height,
-                    bottom_right[0],
-                    bottom_right[1] + time_slot * time_slot_height,
+                    top_left.X,
+                    top_left.Y + time_slot * time_slot_height,
+                    bottom_right.X,
+                    bottom_right.Y + time_slot * time_slot_height,
                 )
             )
             time_slot_array = np.array(time_slot_crop)
-            time_slot_size = time_slot_array.shape[0] * time_slot_array.shape[1]
             threshold_mask = (time_slot_array <= threshold).all(axis=-1)
             num_coloured = np.sum(threshold_mask)
             is_coloured = (num_coloured / time_slot_size) * 100 >= 3
@@ -61,7 +66,7 @@ def main(image: Image):
                     }
                 )
         day_time_crops.append(time_crops)
-    fig, axes = plt.subplots(35, 7, figsize=(8, 12))
+    fig, axes = plt.subplots(num_time_slots, num_days, figsize=(8, 12))
     axis_index = 0
     print("Mon\tTue\tWed\tThu\tFri\tSat\tSun")
     for time in range(5):
@@ -71,8 +76,8 @@ def main(image: Image):
             + f"{day_time_crops[4][time][1]}\t{day_time_crops[5][time][1]}\t"
             + f"{day_time_crops[6][time][1]}"
         )
-    for i in range(35):
-        for j in range(7):
+    for i in range(num_time_slots):
+        for j in range(num_days):
             axes.flat[axis_index].imshow(day_time_crops[j][i][0])
             axes.flat[axis_index].axis("off")
             axis_index += 1
