@@ -5,8 +5,6 @@ from time import sleep
 import requests
 import socket
 
-figurine_status = {}
-response = {}
 POLL_DELAY = 15
 
 global connect_status, read_state, port, serialPort
@@ -98,7 +96,7 @@ def start_thread():
     global port, connect_status
     print("THR [Starting Thread at port:", port, "]")
     port_controller = threading.Thread(target=check_presence, args=(port, 0.1))
-    port_controller.setDaemon(True)
+    port_controller.daemon = True
     port_controller.start()
 
 
@@ -109,6 +107,7 @@ def send_to_controller(value):
 
 def main():
     global port, connect_status
+    figurine_status = {}
 
     while True:
         if not connect_status:
@@ -122,16 +121,10 @@ def main():
             continue
         if serialPort.is_open:
             try:
-                print("Polling now")
-                send_to_controller({"family": 0, "user_1":0, "user_2":0, "user_3":0, "user_4":0})
-                sleep(POLL_DELAY)
-                send_to_controller({"family": 0, "user_1":1, "user_2":0, "user_3":0, "user_4":0})
-                sleep(POLL_DELAY)
-                send_to_controller({"family": 0, "user_1":1, "user_2":1, "user_3":1, "user_4":0})
-                sleep(POLL_DELAY)
-                send_to_controller({"family": 0, "user_1":0, "user_2":1, "user_3":1, "user_4":0})
-                sleep(POLL_DELAY)
-                send_to_controller({"family": 1, "user_1":0, "user_2":0, "user_3":0, "user_4":0})
+                response = requests.get("http://127.0.0.1:8000/figurines")
+                if response.text != figurine_status:
+                    figurine_status = response.text
+                    send_to_controller(figurine_status)
                 sleep(POLL_DELAY)
             except Exception as e:
                 serial_disconnect()
