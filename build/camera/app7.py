@@ -12,6 +12,7 @@ import os
 # https://pyimagesearch.com/faqs/single-faq/what-is-the-code-license-associated-with-your-examples/
 # A screenshot of the license is also found in /Lambda-Deco3081/assets/pyimagesearchlicense.png
 
+cv2.destroyAllWindows()
 path = '../../assets/image-test/test2.png'
 vs = cv2.VideoCapture(1, cv2.CAP_DSHOW)
 vs.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
@@ -22,12 +23,12 @@ noMotionTimeStamp = datetime.datetime.now()
 avg = None
 thereWasMotion = True
 while True:
-    _, frame = vs.read()
+    truth, frame = vs.read()
     timestamp = datetime.datetime.now()
     if frame is None:
         break
 
-    frame = imutils.resize(frame, width=1920, height=1080)
+    # frame = imutils.resize(frame, width=960, height=540)
     grey = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     grey = cv2.GaussianBlur(grey, (21, 21), 0)
 
