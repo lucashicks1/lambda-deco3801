@@ -17,7 +17,7 @@ async def get_available() -> Annotated[dict, Body(examples=[FIGURINES_EXAMPLE])]
     users: dict = {}
     timeslot: str = utils.current_to_timeslot()
     booked_users = cal_col.find_one({"day": time_lib.strftime("%A").lower(), "time": timeslot}).get("booked_users")
-    for user in user_col.distinct("user_id", {"user_id": {"$ne": constants.FAMILY_NAME}}):
+    for user in user_col.distinct("user_id"):
         status = 1 if user in booked_users else 0
         users[user] = status
-    return users
+    return users 
