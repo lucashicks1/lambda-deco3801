@@ -6,12 +6,8 @@
 #define NUM_OF_SERVOS 4
 
 // Define the digital pins for controlling
-const int enableServo1 = 2;
-const int enableServo2 = 3;
-const int enableServo3 = 4;
-const int enableServo4 = 5;
+const int enableServoPins[] = {3, 5, 6, 9};
 const int pwmBuzzerPin = 8; // PWM buzzer control pin
-const int pwmServoPin = 9; // PWM servo control pin
 
 char previousMessage[9] = ""; //Previous message
 
@@ -66,18 +62,18 @@ void buzzer_writing(int number) {
 
 
 void servo_write_cycle(char* message) {
-  for (int i = SERVO_OFFSET; i < 8; i++) {
-    int newPosition = (message[i] - '0') * 180; //Set angle for servo motor
-    if (newPosition != servoSignal[i - SERVO_OFFSET].read()) { //If motor angle does not equal new angle
-      servoSignal[i - SERVO_OFFSET].write(newPosition); //Write angle to servo
+  for (int i = 0; i < NUM_OF_SERVOS; i++) {
+    int newPosition = ((message[i + SERVO_OFFSET] - '0') * 180); // Set angle for servo motor
+    if (message[i + SERVO_OFFSET] != previousMessage[i + SERVO_OFFSET]) { // If motor angle does not equal new angle
+      servoSignal[i].write(newPosition); // Write angle to servo
       if (newPosition == 0) {
-        buzzer_writing(i - SERVO_OFFSET); //Write to buzzer
+        buzzer_writing(i); // Write to buzzer
       }
       delay(500);
     } else {
-      if (previousMessage[MESSAGE_OFFSET] == '1') { //Check if previous message was a family event and now not
+      if (previousMessage[MESSAGE_OFFSET] == '1') { // Check if previous message was a family event and now not
         if (newPosition == 0) {
-            buzzer_writing(i - SERVO_OFFSET);
+          buzzer_writing(i);
         }
         delay(500);
       }
@@ -86,10 +82,10 @@ void servo_write_cycle(char* message) {
 }
 
 void servo_write_reset() {
-  for (int i = MESSAGE_OFFSET; i < 8; i++) {
+  for (int i = 0; i < NUM_OF_SERVOS; i++) {
     int newPosition = 0;
-    if (newPosition != servoSignal[i - SERVO_OFFSET].read()) {
-      servoSignal[i - SERVO_OFFSET].write(newPosition);
+    if (newPosition != servoSignal[i].read()) {
+      servoSignal[i].write(newPosition);
     }
   }
 }
@@ -98,25 +94,21 @@ void setup() {
   // Initialize serial communication
   Serial.begin(9600);
 
-  servoSignal[0].attach(enableServo1);
-  servoSignal[1].attach(enableServo2);
-  servoSignal[2].attach(enableServo3);
-  servoSignal[3].attach(enableServo4);
+  for(int n = 0; n < NUM_OF_SERVOS; n++) {
+    servoSignal[n].attach(enableServoPins[n]);
+    servoSignal[n].write(180);
+  }
 
-  // Set PWM pin as an output
-  pinMode(pwmServoPin, OUTPUT);
   pinMode(pwmBuzzerPin, OUTPUT);
-  digitalWrite(pwmServoPin, LOW);
 }
 
 void loop() {
-  if (Serial.available() >= 😎 { // Check if there are at least 8 characters available in the serial buffer
+  if (Serial.available() >= 8) { // Check if there are at least 8 characters available in the serial buffer
     char currentMessage[9]; // Buffer to store the received message
     Serial.readBytes(currentMessage, 8); // Read the message into the buffer
     currentMessage[8] = '\0'; // Null-terminate the string
-    analogWrite(pwmServoPin, 255); // Set PWM duty cycle to maximum (255) on pin 9
 
-    if (strncmp(currentMessage, previousMessage, 😎 != 0) {
+    if (strncmp(currentMessage, previousMessage, 8) != 0) {
       if ((currentMessage[MESSAGE_OFFSET] == '1')) {
         if((currentMessage[MESSAGE_OFFSET] != previousMessage[MESSAGE_OFFSET])) {
           servo_write_reset();
@@ -130,6 +122,5 @@ void loop() {
       strncpy(previousMessage, currentMessage, 8);
     }
 
-    analogWrite(pwmServoPin, 0); // Turn off PWM on pin 9
   }
 }
