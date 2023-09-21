@@ -1,23 +1,24 @@
-from PIL import Image
 import json
-import matplotlib.pyplot as plt
-import numpy as np
-from tqdm import tqdm
-import pytesseract
 from collections import namedtuple
 
+import matplotlib.pyplot as plt
+import numpy as np
+import pytesseract
+from PIL import Image
+from tqdm import tqdm
+
 days_of_the_week = {
-    0: "Monday",
-    1: "Tuesday",
-    2: "Wednesday",
-    3: "Thursday",
-    4: "Friday",
-    5: "Saturday",
-    6: "Sunday",
+    0: 'Monday',
+    1: 'Tuesday',
+    2: 'Wednesday',
+    3: 'Thursday',
+    4: 'Friday',
+    5: 'Saturday',
+    6: 'Sunday',
 }
 
-Point = namedtuple("Point", ["X", "Y"])
-TimeSlot = namedtuple("TimeSlot", ["top_left", "bottom_right"])
+Point = namedtuple('Point', ['X', 'Y'])
+TimeSlot = namedtuple('TimeSlot', ['top_left', 'bottom_right'])
 
 time_slot_width = 141
 time_slot_height = 49
@@ -41,7 +42,7 @@ def main(image: Image):
 
     for day, (top_left, bottom_right) in enumerate(day_time_slots):
         time_crops = []
-        print(f"On day {day}")
+        print(f'On day {day}')
         for time_slot in tqdm(range(0, num_time_slots)):
             time_slot_crop = image.crop(
                 (
@@ -60,40 +61,39 @@ def main(image: Image):
                 ocr_result = pytesseract.image_to_string(time_slot_crop)
                 coloured_time_slots.append(
                     {
-                        "day": days_of_the_week.get(day),
-                        "time_slot": time_slot,
-                        "data": ocr_result,
+                        'day': days_of_the_week.get(day),
+                        'time_slot': time_slot,
+                        'data': ocr_result,
                     }
                 )
         day_time_crops.append(time_crops)
     fig, axes = plt.subplots(num_time_slots, num_days, figsize=(8, 12))
     axis_index = 0
-    print("Mon\tTue\tWed\tThu\tFri\tSat\tSun")
+    print('Mon\tTue\tWed\tThu\tFri\tSat\tSun')
     for time in range(5):
         print(
-            f"{day_time_crops[0][time][1]}\t{day_time_crops[1][time][1]}\t"
-            + f"{day_time_crops[2][time][1]}\t{day_time_crops[3][time][1]}\t"
-            + f"{day_time_crops[4][time][1]}\t{day_time_crops[5][time][1]}\t"
-            + f"{day_time_crops[6][time][1]}"
+            f'{day_time_crops[0][time][1]}\t{day_time_crops[1][time][1]}\t'
+            + f'{day_time_crops[2][time][1]}\t{day_time_crops[3][time][1]}\t'
+            + f'{day_time_crops[4][time][1]}\t{day_time_crops[5][time][1]}\t'
+            + f'{day_time_crops[6][time][1]}'
         )
     for i in range(num_time_slots):
         for j in range(num_days):
             axes.flat[axis_index].imshow(day_time_crops[j][i][0])
-            axes.flat[axis_index].axis("off")
+            axes.flat[axis_index].axis('off')
             axis_index += 1
     plt.tight_layout()
     plt.show()
-    with open("coloured_time_slots.json", "w") as json_file:
+    with open('coloured_time_slots.json', 'w') as json_file:
         json.dump(coloured_time_slots, json_file, indent=4)
 
 
-def normalise_image() -> Image:
+def normalise_image(img_path: str) -> Image:
     """
     normalise_image()
     -----------------
     method for normalising our input image.
     """
-    img_path = "./images/test1.jpg"
     img = Image.open(img_path)
 
     left = 1013
@@ -113,8 +113,9 @@ def normalise_image() -> Image:
     return new_img
 
 
-if __name__ == "__main__":
-    image = normalise_image()
+if __name__ == '__main__':
+    path = './images/test1.jpg'
+    image = normalise_image(path)
     # plt.imshow(image)
     # plt.show()
     main(image)
