@@ -9,19 +9,8 @@
   border-color: #000000;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
-  background-color: #B9E2FF;
+  background-color: #edf6f9;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,17 +20,26 @@
   border-radius: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.Sky-box {
+  border-radius: 20px;
+  border: 1px solid #454545;
+  background: var(--blue);
+  width: 962px;
+  height: 1100px;
+  margin: auto;
+  position: relative;
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Grass-box {
+  border-radius: 20px;
+  border: 1px solid #454545;
+  background: var(--lightgreen);
+  width: 962px;
+  height: 279px;
+  bottom: 0px;
+  position: absolute
+  ;
 }
 
 :root {
