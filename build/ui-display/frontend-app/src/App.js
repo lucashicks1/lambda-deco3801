@@ -1,5 +1,7 @@
 import './App.css';
 import DateWidget from './components/widgets/DateWidget';
+import ClockWidget from './components/widgets/ClockWidget';
+
 
 function App() {
   return (
@@ -8,6 +10,7 @@ function App() {
         {"hello, world!"}
         <DateWidget />
       </header>
+      <ClockWidget />
     </div>
   );
 }
