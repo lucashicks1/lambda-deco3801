@@ -42,6 +42,22 @@
   to {
     transform: rotate(360deg);
   }
+}
 
-
+:root {
+  --purple: #8ea8f6;
+  --hotpink: #f18eca;
+  --lightpink: #fcaac6;
+  --red: #e4685a;
+  --orange: #e8945b;
+  --yellow: #fec12d;
+  --tan: #dac8ba;
+  --darkgrey: #393939;
+  --blue: #a2e3f6;
+  --aqua: #84e5ec;
+  --lightaqua: #aaecdd;
+  --darkgreen: #02a774;
+  --lightgreen: #a6d48d;
+  --lightlime: #e8f3b2;
+  --cream: #fdf7f0;
 }
