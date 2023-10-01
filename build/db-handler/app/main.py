@@ -1,4 +1,5 @@
 from fastapi import FastAPI, responses
+from fastapi.middleware.cors import CORSMiddleware
 from app.routers import figures_router, whiteboard_router, display_router
 from app.dependencies.database import cal_col
 from app import help_scripts
@@ -18,10 +19,24 @@ tags_metadata = [
     }
 ]
 
+origins = [
+    "http://0.0.0.0:3000",
+    "http://localhost:3000"
+]
+
 app = FastAPI(
     title="Lambda DB Handler",
     openapi_tags=tags_metadata
 )
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 app.include_router(figures_router.router)
 app.include_router(whiteboard_router.router)
@@ -42,3 +57,4 @@ async def reset(reset: bool = False):
 @app.get("/dump", summary="DUMPS THE MONGODB FOR TESTING")
 async def dump():
     return {"body": list(cal_col.find({}, {"_id": 0}))}
+
