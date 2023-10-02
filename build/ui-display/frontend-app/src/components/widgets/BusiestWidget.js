@@ -14,11 +14,9 @@ export default function BusiestWidget() {
             if (data) {
                 const times = Object.values(data);
                 setBusiest(Object.entries(data).filter(([key, value]) => value == Math.max(...times)).map(([key, value]) => key));
+                setLoading(false);
                 
             } 
-            if (busiest.length > 0) {
-                setLoading(false);
-            }
         };
 
         fetchData();
