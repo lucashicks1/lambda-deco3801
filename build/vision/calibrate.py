@@ -2,6 +2,9 @@ import sys
 from collections import namedtuple
 
 import cv2
+import matplotlib
+
+matplotlib.use('qtagg')
 import matplotlib.pyplot as plt
 import numpy as np
 from constants import num_days
@@ -111,10 +114,12 @@ def show_cells(
         for time_slot in range(0, num_time_slots):
             time_crops.append(
                 img.crop(
-                    top.X,
-                    np.floor(top.Y + time_slot * cell_dims[1]),
-                    bot.X,
-                    np.floor(bot.Y + time_slot * cell_dims[1]),
+                    (
+                        top.X,
+                        np.floor(top.Y + time_slot * cell_dims[1]),
+                        bot.X,
+                        np.floor(bot.Y + time_slot * cell_dims[1]),
+                    )
                 )
             )
         day_time_crops.append(time_crops)
