@@ -142,6 +142,10 @@ def show_cells(
 
 
 def save_settings(top_left: (int, int), cell_dims: (float, float)):
+    with open('camera-constants.py', 'w') as file:
+        file.write(
+            f'left = {top_left[0]}\ntop = {top_left[1]}\ntime_slot_width = {cell_dims[0]}\ntime_slot_height = {cell_dims[1]}'
+        )
     print('done')
 
 
