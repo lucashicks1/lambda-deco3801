@@ -1,1 +1,260 @@
-[]
+[
+    {
+        "day": "Tuesday",
+        "time_slot": "0730",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Tuesday",
+        "time_slot": "0800",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Tuesday",
+        "time_slot": "0900",
+        "colour": "blue",
+        "data": ""
+    },
+    {
+        "day": "Tuesday",
+        "time_slot": "0900",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Tuesday",
+        "time_slot": "0930",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Tuesday",
+        "time_slot": "1000",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Tuesday",
+        "time_slot": "1030",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Tuesday",
+        "time_slot": "1530",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Tuesday",
+        "time_slot": "1530",
+        "colour": "black",
+        "data": "Session\n"
+    },
+    {
+        "day": "Tuesday",
+        "time_slot": "1600",
+        "colour": "black",
+        "data": "SESS\n"
+    },
+    {
+        "day": "Tuesday",
+        "time_slot": "1630",
+        "colour": "black",
+        "data": "SESSTON\n"
+    },
+    {
+        "day": "Wednesday",
+        "time_slot": "0900",
+        "colour": "blue",
+        "data": ""
+    },
+    {
+        "day": "Wednesday",
+        "time_slot": "0930",
+        "colour": "blue",
+        "data": ""
+    },
+    {
+        "day": "Wednesday",
+        "time_slot": "1000",
+        "colour": "blue",
+        "data": ""
+    },
+    {
+        "day": "Wednesday",
+        "time_slot": "1030",
+        "colour": "blue",
+        "data": ""
+    },
+    {
+        "day": "Wednesday",
+        "time_slot": "1100",
+        "colour": "blue",
+        "data": ""
+    },
+    {
+        "day": "Wednesday",
+        "time_slot": "1300",
+        "colour": "black",
+        "data": ""
+    },
+    {
+        "day": "Wednesday",
+        "time_slot": "1500",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Wednesday",
+        "time_slot": "1500",
+        "colour": "black",
+        "data": "Ture\n"
+    },
+    {
+        "day": "Wednesday",
+        "time_slot": "1800",
+        "colour": "black",
+        "data": ""
+    },
+    {
+        "day": "Wednesday",
+        "time_slot": "1830",
+        "colour": "black",
+        "data": ""
+    },
+    {
+        "day": "Wednesday",
+        "time_slot": "1930",
+        "colour": "black",
+        "data": ""
+    },
+    {
+        "day": "Thursday",
+        "time_slot": "0530",
+        "colour": "black",
+        "data": ""
+    },
+    {
+        "day": "Thursday",
+        "time_slot": "0730",
+        "colour": "black",
+        "data": ""
+    },
+    {
+        "day": "Thursday",
+        "time_slot": "1300",
+        "colour": "black",
+        "data": "S TUOY]\n"
+    },
+    {
+        "day": "Thursday",
+        "time_slot": "1400",
+        "colour": "black",
+        "data": ""
+    },
+    {
+        "day": "Friday",
+        "time_slot": "0530",
+        "colour": "black",
+        "data": ""
+    },
+    {
+        "day": "Friday",
+        "time_slot": "1100",
+        "colour": "black",
+        "data": ""
+    },
+    {
+        "day": "Friday",
+        "time_slot": "1130",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Friday",
+        "time_slot": "1130",
+        "colour": "black",
+        "data": "DINNER\n"
+    },
+    {
+        "day": "Saturday",
+        "time_slot": "0900",
+        "colour": "black",
+        "data": ""
+    },
+    {
+        "day": "Saturday",
+        "time_slot": "1030",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Saturday",
+        "time_slot": "1030",
+        "colour": "black",
+        "data": "[HELLO\n"
+    },
+    {
+        "day": "Saturday",
+        "time_slot": "1230",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Saturday",
+        "time_slot": "1300",
+        "colour": "black",
+        "data": "TOATE\n"
+    },
+    {
+        "day": "Saturday",
+        "time_slot": "1400",
+        "colour": "black",
+        "data": "MOVIE\n"
+    },
+    {
+        "day": "Saturday",
+        "time_slot": "1500",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Saturday",
+        "time_slot": "1730",
+        "colour": "black",
+        "data": ""
+    },
+    {
+        "day": "Saturday",
+        "time_slot": "1800",
+        "colour": "black",
+        "data": ""
+    },
+    {
+        "day": "Sunday",
+        "time_slot": "0630",
+        "colour": "black",
+        "data": ""
+    },
+    {
+        "day": "Sunday",
+        "time_slot": "1030",
+        "colour": "black",
+        "data": ""
+    },
+    {
+        "day": "Sunday",
+        "time_slot": "1130",
+        "colour": "black",
+        "data": ""
+    },
+    {
+        "day": "Sunday",
+        "time_slot": "1200",
+        "colour": "black",
+        "data": ""
+    }
+]

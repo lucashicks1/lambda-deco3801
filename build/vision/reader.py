@@ -1,49 +1,40 @@
 import json
+import sys
+import time
 from collections import namedtuple
 
-import matplotlib.pyplot as plt
 import numpy as np
 import pytesseract
+from constants import colour_thresholds
+from constants import days_of_the_week
+from constants import num_days
+from constants import num_time_slots
+from constants import time_slots
 from PIL import Image
-from tqdm import tqdm
-
-days_of_the_week = {
-    0: 'Monday',
-    1: 'Tuesday',
-    2: 'Wednesday',
-    3: 'Thursday',
-    4: 'Friday',
-    5: 'Saturday',
-    6: 'Sunday',
-}
 
 Point = namedtuple('Point', ['X', 'Y'])
 TimeSlot = namedtuple('TimeSlot', ['top_left', 'bottom_right'])
 
+
 time_slot_width = 145
 time_slot_height = 48.5
-time_slot_size = time_slot_width * time_slot_height
-num_time_slots = 35
-num_days = 7
 
 
 def main(image: Image):
-    threshold = 100
 
     day_time_slots = [  # yay list comprehension :)
         TimeSlot(
             top_left=Point(time_slot_width * i, 0),
-            bottom_right=Point(time_slot_width * (i + 1), np.floor(time_slot_height)),
+            bottom_right=Point(
+                time_slot_width * (i + 1), np.floor(time_slot_height)
+            ),
         )
         for i in range(num_days)
     ]
-    day_time_crops = []
     coloured_time_slots = []
 
     for day, (top_left, bottom_right) in enumerate(day_time_slots):
-        time_crops = []
-        print(f'On day {day}')
-        for time_slot in tqdm(range(0, num_time_slots)):
+        for time_slot in range(0, num_time_slots):
             time_slot_crop = image.crop(
                 (
                     top_left.X,
@@ -52,64 +43,99 @@ def main(image: Image):
                     np.floor(bottom_right.Y + time_slot * time_slot_height),
                 )
             )
+            time_slot_size = time_slot_crop.size[0] * time_slot_crop.size[1]
             time_slot_array = np.array(time_slot_crop)
-            threshold_mask = (time_slot_array <= threshold).all(axis=-1)
-            num_coloured = np.sum(threshold_mask)
-            is_coloured = (num_coloured / time_slot_size) * 100 >= 3
-            time_crops.append((time_slot_crop, is_coloured))
-            if is_coloured:
-                ocr_result = pytesseract.image_to_string(time_slot_crop)
+
+            red_mask = np.all(
+                (time_slot_array >= colour_thresholds.get('red_min'))
+                & (time_slot_array <= colour_thresholds.get('red_max')),
+                axis=-1,
+            )
+            blue_mask = np.all(
+                (time_slot_array >= colour_thresholds.get('blue_min'))
+                & (time_slot_array <= colour_thresholds.get('blue_max')),
+                axis=-1,
+            )
+            black_mask = np.all(
+                (time_slot_array >= colour_thresholds.get('black_min'))
+                & (time_slot_array <= colour_thresholds.get('black_max')),
+                axis=-1,
+            )
+
+            output_red = np.ones_like(time_slot_array) * 255
+            output_blue = np.ones_like(time_slot_array) * 255
+            output_black = np.ones_like(time_slot_array) * 255
+
+            output_red[red_mask] = [0, 0, 0]
+            output_blue[blue_mask] = [0, 0, 0]
+            output_black[black_mask] = [0, 0, 0]
+
+            num_coloured_red = np.count_nonzero(red_mask)
+            num_coloured_blue = np.count_nonzero(blue_mask)
+            num_coloured_black = np.count_nonzero(black_mask)
+
+            pcent_red = (num_coloured_red / time_slot_size) * 100
+            pcent_blue = (num_coloured_blue / time_slot_size) * 100
+            pcent_black = (num_coloured_black / time_slot_size) * 100
+
+            if pcent_blue >= 2:
+                ocr_result = pytesseract.image_to_string(output_blue)
                 coloured_time_slots.append(
                     {
                         'day': days_of_the_week.get(day),
-                        'time_slot': time_slot,
+                        'time_slot': time_slots.get(time_slot),
+                        'colour': 'blue',
                         'data': ocr_result,
                     }
                 )
-        day_time_crops.append(time_crops)
-    fig, axes = plt.subplots(num_time_slots, num_days, figsize=(8, 12))
-    axis_index = 0
-    print('Mon\tTue\tWed\tThu\tFri\tSat\tSun')
-    for time in range(5):
-        print(
-            f'{day_time_crops[0][time][1]}\t{day_time_crops[1][time][1]}\t'
-            + f'{day_time_crops[2][time][1]}\t{day_time_crops[3][time][1]}\t'
-            + f'{day_time_crops[4][time][1]}\t{day_time_crops[5][time][1]}\t'
-            + f'{day_time_crops[6][time][1]}'
-        )
-    for i in range(num_time_slots):
-        for j in range(num_days):
-            axes.flat[axis_index].imshow(day_time_crops[j][i][0])
-            axes.flat[axis_index].axis('off')
-            axis_index += 1
-    plt.tight_layout()
-    plt.show()
+            if pcent_red >= 2:
+                ocr_result = pytesseract.image_to_string(output_red)
+                coloured_time_slots.append(
+                    {
+                        'day': days_of_the_week.get(day),
+                        'time_slot': time_slots.get(time_slot),
+                        'colour': 'red',
+                        'data': ocr_result,
+                    }
+                )
+            if pcent_black >= 18:
+                ocr_result = pytesseract.image_to_string(output_black)
+                coloured_time_slots.append(
+                    {
+                        'day': days_of_the_week.get(day),
+                        'time_slot': time_slots.get(time_slot),
+                        'colour': 'black',
+                        'data': ocr_result,
+                    }
+                )
+
     with open('coloured_time_slots.json', 'w') as json_file:
         json.dump(coloured_time_slots, json_file, indent=4)
 
 
-def normalise_image(img_path: str) -> Image:
+def crop_image(img_path: str) -> Image:
     """
     normalise_image()
     -----------------
-    method for normalising our input image.
+    method for cropping our input image to the top left corner of the calendar.
     """
     img = Image.open(img_path)
-    print(img.size)
 
     left = 1238
     top = 183
-    bottom = img.size[1]
-    right = img.size[0]
 
-    img = img.crop((left, top, right, bottom))
+    img = img.crop((left, top, img.size[0], img.size[1]))
 
-    return img
+    return img.convert('RGB')
 
 
 if __name__ == '__main__':
-    path = './images/test-mix.jpg'
-    image = normalise_image(path)
-    # plt.imshow(image)
-    # plt.show()
+    start = time.time()
+    path = sys.path[0] + '/'
+    if len(sys.argv) > 1:
+        path += sys.argv[1]
+    else:
+        path +='./images/test-mix.jpg'
+    image = crop_image(path)
     main(image)
+    print(f'took {time.time() - start}')
