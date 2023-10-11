@@ -8,17 +8,18 @@ DB_HOST = "localhost"
 DB_PORT = 27017
 DB_NAME = "mydb"
 
-args = "retryWrites=true&w=majority&?tls=true&tlsCAFile=app/cert.pem"
+args = "retryWrites=true&w=majority&tls=true&tlsCAFile=app/cert.pem"
 uri = f"mongodb+srv://lambdadb:{DB_PASS}@lambdacluster.vch8k4d.mongodb.net/?{args}"
 
 client: MongoClient = MongoClient(uri, server_api=server_api.ServerApi("1"))
 
 try:
     client.admin.command("ping")
-    print("Pinged db, and successful")
+    print("SUCCESSFUL - CONNECTING TO CLOUD DB")
 except Exception as e:
     print(e)
-    print("Not successful ping, swapping to local version")
+    print("UNSUCCESSFUL - CONNECTING TO CLOUD DB")
+    print("SUCCESSFUL - SWAPPING TO LOCAL DB")
     client = MongoClient(DB_HOST, DB_PORT)
 
 cal_col: collection = client[DB_NAME]["calendar"]
