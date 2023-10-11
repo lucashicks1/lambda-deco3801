@@ -1,6 +1,7 @@
 import './App.css';
 import DateWidget from './components/widgets/DateWidget';
 import ClockWidget from './components/widgets/ClockWidget';
+import WeatherWidget from './components/widgets/WeatherWidget';
 import BusiestWidget from './components/widgets/BusiestWidget';
 import SuggestedTimeWidget from './components/widgets/SuggestedTimeWidget';
 
@@ -8,10 +9,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {"hello, world!"}
+        <ClockWidget />
         <DateWidget />
       </header>
-      <ClockWidget />
       <div className="Sky-box">
         <BusiestWidget />
         <SuggestedTimeWidget />
