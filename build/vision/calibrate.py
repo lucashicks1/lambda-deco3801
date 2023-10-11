@@ -3,13 +3,13 @@ from collections import namedtuple
 
 import cv2
 import matplotlib
-
-matplotlib.use('qtagg')
 import matplotlib.pyplot as plt
 import numpy as np
 from constants import num_days
 from constants import num_time_slots
 from PIL import Image
+
+matplotlib.use('qtagg')
 
 Point = namedtuple('Point', ['X', 'Y'])
 TimeSlot = namedtuple('TimeSlot', ['top_left', 'bottom_right'])
@@ -141,11 +141,13 @@ def show_cells(
     return check == 'y'
 
 
-def save_settings(top_left: (int, int), cell_dims: (float, float)):
+def save_settings(top_left: (int, int), cell_dims: (float, float), angle: int):
     with open('camera-constants.py', 'w') as file:
-        file.write(
-            f'left = {top_left[0]}\ntop = {top_left[1]}\ntime_slot_width = {cell_dims[0]}\ntime_slot_height = {cell_dims[1]}'
-        )
+        file.write(f'left = {top_left[0]}')
+        file.write(f'top = {top_left[1]}')
+        file.write(f'time_slot_width = {cell_dims[0]}')
+        file.write(f'time_slot_height = {cell_dims[1]}')
+        file.write(f'rotation_angle = {angle}')
     print('done')
 
 
@@ -153,7 +155,7 @@ if __name__ == '__main__':
     path = sys.path[0] + '/images/calibrate.jpg'
     plt.close('all')
     cv2.destroyAllWindows()
-    get_rot_angle(path)
+    angle = get_rot_angle(path)
     plt.close('all')
     cv2.destroyAllWindows()
     img = Image.open(path)
@@ -184,4 +186,4 @@ if __name__ == '__main__':
         good_bounds = show_cells(img, top_left, cell_dims)
         plt.close('all')
         cv2.destroyAllWindows()
-    save_settings(top_left, cell_dims)
+    save_settings(top_left, cell_dims, angle)

@@ -5,6 +5,10 @@ from collections import namedtuple
 
 import numpy as np
 import pytesseract
+from camera_constants import left
+from camera_constants import time_slot_height
+from camera_constants import time_slot_width
+from camera_constants import top
 from constants import colour_thresholds
 from constants import days_of_the_week
 from constants import num_days
@@ -14,10 +18,6 @@ from PIL import Image
 
 Point = namedtuple('Point', ['X', 'Y'])
 TimeSlot = namedtuple('TimeSlot', ['top_left', 'bottom_right'])
-
-
-time_slot_width = 145
-time_slot_height = 48.5
 
 
 def main(image: Image):
@@ -119,23 +119,26 @@ def crop_image(img_path: str) -> Image:
     -----------------
     method for cropping our input image to the top left corner of the calendar.
     """
-    img = Image.open(img_path)
-
-    left = 1238
-    top = 183
-
-    img = img.crop((left, top, img.size[0], img.size[1]))
-
-    return img.convert('RGB')
+    try:
+        img = Image.open(img_path)
+        img = img.crop((left, top, img.size[0], img.size[1]))
+        return img.convert('RGB')
+    except Exception as e:
+        print(f"Error: {e} has occurred.")
+        print(f"Check path: {img_path}")
+        exit()
 
 
 if __name__ == '__main__':
     start = time.time()
     path = sys.path[0] + '/'
     if len(sys.argv) > 1:
-        path += sys.argv[1]
+        if sys.argv[1][0] == '/':
+            path = sys.argv[1]
+        else:
+            path += sys.argv[1]
     else:
-        path +='./images/test-mix.jpg'
+        path += 'images/test-mix.jpg'
     image = crop_image(path)
     main(image)
     print(f'took {time.time() - start}')
