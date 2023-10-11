@@ -8,7 +8,7 @@ class TimeSlot(BaseModel):
     day: Literal[tuple(constants.DAYS)]
     time_slot: int
     data: Optional[str] = None
-    color: Optional[str] = None
+    colour: Optional[str] = None
 
 
 # Request payload passed into whiteboard routers

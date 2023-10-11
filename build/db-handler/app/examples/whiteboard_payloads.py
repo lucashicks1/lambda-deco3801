@@ -3,12 +3,14 @@ POST_WHITEBOARD = {
         {
             "day": "monday",
             "time_slot": 0,
-            "data": "captured text"
+            "data": "captured text",
+            "colour": "black"
         },
         {
             "day": "tuesday",
             "time_slot": 0,
-            "data": "text"
+            "data": "text",
+            "colour": "black,red"
         }
     ]
 }

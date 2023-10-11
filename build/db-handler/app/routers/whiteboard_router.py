@@ -35,7 +35,7 @@ def modify_calendar(user: str,
             {
                 "$push": {
                     "booked_users": user,
-                    "colour": time_slot.color.split(",")
+                    "colour": time_slot.colour.split(",")
                 }
             }
         )
