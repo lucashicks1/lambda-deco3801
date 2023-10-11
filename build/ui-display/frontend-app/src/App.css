@@ -10,7 +10,7 @@
 }
 
 .App-header {
-  background-color: #B9E2FF;
+  background-color: #edf6f9;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,6 +18,28 @@
   font-size: calc(10px + 2vmin);
   color: white;
   border-radius: 20px;
+}
+
+.Sky-box {
+  border-radius: 20px;
+  border: 1px solid #454545;
+  background: var(--blue);
+  width: 962px;
+  height: 1100px;
+  margin: auto;
+  position: relative;
+
+}
+
+.Grass-box {
+  border-radius: 20px;
+  border: 1px solid #454545;
+  background: var(--lightgreen);
+  width: 962px;
+  height: 279px;
+  bottom: 0px;
+  position: absolute
+  ;
 }
 
 :root {
