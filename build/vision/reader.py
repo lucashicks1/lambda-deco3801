@@ -136,7 +136,7 @@ if __name__ == '__main__':
         if sys.argv[1][0] == '/':
             path = sys.argv[1]
         else:
-            path += sys.argv[1]
+            path = sys.argv[1]
     else:
         path += 'images/test-mix.jpg'
     image = crop_image(path)

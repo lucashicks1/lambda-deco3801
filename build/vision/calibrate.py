@@ -1,3 +1,4 @@
+import os
 import sys
 from collections import namedtuple
 
@@ -16,7 +17,7 @@ TimeSlot = namedtuple('TimeSlot', ['top_left', 'bottom_right'])
 
 
 def get_rot_angle(path: str = 'cap.jpg') -> int:
-    angle = 0
+    angle = 90
     cap = cv2.VideoCapture(0)
     if not cap.isOpened():
         print('Error: Could not open camera')
@@ -32,10 +33,18 @@ def get_rot_angle(path: str = 'cap.jpg') -> int:
             break
 
         rows, cols, _ = frame.shape
-        rotation_matrix = cv2.getRotationMatrix2D(
-            (cols / 2, rows / 2), angle, 1
-        )
-        rotated_frame = cv2.warpAffine(frame, rotation_matrix, (cols, rows))
+        # rotation_matrix = cv2.getRotationMatrix2D(
+            # (cols / 2, rows / 2), angle, 1
+        # )
+        # rotated_frame = cv2.warpAffine(frame, rotation_matrix, (cols, rows))
+        if angle == 0:
+            rotated_frame = frame
+        elif angle == 90:
+            rotated_frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
+        elif angle == 180:
+            rotated_frame = cv2.rotate(frame, cv2.ROTATE_180)
+        elif angle == 270:
+            rotated_frame = cv2.rotate(frame, cv2.ROTATE_90_COUNTERCLOCKWISE)
 
         cv2.imshow('Webcam', rotated_frame)
         key = cv2.waitKey(1)
@@ -142,12 +151,12 @@ def show_cells(
 
 
 def save_settings(top_left: (int, int), cell_dims: (float, float), angle: int):
-    with open('camera-constants.py', 'w') as file:
-        file.write(f'left = {top_left[0]}')
-        file.write(f'top = {top_left[1]}')
-        file.write(f'time_slot_width = {cell_dims[0]}')
-        file.write(f'time_slot_height = {cell_dims[1]}')
-        file.write(f'rotation_angle = {angle}')
+    with open('camera_constants.py', 'w') as file:
+        file.write(f'left = {top_left[0]}\n')
+        file.write(f'top = {top_left[1]}\n')
+        file.write(f'time_slot_width = {cell_dims[0]}\n')
+        file.write(f'time_slot_height = {cell_dims[1]}\n')
+        file.write(f'rotation_angle = {angle}\n')
     print('done')
 
 
@@ -187,3 +196,5 @@ if __name__ == '__main__':
         plt.close('all')
         cv2.destroyAllWindows()
     save_settings(top_left, cell_dims, angle)
+    if os.path.exists(path):
+        os.remove(path)

@@ -59,3 +59,5 @@ colour_thresholds = {
 
 num_time_slots = 35
 num_days = 7
+
+python_path = '/Users/alexviller/micromamba/envs/tmp/bin/python'
