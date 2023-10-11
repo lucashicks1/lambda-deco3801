@@ -1,13 +1,21 @@
 import './Widgets.css';
+import React, { useState, useEffect } from 'react';
 
-function ClockWidget() {
+export default function ClockWidget() {
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    // Clean up the interval on component unmount
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="ClockWidget">
-      <header className="Clock-box">
-        {"HOLA, world!"}
-      </header>
+    <div>
+      <h1>{currentTime.toLocaleTimeString()}</h1>
     </div>
   );
 }
-
-export default ClockWidget;
