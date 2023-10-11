@@ -196,5 +196,3 @@ if __name__ == '__main__':
         plt.close('all')
         cv2.destroyAllWindows()
     save_settings(top_left, cell_dims, angle)
-    if os.path.exists(path):
-        os.remove(path)

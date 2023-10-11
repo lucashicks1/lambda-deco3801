@@ -5,8 +5,6 @@ import subprocess
 import time
 
 import cv2
-import imutils
-
 from camera_constants import rotation_angle
 from constants import python_path
 
@@ -18,7 +16,7 @@ from constants import python_path
 
 
 cv2.destroyAllWindows()
-path = '../vision/images/capture.jpg'
+path = './images/capture.jpg'
 path = os.path.abspath(path)
 cap = cv2.VideoCapture(0)
 # cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
@@ -34,7 +32,6 @@ while True:
     if frame is None:
         break
 
-    # frame = imutils.resize(frame, width=960, height=540)
     grey = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     grey = cv2.GaussianBlur(grey, (21, 21), 0)
 
@@ -47,10 +44,9 @@ while True:
     thresh = cv2.threshold(frameDelta, 15, 255, cv2.THRESH_BINARY)[1]
     thresh = cv2.dilate(thresh, None, iterations=2)
 
-    contours = cv2.findContours(
+    (contours, *_) = cv2.findContours(
         thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
     )
-    contours = imutils.grab_contours(contours)
 
     for c in contours:
         if cv2.contourArea(c) < 500:
@@ -62,16 +58,6 @@ while True:
 
     noMotionTime = timestamp - noMotionTimeStamp
     if noMotionTime > datetime.timedelta(seconds=3) and thereWasMotion is True:
-        text = timestamp.strftime('%A %d %B %Y %I:%M:%S%p')
-        cv2.putText(
-            frame,
-            text,
-            (10, 20),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.5,
-            (0, 255, 0),
-            2,
-        )
         if rotation_angle == 90:
             frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
         elif rotation_angle == 180:
@@ -85,11 +71,11 @@ while True:
         vision_path = os.path.abspath(vision_path)
         subprocess.run(f'{python_path} {vision_path} {path}', shell=True)
     # show the frame and record if the user presses a key
-    cv2.imshow('Epic Motion Epicness Detection Camera', frame)
+    cv2.imshow('Motion Detect', frame)
     key = cv2.waitKey(1) & 0xFF
 
-    # if the `q` key is pressed, break from the loop
-    if key == ord('q'):
+    # if the `q`, or `esc` key is pressed, break from the loop
+    if key == ord('q') or key == 27:
         break
 
 # cleanup the camera and close any open windows

@@ -40,7 +40,7 @@ run time.
 Using this matplotlib window and image, zoom in to find the top left corner of the
 calendar and record the x, y coordinate of this. Then record the height and width of
 each time slot cell. Then, when prompted, enter each into the terminal after closing
-the matplotlib window. Now the script should be calibrated for your current set up.
+the matplotlib window. Now the script is calibrated for your current set up.
 
 ##### constants.py
 
