@@ -30,7 +30,6 @@ def reset_db():
                 hour += 1
             timeslot_num += 1
 
-
     print("\nTIMESLOTS")
     cursor = cal_col.find({})
     for doc in cursor:

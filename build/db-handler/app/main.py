@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routers import figures_router, whiteboard_router, display_router
 from app.dependencies.database import cal_col
 from app import help_scripts
+
 tags_metadata = [
     {
         "name": "Display",
@@ -28,6 +29,7 @@ app = FastAPI(
     openapi_tags=tags_metadata
 )
 
+# Adds CORS middleware for react app
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -36,18 +38,20 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
+# Includes all of the endpoint routers
 app.include_router(figures_router.router)
 app.include_router(whiteboard_router.router)
 app.include_router(display_router.router)
+
+
+# Redirect main endpoint to the docs
 @app.get("/", summary="Default landing page which will redirect you to the docs")
 async def main():
     # Redirects you to doc page
     return responses.RedirectResponse("/docs")
+
+
 @app.get("/reset", summary="Resets the state of the database")
-async def reset(reset: bool = False):
-    if reset:
+async def reset(state: bool = False):
+    if state:
         help_scripts.reset_db()
-@app.get("/dump", summary="DUMPS THE MONGODB FOR TESTING")
-async def dump():
-    return {"body": list(cal_col.find({}, {"_id": 0}))}
