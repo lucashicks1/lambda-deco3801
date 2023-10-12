@@ -1,4 +1,3 @@
-import os
 import sys
 from collections import namedtuple
 
@@ -15,8 +14,24 @@ matplotlib.use('qtagg')
 Point = namedtuple('Point', ['X', 'Y'])
 TimeSlot = namedtuple('TimeSlot', ['top_left', 'bottom_right'])
 
+"""
+NOTE: This file contains lots of ensuring all windows are closed and pre set 
+information for different libraries. This is due to an issue when importing
+both open cv and matplotlib. These should fix all problems but may not work
+on your machine.
+"""
+
 
 def get_rot_angle(path: str = 'cap.jpg') -> int:
+    """
+    get_rot_angle()
+    ---------------
+    method for prompting user to tell the orientation of their camera
+
+    :param path: path to the image we are checking. Defaults to cap.jpg
+    :return: the rotation angle
+    """
+    # default to 90 as calendar is portrait so makes sense
     angle = 90
     cap = cv2.VideoCapture(0)
     if not cap.isOpened():
@@ -34,7 +49,7 @@ def get_rot_angle(path: str = 'cap.jpg') -> int:
 
         rows, cols, _ = frame.shape
         # rotation_matrix = cv2.getRotationMatrix2D(
-            # (cols / 2, rows / 2), angle, 1
+        # (cols / 2, rows / 2), angle, 1
         # )
         # rotated_frame = cv2.warpAffine(frame, rotation_matrix, (cols, rows))
         if angle == 0:
@@ -49,7 +64,7 @@ def get_rot_angle(path: str = 'cap.jpg') -> int:
         cv2.imshow('Webcam', rotated_frame)
         key = cv2.waitKey(1)
 
-        if key == 27:
+        if key == 27:  # wait for `esc` key to be pressed
             check = float(
                 input('Please enter rotation angle, or -1 to exit: ')
             )
@@ -66,6 +81,16 @@ def get_rot_angle(path: str = 'cap.jpg') -> int:
 
 
 def get_top_left(img: Image) -> (int, int):
+    """
+    get_top_left()
+    --------------
+    This method prompts user to find the top left corner of the information
+    space of the calendar.
+
+    :param img: The image that we are considering, after rotation.
+    :return: a tuple of (left, top) which are the x, y coordinates of the
+             corner
+    """
     img_array = np.array(img)
     plt.imshow(img_array)
     plt.show(block=False)
@@ -84,6 +109,16 @@ def get_top_left(img: Image) -> (int, int):
 
 
 def show_crop(img: Image, top_left: (int, int)) -> bool:
+    """
+    show_crop()
+    -----------
+    This method shows the user a quick sanity check to ensure they are happy
+    with their choice.
+
+    :param img: the image we are considering.
+    :param top_left: the coordinates they gave.
+    :return: boolean based on if they are happy with their choice.
+    """
     cropped = img.crop((top_left[0], top_left[1], img.size[0], img.size[1]))
     plt.imshow(cropped)
     plt.show(block=False)
@@ -94,6 +129,17 @@ def show_crop(img: Image, top_left: (int, int)) -> bool:
 
 
 def get_cell_dims(img: Image, top_left: (int, int)) -> (float, float):
+    """
+    get_cell_dims()
+    ---------------
+    Prompt user for height and width in pixels of a time cell on the calendar
+    based on the image provided
+
+    :param img: the image we are considering.
+    :param top_left: the user provided top left corner in (x, y) form.
+    :return: a tuple of floats in the form (width, height) containing the
+             dimensions of a time cell from the calendar
+    """
     cropped = img.crop((top_left[0], top_left[1], img.size[0], img.size[1]))
     cropped_array = np.array(cropped)
     plt.imshow(cropped_array)
@@ -108,6 +154,17 @@ def get_cell_dims(img: Image, top_left: (int, int)) -> (float, float):
 def show_cells(
     img: Image, top_left: (int, int), cell_dims: (float, float)
 ) -> bool:
+    """
+    show_cells()
+    ------------
+    shows the image of the calendar seperated into each time cell based on
+    their provided top left crop and dimensions of a time cell.
+
+    :param img: the image we are considering.
+    :param top_left: the user provided top left conrner in (x, y) form.
+    :param cell_dims: the user provided cell dimensions in (width, height) form.
+    :return: boolean of if the user is happy with their provided dimensions.
+    """
     img = img.crop((top_left[0], top_left[1], img.size[0], img.size[1]))
     day_time_slots = [  # yay list comprehension :)
         TimeSlot(
@@ -151,6 +208,16 @@ def show_cells(
 
 
 def save_settings(top_left: (int, int), cell_dims: (float, float), angle: int):
+    """
+    save_settings()
+    ---------------
+    Writes the users input to the camera_constants file for use by other
+    scripts in order to ensure consistency.
+
+    :param top_left: the user provided top left corner in (x, y) form
+    :param cell_dims: the user provided cell dimensions in (width, height) form
+    :param angle: the user provided rotation angle of the image
+    """
     with open('camera_constants.py', 'w') as file:
         file.write(f'left = {top_left[0]}\n')
         file.write(f'top = {top_left[1]}\n')
