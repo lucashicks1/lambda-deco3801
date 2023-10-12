@@ -3,7 +3,7 @@ name: Python formatter and linter
 on: [push]
 
 jobs:
-  build-linux:
+  python-linting-formatting:
     runs-on: ubuntu-latest # Run the runner on a ubuntu image
     strategy:
       max-parallel: 5
@@ -24,6 +24,7 @@ jobs:
         pip install pylint
     - name: Run formatter and linter
       run: |
+        pip list
         pylint camera
         pylint db-handler
         pylint figurines
