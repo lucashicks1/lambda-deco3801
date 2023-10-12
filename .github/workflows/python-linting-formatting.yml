@@ -16,7 +16,7 @@ jobs:
         python-version: '3.11'
     - name: Install formatter and linter
       run: |
-        export PYTHONPATH = $GITHUB_PATH
+        export PYTHONPATH=$GITHUB_PATH
         python -m venv venv
         source ./venv/bin/activate
         pip install --upgrade pip
