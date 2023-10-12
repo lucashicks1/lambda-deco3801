@@ -1,16 +1,26 @@
+"""Utils file for basic utility functions used throughout the database handler"""
 from datetime import datetime
-import time as time_lib
 import app.constants as constants
 import app.dependencies.database as db
 
 
 def current_to_timeslot() -> str:
+    """Calculates the current timeslot to a string that is used in the database
+
+    Returns:
+        str: string representation of the current timeslot
+    """
     now = datetime.now()
     # Gets current time with minutes rounded down to the closest 15 minute timeslot
     return f'{now.hour:02}:{now.minute // constants.TIMESLOT_LEN * constants.TIMESLOT_LEN:02}'
 
 
 def current_to_timeslot_num() -> int:
+    """Calculates the current timeslot to a number that is used in the database
+
+    Returns:
+        int: int representation of the current timeslot
+    """
     now = datetime.now()
     hour_slot: int = now.hour * 60 / constants.TIMESLOT_LEN
     minute_slot: int = (
@@ -20,6 +30,7 @@ def current_to_timeslot_num() -> int:
 
 
 def reset_db():
+    """Resets the database and adds in random timeslot information"""
     db.cal_col.delete_many({})
     db.user_col.delete_many({})
 

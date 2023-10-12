@@ -1,8 +1,8 @@
+import time as time_lib
+from typing import Annotated
 from fastapi import Body, APIRouter
 from app.dependencies.database import cal_col, user_col
-import time as time_lib
 import app.utils as utils
-from typing import Annotated
 from app.examples.figurines_payloads import FIGURINES_EXAMPLE
 
 router = APIRouter(prefix='/figurines', tags=['Figurines'])
@@ -13,9 +13,14 @@ router = APIRouter(prefix='/figurines', tags=['Figurines'])
     summary='Gets map of all users and their availability for that timeslot. 1 represents busy, '
     '0 represents free',
 )
-async def get_available() -> Annotated[
+def get_available() -> Annotated[
     dict, Body(examples=[FIGURINES_EXAMPLE])
 ]:
+    """Endpoint that determines whether a user is free or not
+
+    Returns:
+        dict: map, mapping a user to their status
+    """
     users: dict = {}
     timeslot: str = utils.current_to_timeslot()
     # Finds the timeslot in the database at the current time

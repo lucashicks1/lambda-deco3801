@@ -1,7 +1,7 @@
+"""Fast api app that is run when api starts"""
 from fastapi import FastAPI, responses
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers import figures_router, whiteboard_router, display_router
-from app.dependencies.database import cal_col
 from app import help_scripts
 
 tags_metadata = [
@@ -42,12 +42,18 @@ app.include_router(display_router.router)
 @app.get(
     '/', summary='Default landing page which will redirect you to the docs'
 )
-async def main():
+def main():
+    """0th level of the API that redirects to the API docs"""
     # Redirects you to doc page
     return responses.RedirectResponse('/docs')
 
 
 @app.get('/reset', summary='Resets the state of the database')
-async def reset(state: bool = False):
+def reset(state: bool = False):
+    """Resets the database if state is true
+
+    Args:
+        state (bool, optional): Whether the database will be reset. Defaults to False.
+    """
     if state:
         help_scripts.reset_db()

@@ -1,8 +1,13 @@
+"""API router for display endpoints"""
+from typing import Annotated
+
 from fastapi import Body, APIRouter, Query
 from app.dependencies.database import cal_col, user_col
+from app.examples.display_payloads import (
+    FREE_TIMESLOTS_EXAMPLE,
+    USER_TOTALS_EXAMPLES,
+    FAMILY_TIMESLOTS_EXAMPLE)
 from app import constants
-from typing import Annotated
-from app.examples.display_payloads import *
 
 router = APIRouter(prefix='/display', tags=['Display'])
 
@@ -11,9 +16,14 @@ router = APIRouter(prefix='/display', tags=['Display'])
     '/user-totals',
     summary='Calculates the total number of booked hours for each user.',
 )
-async def get_user_hours() -> Annotated[
+def get_user_hours() -> Annotated[
     dict, Body(examples=[USER_TOTALS_EXAMPLES])
 ]:
+    """Endpoint that returns the total number of booked hours for each user.
+
+    Returns:
+        dict: user booked hour totals
+    """
     # Find all users that aren't the family user
     users: list[str] = user_col.distinct(
         'user_id', {'user_id': {'$ne': constants.FAMILY_NAME}}
@@ -32,9 +42,14 @@ async def get_user_hours() -> Annotated[
     '/family-timeslots',
     summary='Gets all of the timeslots that the family has booked in time for.',
 )
-async def get_family_timeslots() -> Annotated[
+def get_family_timeslots() -> Annotated[
     dict, Body(examples=[FAMILY_TIMESLOTS_EXAMPLE])
 ]:
+    """Endpoint that returns all of the timeslots that the family has booked
+
+    Returns:
+        dict: calendar timeslots
+    """
     documents: list = list(
         cal_col.find(
             {'booked_users': {'$in': [constants.FAMILY_NAME]}}, {'_id': 0}
@@ -48,7 +63,7 @@ async def get_family_timeslots() -> Annotated[
     summary='Gets the timeslots that have a certain number of free users. Each slot is sorted in descending '
     'order in terms of how many people are free during it',
 )
-async def get_free_timeslots(
+def get_free_timeslots(
     min_num_users: Annotated[
         int,
         Query(
@@ -60,6 +75,11 @@ async def get_free_timeslots(
         ),
     ] = user_col.count_documents({'user_id': {'$ne': constants.FAMILY_NAME}})
 ) -> Annotated[dict, Body(examples=[FREE_TIMESLOTS_EXAMPLE])]:
+    """Endpoint that gets timeslots with a given number of free users.
+
+    Returns:
+        dict: timeslots with a given number of free users
+    """
     num_users: int = user_col.count_documents(
         {'user_id': {'$ne': constants.FAMILY_NAME}}
     )

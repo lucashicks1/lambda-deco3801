@@ -24,6 +24,6 @@ jobs:
         pip install pylint
         blue --check --exclude '' build/
         pylint build/camera --exit-zero
-        pylint build/db-handler --exit-zero
+        pylint build/db-handler/app --exit-zero
         pylint build/figurines --exit-zero
         pylint build/vision --exit-zero

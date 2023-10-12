@@ -1,6 +1,6 @@
+from typing import Annotated
 from fastapi import Body, APIRouter, HTTPException
 from app.dependencies.database import cal_col, user_col
-from typing import Annotated
 from app.models.whiteboard_models import WhiteboardRequest
 from app.examples.whiteboard_payloads import (
     POST_WHITEBOARD,
@@ -15,6 +15,14 @@ def modify_calendar(
     user: str,
     payload: Annotated[WhiteboardRequest, Body(examples=[POST_WHITEBOARD])],
 ) -> Annotated[dict, Body(examples=[RESPONSE_WHITEBOARD])]:
+    """Endpoint that updates the calendar with information given to the image capture software.
+
+    Raises:
+        HTTPException: 400 status code if the user provided is not valid
+
+    Returns:
+        dict: success message_description_
+    """
     users = user_col.distinct('user_id')
     if user not in users:
         raise HTTPException(

@@ -1,6 +1,7 @@
+"""Help scripts that are used throughout the app"""
+import random
 from app.dependencies.database import cal_col, user_col
 import app.constants as constants
-import random
 
 
 def reset_db():
