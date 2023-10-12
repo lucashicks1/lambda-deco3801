@@ -1,278 +1,932 @@
 [
     {
-        "day": "Tuesday",
-        "time_slot": "1730",
-        "colour": "red",
-        "data": ""
+        "day": "monday",
+        "time_slot": 0,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Tuesday",
-        "time_slot": "1800",
-        "colour": "black",
-        "data": ""
+        "day": "monday",
+        "time_slot": 1,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Tuesday",
-        "time_slot": "1830",
-        "colour": "red",
-        "data": ""
+        "day": "monday",
+        "time_slot": 2,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Tuesday",
-        "time_slot": "1830",
-        "colour": "black",
-        "data": ""
+        "day": "monday",
+        "time_slot": 3,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Tuesday",
-        "time_slot": "1930",
-        "colour": "red",
-        "data": ""
+        "day": "monday",
+        "time_slot": 4,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Tuesday",
-        "time_slot": "2000",
-        "colour": "red",
-        "data": ""
+        "day": "monday",
+        "time_slot": 5,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Tuesday",
-        "time_slot": "2030",
-        "colour": "black",
-        "data": ""
+        "day": "monday",
+        "time_slot": 6,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Tuesday",
-        "time_slot": "2100",
-        "colour": "black",
-        "data": ""
+        "day": "monday",
+        "time_slot": 7,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Tuesday",
-        "time_slot": "2130",
-        "colour": "black",
-        "data": ""
+        "day": "monday",
+        "time_slot": 8,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Tuesday",
-        "time_slot": "2200",
-        "colour": "black",
-        "data": ""
+        "day": "monday",
+        "time_slot": 9,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Wednesday",
-        "time_slot": "1700",
-        "colour": "black",
-        "data": ""
+        "day": "monday",
+        "time_slot": 10,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Wednesday",
-        "time_slot": "1730",
-        "colour": "black",
-        "data": ""
+        "day": "monday",
+        "time_slot": 11,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Wednesday",
-        "time_slot": "1800",
-        "colour": "red",
-        "data": ""
+        "day": "monday",
+        "time_slot": 12,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Wednesday",
-        "time_slot": "1800",
-        "colour": "black",
-        "data": ""
+        "day": "monday",
+        "time_slot": 13,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Wednesday",
-        "time_slot": "1830",
-        "colour": "red",
-        "data": ""
+        "day": "monday",
+        "time_slot": 14,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Wednesday",
-        "time_slot": "1900",
-        "colour": "black",
-        "data": ""
+        "day": "monday",
+        "time_slot": 17,
+        "data": "",
+        "colour": "red"
     },
     {
-        "day": "Wednesday",
-        "time_slot": "1930",
-        "colour": "black",
-        "data": ""
+        "day": "monday",
+        "time_slot": 19,
+        "data": "",
+        "colour": "blue,red"
     },
     {
-        "day": "Wednesday",
-        "time_slot": "2000",
-        "colour": "red",
-        "data": ""
+        "day": "monday",
+        "time_slot": 20,
+        "data": "",
+        "colour": "blue,red"
     },
     {
-        "day": "Wednesday",
-        "time_slot": "2030",
-        "colour": "red",
-        "data": ""
+        "day": "monday",
+        "time_slot": 21,
+        "data": "",
+        "colour": "blue,black"
     },
     {
-        "day": "Wednesday",
-        "time_slot": "2200",
-        "colour": "red",
-        "data": ""
+        "day": "monday",
+        "time_slot": 22,
+        "data": "",
+        "colour": "blue,black"
     },
     {
-        "day": "Thursday",
-        "time_slot": "0730",
-        "colour": "red",
-        "data": ""
+        "day": "monday",
+        "time_slot": 23,
+        "data": "",
+        "colour": "blue,black"
     },
     {
-        "day": "Thursday",
-        "time_slot": "0800",
-        "colour": "red",
-        "data": ""
+        "day": "monday",
+        "time_slot": 24,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Thursday",
-        "time_slot": "0830",
-        "colour": "red",
-        "data": ""
+        "day": "monday",
+        "time_slot": 26,
+        "data": "",
+        "colour": "blue"
     },
     {
-        "day": "Thursday",
-        "time_slot": "0900",
-        "colour": "red",
-        "data": ""
+        "day": "monday",
+        "time_slot": 28,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Thursday",
-        "time_slot": "0930",
-        "colour": "red",
-        "data": ""
+        "day": "monday",
+        "time_slot": 29,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Thursday",
-        "time_slot": "1000",
-        "colour": "red",
-        "data": ""
+        "day": "monday",
+        "time_slot": 30,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Thursday",
-        "time_slot": "1030",
-        "colour": "red",
-        "data": ""
+        "day": "monday",
+        "time_slot": 31,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Thursday",
-        "time_slot": "1100",
-        "colour": "red",
-        "data": ""
+        "day": "monday",
+        "time_slot": 32,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Thursday",
-        "time_slot": "1130",
-        "colour": "red",
-        "data": ""
+        "day": "monday",
+        "time_slot": 34,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Thursday",
-        "time_slot": "1200",
-        "colour": "red",
-        "data": ""
+        "day": "tuesday",
+        "time_slot": 0,
+        "data": "",
+        "colour": "blue"
     },
     {
-        "day": "Thursday",
-        "time_slot": "1230",
-        "colour": "red",
-        "data": ""
+        "day": "tuesday",
+        "time_slot": 1,
+        "data": "",
+        "colour": "blue"
     },
     {
-        "day": "Thursday",
-        "time_slot": "1300",
-        "colour": "red",
-        "data": ""
+        "day": "tuesday",
+        "time_slot": 2,
+        "data": "",
+        "colour": "blue"
     },
     {
-        "day": "Thursday",
-        "time_slot": "1330",
-        "colour": "red",
-        "data": ""
+        "day": "tuesday",
+        "time_slot": 3,
+        "data": "",
+        "colour": "blue"
     },
     {
-        "day": "Thursday",
-        "time_slot": "1400",
-        "colour": "red",
-        "data": ""
+        "day": "tuesday",
+        "time_slot": 4,
+        "data": "",
+        "colour": "blue"
     },
     {
-        "day": "Thursday",
-        "time_slot": "1700",
-        "colour": "red",
-        "data": ""
+        "day": "tuesday",
+        "time_slot": 5,
+        "data": "",
+        "colour": "blue"
     },
     {
-        "day": "Thursday",
-        "time_slot": "1730",
-        "colour": "red",
-        "data": ""
+        "day": "tuesday",
+        "time_slot": 6,
+        "data": "",
+        "colour": "blue"
     },
     {
-        "day": "Thursday",
-        "time_slot": "1800",
-        "colour": "red",
-        "data": ""
+        "day": "tuesday",
+        "time_slot": 7,
+        "data": "",
+        "colour": "blue"
     },
     {
-        "day": "Thursday",
-        "time_slot": "1830",
-        "colour": "red",
-        "data": ""
+        "day": "tuesday",
+        "time_slot": 8,
+        "data": "",
+        "colour": "blue"
     },
     {
-        "day": "Thursday",
-        "time_slot": "1900",
-        "colour": "red",
-        "data": ""
+        "day": "tuesday",
+        "time_slot": 9,
+        "data": "",
+        "colour": "blue"
     },
     {
-        "day": "Thursday",
-        "time_slot": "1930",
-        "colour": "red",
-        "data": ""
+        "day": "tuesday",
+        "time_slot": 11,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Thursday",
-        "time_slot": "2000",
-        "colour": "red",
-        "data": ""
+        "day": "tuesday",
+        "time_slot": 12,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Thursday",
-        "time_slot": "2030",
-        "colour": "red",
-        "data": ""
+        "day": "tuesday",
+        "time_slot": 13,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Thursday",
-        "time_slot": "2100",
-        "colour": "red",
-        "data": ""
+        "day": "tuesday",
+        "time_slot": 14,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Thursday",
-        "time_slot": "2130",
-        "colour": "red",
-        "data": ""
+        "day": "tuesday",
+        "time_slot": 15,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Thursday",
-        "time_slot": "2200",
-        "colour": "red",
-        "data": ""
+        "day": "tuesday",
+        "time_slot": 16,
+        "data": "",
+        "colour": "black"
     },
     {
-        "day": "Friday",
-        "time_slot": "0730",
-        "colour": "red",
-        "data": ""
+        "day": "tuesday",
+        "time_slot": 18,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "tuesday",
+        "time_slot": 20,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "tuesday",
+        "time_slot": 21,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "tuesday",
+        "time_slot": 22,
+        "data": "",
+        "colour": "blue,black"
+    },
+    {
+        "day": "tuesday",
+        "time_slot": 23,
+        "data": "",
+        "colour": "blue,black"
+    },
+    {
+        "day": "tuesday",
+        "time_slot": 24,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "tuesday",
+        "time_slot": 26,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "tuesday",
+        "time_slot": 28,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "tuesday",
+        "time_slot": 29,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "tuesday",
+        "time_slot": 30,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "tuesday",
+        "time_slot": 31,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "tuesday",
+        "time_slot": 32,
+        "data": "",
+        "colour": "red"
+    },
+    {
+        "day": "tuesday",
+        "time_slot": 33,
+        "data": "",
+        "colour": "red"
+    },
+    {
+        "day": "tuesday",
+        "time_slot": 34,
+        "data": "",
+        "colour": "red"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 0,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 1,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 2,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 3,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 5,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 6,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 7,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 12,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 13,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 14,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 15,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 16,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 17,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 18,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 19,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 20,
+        "data": "",
+        "colour": "blue,black"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 21,
+        "data": "",
+        "colour": "blue,black"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 22,
+        "data": "",
+        "colour": "blue,black"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 23,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 24,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 27,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 28,
+        "data": "",
+        "colour": "red,black"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 29,
+        "data": "",
+        "colour": "red,black"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 30,
+        "data": "",
+        "colour": "blue,black"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 31,
+        "data": "",
+        "colour": "red,black"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 32,
+        "data": "",
+        "colour": "red"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 34,
+        "data": "",
+        "colour": "red"
+    },
+    {
+        "day": "thursday",
+        "time_slot": 0,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "thursday",
+        "time_slot": 1,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "thursday",
+        "time_slot": 2,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "thursday",
+        "time_slot": 3,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "thursday",
+        "time_slot": 4,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "thursday",
+        "time_slot": 12,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "thursday",
+        "time_slot": 13,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "thursday",
+        "time_slot": 14,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "thursday",
+        "time_slot": 15,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "thursday",
+        "time_slot": 16,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "thursday",
+        "time_slot": 17,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "thursday",
+        "time_slot": 18,
+        "data": "\u00bb lin\n",
+        "colour": "blue,red"
+    },
+    {
+        "day": "thursday",
+        "time_slot": 21,
+        "data": "",
+        "colour": "red"
+    },
+    {
+        "day": "thursday",
+        "time_slot": 22,
+        "data": "",
+        "colour": "red"
+    },
+    {
+        "day": "thursday",
+        "time_slot": 23,
+        "data": "",
+        "colour": "red"
+    },
+    {
+        "day": "thursday",
+        "time_slot": 24,
+        "data": "",
+        "colour": "red"
+    },
+    {
+        "day": "thursday",
+        "time_slot": 27,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "thursday",
+        "time_slot": 28,
+        "data": "",
+        "colour": "blue,red,black"
+    },
+    {
+        "day": "thursday",
+        "time_slot": 29,
+        "data": "i\n",
+        "colour": "blue,black"
+    },
+    {
+        "day": "thursday",
+        "time_slot": 30,
+        "data": "",
+        "colour": "blue,red,black"
+    },
+    {
+        "day": "thursday",
+        "time_slot": 32,
+        "data": "",
+        "colour": "red"
+    },
+    {
+        "day": "thursday",
+        "time_slot": 33,
+        "data": "",
+        "colour": "red"
+    },
+    {
+        "day": "thursday",
+        "time_slot": 34,
+        "data": "",
+        "colour": "red"
+    },
+    {
+        "day": "friday",
+        "time_slot": 0,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "friday",
+        "time_slot": 1,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "friday",
+        "time_slot": 2,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "friday",
+        "time_slot": 3,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "friday",
+        "time_slot": 4,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "friday",
+        "time_slot": 12,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "friday",
+        "time_slot": 13,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "friday",
+        "time_slot": 14,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "friday",
+        "time_slot": 15,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "friday",
+        "time_slot": 16,
+        "data": "",
+        "colour": "red,black"
+    },
+    {
+        "day": "friday",
+        "time_slot": 17,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "friday",
+        "time_slot": 21,
+        "data": "",
+        "colour": "red"
+    },
+    {
+        "day": "friday",
+        "time_slot": 22,
+        "data": "",
+        "colour": "red"
+    },
+    {
+        "day": "friday",
+        "time_slot": 23,
+        "data": "",
+        "colour": "red"
+    },
+    {
+        "day": "friday",
+        "time_slot": 27,
+        "data": "2 ems\n",
+        "colour": "blue,black"
+    },
+    {
+        "day": "friday",
+        "time_slot": 28,
+        "data": "",
+        "colour": "red,black"
+    },
+    {
+        "day": "friday",
+        "time_slot": 29,
+        "data": "",
+        "colour": "red,black"
+    },
+    {
+        "day": "friday",
+        "time_slot": 30,
+        "data": "FBG\n",
+        "colour": "red,black"
+    },
+    {
+        "day": "saturday",
+        "time_slot": 0,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "saturday",
+        "time_slot": 1,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "saturday",
+        "time_slot": 2,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "saturday",
+        "time_slot": 3,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "saturday",
+        "time_slot": 4,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "saturday",
+        "time_slot": 12,
+        "data": "",
+        "colour": "blue,black"
+    },
+    {
+        "day": "saturday",
+        "time_slot": 13,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "saturday",
+        "time_slot": 14,
+        "data": "om\n",
+        "colour": "black"
+    },
+    {
+        "day": "saturday",
+        "time_slot": 15,
+        "data": "",
+        "colour": "red,black"
+    },
+    {
+        "day": "saturday",
+        "time_slot": 16,
+        "data": "",
+        "colour": "red"
+    },
+    {
+        "day": "saturday",
+        "time_slot": 17,
+        "data": "r f@ 4\n",
+        "colour": "red,black"
+    },
+    {
+        "day": "saturday",
+        "time_slot": 27,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "saturday",
+        "time_slot": 28,
+        "data": "",
+        "colour": "red,black"
+    },
+    {
+        "day": "saturday",
+        "time_slot": 29,
+        "data": "",
+        "colour": "red,black"
+    },
+    {
+        "day": "saturday",
+        "time_slot": 30,
+        "data": "sit en\n",
+        "colour": "black"
+    },
+    {
+        "day": "sunday",
+        "time_slot": 0,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "sunday",
+        "time_slot": 1,
+        "data": "",
+        "colour": "blue"
+    },
+    {
+        "day": "sunday",
+        "time_slot": 12,
+        "data": "",
+        "colour": "blue,black"
+    },
+    {
+        "day": "sunday",
+        "time_slot": 13,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "sunday",
+        "time_slot": 14,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "sunday",
+        "time_slot": 15,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "sunday",
+        "time_slot": 16,
+        "data": "",
+        "colour": "red,black"
+    },
+    {
+        "day": "sunday",
+        "time_slot": 17,
+        "data": "",
+        "colour": "blue,red,black"
+    },
+    {
+        "day": "sunday",
+        "time_slot": 18,
+        "data": "dai\n",
+        "colour": "blue,black"
+    },
+    {
+        "day": "sunday",
+        "time_slot": 19,
+        "data": "",
+        "colour": "blue,red"
+    },
+    {
+        "day": "sunday",
+        "time_slot": 27,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "sunday",
+        "time_slot": 28,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "sunday",
+        "time_slot": 29,
+        "data": "",
+        "colour": "black"
     }
 ]

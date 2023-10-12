@@ -23,6 +23,13 @@ conda env create -f environment.yaml
 conda activate env
 ```
 
+When installation of dependencies is complete, from the environment you are using
+run 
+```
+which python
+```
+and put the result of that into constants.py in place of python_path
+
 # Reader Script
 
 This script uses an image of the calendar and given some presets created by a
