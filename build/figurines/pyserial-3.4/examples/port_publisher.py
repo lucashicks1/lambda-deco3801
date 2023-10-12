@@ -31,11 +31,12 @@ import dbus
 try:
     import avahi
 except ImportError:
+
     class avahi:
-        DBUS_NAME = "org.freedesktop.Avahi"
-        DBUS_PATH_SERVER = "/"
-        DBUS_INTERFACE_SERVER = "org.freedesktop.Avahi.Server"
-        DBUS_INTERFACE_ENTRY_GROUP = DBUS_NAME + ".EntryGroup"
+        DBUS_NAME = 'org.freedesktop.Avahi'
+        DBUS_PATH_SERVER = '/'
+        DBUS_INTERFACE_SERVER = 'org.freedesktop.Avahi.Server'
+        DBUS_INTERFACE_ENTRY_GROUP = DBUS_NAME + '.EntryGroup'
         IF_UNSPEC = -1
         PROTO_UNSPEC, PROTO_INET, PROTO_INET6 = -1, 0, 1
 
@@ -45,8 +46,9 @@ class ZeroconfService:
     A simple class to publish a network service with zeroconf using avahi.
     """
 
-    def __init__(self, name, port, stype="_http._tcp",
-                 domain="", host="", text=""):
+    def __init__(
+        self, name, port, stype='_http._tcp', domain='', host='', text=''
+    ):
         self.name = name
         self.stype = stype
         self.domain = domain
@@ -58,24 +60,26 @@ class ZeroconfService:
     def publish(self):
         bus = dbus.SystemBus()
         server = dbus.Interface(
-            bus.get_object(
-                avahi.DBUS_NAME,
-                avahi.DBUS_PATH_SERVER
-            ),
-            avahi.DBUS_INTERFACE_SERVER
+            bus.get_object(avahi.DBUS_NAME, avahi.DBUS_PATH_SERVER),
+            avahi.DBUS_INTERFACE_SERVER,
         )
 
         g = dbus.Interface(
-            bus.get_object(
-                avahi.DBUS_NAME,
-                server.EntryGroupNew()
-            ),
-            avahi.DBUS_INTERFACE_ENTRY_GROUP
+            bus.get_object(avahi.DBUS_NAME, server.EntryGroupNew()),
+            avahi.DBUS_INTERFACE_ENTRY_GROUP,
         )
 
-        g.AddService(avahi.IF_UNSPEC, avahi.PROTO_UNSPEC, dbus.UInt32(0),
-                     self.name, self.stype, self.domain, self.host,
-                     dbus.UInt16(self.port), self.text)
+        g.AddService(
+            avahi.IF_UNSPEC,
+            avahi.PROTO_UNSPEC,
+            dbus.UInt32(0),
+            self.name,
+            self.stype,
+            self.domain,
+            self.host,
+            dbus.UInt16(self.port),
+            self.text,
+        )
 
         g.Commit()
         self.group = g
@@ -86,7 +90,9 @@ class ZeroconfService:
             self.group = None
 
     def __str__(self):
-        return "{!r} @ {}:{} ({})".format(self.name, self.host, self.port, self.stype)
+        return '{!r} @ {}:{} ({})'.format(
+            self.name, self.host, self.port, self.stype
+        )
 
 
 class Forwarder(ZeroconfService):
@@ -99,7 +105,9 @@ class Forwarder(ZeroconfService):
     """
 
     def __init__(self, device, name, network_port, on_close=None, log=None):
-        ZeroconfService.__init__(self, name, network_port, stype='_serial_port._tcp')
+        ZeroconfService.__init__(
+            self, name, network_port, stype='_serial_port._tcp'
+        )
         self.alive = False
         self.network_port = network_port
         self.on_close = on_close
@@ -142,9 +150,9 @@ class Forwarder(ZeroconfService):
             socket.SOL_SOCKET,
             socket.SO_REUSEADDR,
             self.server_socket.getsockopt(
-                socket.SOL_SOCKET,
-                socket.SO_REUSEADDR
-            ) | 1
+                socket.SOL_SOCKET, socket.SO_REUSEADDR
+            )
+            | 1,
         )
         self.server_socket.setblocking(0)
         try:
@@ -152,9 +160,13 @@ class Forwarder(ZeroconfService):
             self.server_socket.listen(1)
         except socket.error as msg:
             self.handle_server_error()
-            #~ raise
+            # ~ raise
         if self.log is not None:
-            self.log.info("{}: Waiting for connection on {}...".format(self.device, self.network_port))
+            self.log.info(
+                '{}: Waiting for connection on {}...'.format(
+                    self.device, self.network_port
+                )
+            )
 
         # zeroconfig
         self.publish()
@@ -165,7 +177,7 @@ class Forwarder(ZeroconfService):
     def close(self):
         """Close all resources and unpublish service"""
         if self.log is not None:
-            self.log.info("{}: closing...".format(self.device))
+            self.log.info('{}: closing...'.format(self.device))
         self.alive = False
         self.unpublish()
         if self.server_socket:
@@ -291,18 +303,28 @@ class Forwarder(ZeroconfService):
             self.socket.setblocking(0)
             self.socket.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
             if self.log is not None:
-                self.log.warning('{}: Connected by {}:{}'.format(self.device, addr[0], addr[1]))
+                self.log.warning(
+                    '{}: Connected by {}:{}'.format(
+                        self.device, addr[0], addr[1]
+                    )
+                )
             self.serial.rts = True
             self.serial.dtr = True
             if self.log is not None:
-                self.rfc2217 = serial.rfc2217.PortManager(self.serial, self, logger=log.getChild(self.device))
+                self.rfc2217 = serial.rfc2217.PortManager(
+                    self.serial, self, logger=log.getChild(self.device)
+                )
             else:
                 self.rfc2217 = serial.rfc2217.PortManager(self.serial, self)
         else:
             # reject connection if there is already one
             connection.close()
             if self.log is not None:
-                self.log.warning('{}: Rejecting connect from {}:{}'.format(self.device, addr[0], addr[1]))
+                self.log.warning(
+                    '{}: Rejecting connect from {}:{}'.format(
+                        self.device, addr[0], addr[1]
+                    )
+                )
 
     def handle_server_error(self):
         """Socket server fails"""
@@ -330,9 +352,9 @@ class Forwarder(ZeroconfService):
 
 
 def test():
-    service = ZeroconfService(name="TestService", port=3000)
+    service = ZeroconfService(name='TestService', port=3000)
     service.publish()
-    input("Press the ENTER key to unpublish the service ")
+    input('Press the ENTER key to unpublish the service ')
     service.unpublish()
 
 
@@ -341,10 +363,10 @@ if __name__ == '__main__':  # noqa
     import argparse
 
     VERBOSTIY = [
-        logging.ERROR,      # 0
-        logging.WARNING,    # 1 (default)
-        logging.INFO,       # 2
-        logging.DEBUG,      # 3
+        logging.ERROR,  # 0
+        logging.WARNING,  # 1 (default)
+        logging.INFO,  # 2
+        logging.DEBUG,  # 3
     ]
 
     parser = argparse.ArgumentParser(
@@ -362,71 +384,86 @@ to this service over the network.
 
 Only one connection at once, per port, is supported. When the connection is
 terminated, it waits for the next connect.
-""")
+""",
+    )
 
-    group = parser.add_argument_group("serial port settings")
+    group = parser.add_argument_group('serial port settings')
 
     group.add_argument(
-        "--ports-regex",
-        help="specify a regex to search against the serial devices and their descriptions (default: %(default)s)",
+        '--ports-regex',
+        help='specify a regex to search against the serial devices and their descriptions (default: %(default)s)',
         default='/dev/ttyUSB[0-9]+',
-        metavar="REGEX")
+        metavar='REGEX',
+    )
 
-    group = parser.add_argument_group("network settings")
+    group = parser.add_argument_group('network settings')
 
     group.add_argument(
-        "--tcp-port",
-        dest="base_port",
-        help="specify lowest TCP port number (default: %(default)s)",
+        '--tcp-port',
+        dest='base_port',
+        help='specify lowest TCP port number (default: %(default)s)',
         default=7000,
         type=int,
-        metavar="PORT")
+        metavar='PORT',
+    )
 
-    group = parser.add_argument_group("daemon")
-
-    group.add_argument(
-        "-d", "--daemon",
-        dest="daemonize",
-        action="store_true",
-        help="start as daemon",
-        default=False)
+    group = parser.add_argument_group('daemon')
 
     group.add_argument(
-        "--pidfile",
-        help="specify a name for the PID file",
+        '-d',
+        '--daemon',
+        dest='daemonize',
+        action='store_true',
+        help='start as daemon',
+        default=False,
+    )
+
+    group.add_argument(
+        '--pidfile',
+        help='specify a name for the PID file',
         default=None,
-        metavar="FILE")
+        metavar='FILE',
+    )
 
-    group = parser.add_argument_group("diagnostics")
+    group = parser.add_argument_group('diagnostics')
 
     group.add_argument(
-        "-o", "--logfile",
-        help="write messages file instead of stdout",
+        '-o',
+        '--logfile',
+        help='write messages file instead of stdout',
         default=None,
-        metavar="FILE")
+        metavar='FILE',
+    )
 
     group.add_argument(
-        "-q", "--quiet",
-        dest="verbosity",
-        action="store_const",
+        '-q',
+        '--quiet',
+        dest='verbosity',
+        action='store_const',
         const=0,
-        help="suppress most diagnostic messages",
-        default=1)
+        help='suppress most diagnostic messages',
+        default=1,
+    )
 
     group.add_argument(
-        "-v", "--verbose",
-        dest="verbosity",
-        action="count",
-        help="increase diagnostic messages")
+        '-v',
+        '--verbose',
+        dest='verbosity',
+        action='count',
+        help='increase diagnostic messages',
+    )
 
     args = parser.parse_args()
 
     # set up logging
-    logging.basicConfig(level=VERBOSTIY[min(args.verbosity, len(VERBOSTIY) - 1)])
+    logging.basicConfig(
+        level=VERBOSTIY[min(args.verbosity, len(VERBOSTIY) - 1)]
+    )
     log = logging.getLogger('port_publisher')
 
     # redirect output if specified
     if args.logfile is not None:
+
         class WriteFlushed:
             def __init__(self, fileobj):
                 self.fileobj = fileobj
@@ -437,6 +474,7 @@ terminated, it waits for the next connect.
 
             def close(self):
                 self.fileobj.close()
+
         sys.stdout = sys.stderr = WriteFlushed(open(args.logfile, 'a'))
         # atexit.register(lambda: sys.stdout.close())
 
@@ -451,11 +489,13 @@ terminated, it waits for the next connect.
                 # exit first parent
                 sys.exit(0)
         except OSError as e:
-            log.critical("fork #1 failed: {} ({})\n".format(e.errno, e.strerror))
+            log.critical(
+                'fork #1 failed: {} ({})\n'.format(e.errno, e.strerror)
+            )
             sys.exit(1)
 
         # decouple from parent environment
-        os.chdir("/")   # don't prevent unmounting....
+        os.chdir('/')   # don't prevent unmounting....
         os.setsid()
         os.umask(0)
 
@@ -465,15 +505,18 @@ terminated, it waits for the next connect.
             if pid > 0:
                 # exit from second parent, save eventual PID before
                 if args.pidfile is not None:
-                    open(args.pidfile, 'w').write("{}".format(pid))
+                    open(args.pidfile, 'w').write('{}'.format(pid))
                 sys.exit(0)
         except OSError as e:
-            log.critical("fork #2 failed: {} ({})\n".format(e.errno, e.strerror))
+            log.critical(
+                'fork #2 failed: {} ({})\n'.format(e.errno, e.strerror)
+            )
             sys.exit(1)
 
         if args.logfile is None:
             import syslog
-            syslog.openlog("serial port publisher")
+
+            syslog.openlog('serial port publisher')
 
             # redirect output to syslog
             class WriteToSysLog:
@@ -492,13 +535,14 @@ terminated, it waits for the next connect.
 
                 def close(self):
                     self.flush()
+
             sys.stdout = sys.stderr = WriteToSysLog()
 
             # ensure the that the daemon runs a normal user, if run as root
         # if os.getuid() == 0:
-            #    name, passwd, uid, gid, desc, home, shell = pwd.getpwnam('someuser')
-            #    os.setgid(gid)     # set group first
-            #    os.setuid(uid)     # set user
+        #    name, passwd, uid, gid, desc, home, shell = pwd.getpwnam('someuser')
+        #    os.setgid(gid)     # set group first
+        #    os.setuid(uid)     # set user
 
     # keep the published stuff in a dictionary
     published = {}
@@ -512,7 +556,7 @@ terminated, it waits for the next connect.
         except KeyError:
             pass
         else:
-            log.info("unpublish: {}".format(forwarder))
+            log.info('unpublish: {}'.format(forwarder))
 
     alive = True
     next_check = 0
@@ -523,10 +567,15 @@ terminated, it waits for the next connect.
             now = time.time()
             if now > next_check:
                 next_check = now + 5
-                connected = [d for d, p, i in serial.tools.list_ports.grep(args.ports_regex)]
+                connected = [
+                    d
+                    for d, p, i in serial.tools.list_ports.grep(
+                        args.ports_regex
+                    )
+                ]
                 # Handle devices that are published, but no longer connected
                 for device in set(published).difference(connected):
-                    log.info("unpublish: {}".format(published[device]))
+                    log.info('unpublish: {}'.format(published[device]))
                     unpublish(published[device])
                 # Handle devices that are connected but not yet published
                 for device in sorted(set(connected).difference(published)):
@@ -537,11 +586,12 @@ terminated, it waits for the next connect.
                         port += 1
                     published[device] = Forwarder(
                         device,
-                        "{} on {}".format(device, hostname),
+                        '{} on {}'.format(device, hostname),
                         port,
                         on_close=unpublish,
-                        log=log)
-                    log.warning("publish: {}".format(published[device]))
+                        log=log,
+                    )
+                    log.warning('publish: {}'.format(published[device]))
                     published[device].open()
 
             # select_start = time.time()
@@ -551,10 +601,8 @@ terminated, it waits for the next connect.
             for publisher in published.values():
                 publisher.update_select_maps(read_map, write_map, error_map)
             readers, writers, errors = select.select(
-                read_map.keys(),
-                write_map.keys(),
-                error_map.keys(),
-                5)
+                read_map.keys(), write_map.keys(), error_map.keys(), 5
+            )
             # select_end = time.time()
             # print "select used %.3f s" % (select_end - select_start)
             for reader in readers:
@@ -570,5 +618,5 @@ terminated, it waits for the next connect.
         except SystemExit:
             raise
         except:
-            #~ raise
+            # ~ raise
             traceback.print_exc()

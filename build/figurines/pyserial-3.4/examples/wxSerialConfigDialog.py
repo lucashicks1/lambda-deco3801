@@ -37,32 +37,48 @@ class SerialConfigDialog(wx.Dialog):
         if 'show' in kwds:
             self.show = kwds.pop('show')
         # begin wxGlade: SerialConfigDialog.__init__
-        kwds["style"] = wx.DEFAULT_DIALOG_STYLE
+        kwds['style'] = wx.DEFAULT_DIALOG_STYLE
         wx.Dialog.__init__(self, *args, **kwds)
-        self.label_2 = wx.StaticText(self, -1, "Port")
+        self.label_2 = wx.StaticText(self, -1, 'Port')
         self.choice_port = wx.Choice(self, -1, choices=[])
-        self.label_1 = wx.StaticText(self, -1, "Baudrate")
-        self.combo_box_baudrate = wx.ComboBox(self, -1, choices=[], style=wx.CB_DROPDOWN)
-        self.sizer_1_staticbox = wx.StaticBox(self, -1, "Basics")
+        self.label_1 = wx.StaticText(self, -1, 'Baudrate')
+        self.combo_box_baudrate = wx.ComboBox(
+            self, -1, choices=[], style=wx.CB_DROPDOWN
+        )
+        self.sizer_1_staticbox = wx.StaticBox(self, -1, 'Basics')
         self.panel_format = wx.Panel(self, -1)
-        self.label_3 = wx.StaticText(self.panel_format, -1, "Data Bits")
-        self.choice_databits = wx.Choice(self.panel_format, -1, choices=["choice 1"])
-        self.label_4 = wx.StaticText(self.panel_format, -1, "Stop Bits")
-        self.choice_stopbits = wx.Choice(self.panel_format, -1, choices=["choice 1"])
-        self.label_5 = wx.StaticText(self.panel_format, -1, "Parity")
-        self.choice_parity = wx.Choice(self.panel_format, -1, choices=["choice 1"])
-        self.sizer_format_staticbox = wx.StaticBox(self.panel_format, -1, "Data Format")
+        self.label_3 = wx.StaticText(self.panel_format, -1, 'Data Bits')
+        self.choice_databits = wx.Choice(
+            self.panel_format, -1, choices=['choice 1']
+        )
+        self.label_4 = wx.StaticText(self.panel_format, -1, 'Stop Bits')
+        self.choice_stopbits = wx.Choice(
+            self.panel_format, -1, choices=['choice 1']
+        )
+        self.label_5 = wx.StaticText(self.panel_format, -1, 'Parity')
+        self.choice_parity = wx.Choice(
+            self.panel_format, -1, choices=['choice 1']
+        )
+        self.sizer_format_staticbox = wx.StaticBox(
+            self.panel_format, -1, 'Data Format'
+        )
         self.panel_timeout = wx.Panel(self, -1)
-        self.checkbox_timeout = wx.CheckBox(self.panel_timeout, -1, "Use Timeout")
-        self.text_ctrl_timeout = wx.TextCtrl(self.panel_timeout, -1, "")
-        self.label_6 = wx.StaticText(self.panel_timeout, -1, "seconds")
-        self.sizer_timeout_staticbox = wx.StaticBox(self.panel_timeout, -1, "Timeout")
+        self.checkbox_timeout = wx.CheckBox(
+            self.panel_timeout, -1, 'Use Timeout'
+        )
+        self.text_ctrl_timeout = wx.TextCtrl(self.panel_timeout, -1, '')
+        self.label_6 = wx.StaticText(self.panel_timeout, -1, 'seconds')
+        self.sizer_timeout_staticbox = wx.StaticBox(
+            self.panel_timeout, -1, 'Timeout'
+        )
         self.panel_flow = wx.Panel(self, -1)
-        self.checkbox_rtscts = wx.CheckBox(self.panel_flow, -1, "RTS/CTS")
-        self.checkbox_xonxoff = wx.CheckBox(self.panel_flow, -1, "Xon/Xoff")
-        self.sizer_flow_staticbox = wx.StaticBox(self.panel_flow, -1, "Flow Control")
-        self.button_ok = wx.Button(self, wx.ID_OK, "")
-        self.button_cancel = wx.Button(self, wx.ID_CANCEL, "")
+        self.checkbox_rtscts = wx.CheckBox(self.panel_flow, -1, 'RTS/CTS')
+        self.checkbox_xonxoff = wx.CheckBox(self.panel_flow, -1, 'Xon/Xoff')
+        self.sizer_flow_staticbox = wx.StaticBox(
+            self.panel_flow, -1, 'Flow Control'
+        )
+        self.button_ok = wx.Button(self, wx.ID_OK, '')
+        self.button_cancel = wx.Button(self, wx.ID_CANCEL, '')
 
         self.__set_properties()
         self.__do_layout()
@@ -72,14 +88,14 @@ class SerialConfigDialog(wx.Dialog):
 
     def __set_properties(self):
         # begin wxGlade: SerialConfigDialog.__set_properties
-        self.SetTitle("Serial Port Configuration")
+        self.SetTitle('Serial Port Configuration')
         self.choice_databits.SetSelection(0)
         self.choice_stopbits.SetSelection(0)
         self.choice_parity.SetSelection(0)
         self.text_ctrl_timeout.Enable(False)
         self.button_ok.SetDefault()
         # end wxGlade
-        self.SetTitle("Serial Port Configuration")
+        self.SetTitle('Serial Port Configuration')
         if self.show & SHOW_TIMEOUT:
             self.text_ctrl_timeout.Enable(0)
         self.button_ok.SetDefault()
@@ -98,8 +114,10 @@ class SerialConfigDialog(wx.Dialog):
         preferred_index = 0
         self.choice_port.Clear()
         self.ports = []
-        for n, (portname, desc, hwid) in enumerate(sorted(serial.tools.list_ports.comports())):
-            self.choice_port.Append(u'{} - {}'.format(portname, desc))
+        for n, (portname, desc, hwid) in enumerate(
+            sorted(serial.tools.list_ports.comports())
+        ):
+            self.choice_port.Append('{} - {}'.format(portname, desc))
             self.ports.append(portname)
             if self.serial.name == portname:
                 preferred_index = n
@@ -115,7 +133,9 @@ class SerialConfigDialog(wx.Dialog):
             if preferred_index is not None:
                 self.combo_box_baudrate.SetSelection(preferred_index)
             else:
-                self.combo_box_baudrate.SetValue(u'{}'.format(self.serial.baudrate))
+                self.combo_box_baudrate.SetValue(
+                    '{}'.format(self.serial.baudrate)
+                )
         if self.show & SHOW_FORMAT:
             # fill in data bits and select current setting
             self.choice_databits.Clear()
@@ -158,11 +178,17 @@ class SerialConfigDialog(wx.Dialog):
         sizer_2 = wx.BoxSizer(wx.VERTICAL)
         sizer_3 = wx.BoxSizer(wx.HORIZONTAL)
         self.sizer_flow_staticbox.Lower()
-        sizer_flow = wx.StaticBoxSizer(self.sizer_flow_staticbox, wx.HORIZONTAL)
+        sizer_flow = wx.StaticBoxSizer(
+            self.sizer_flow_staticbox, wx.HORIZONTAL
+        )
         self.sizer_timeout_staticbox.Lower()
-        sizer_timeout = wx.StaticBoxSizer(self.sizer_timeout_staticbox, wx.HORIZONTAL)
+        sizer_timeout = wx.StaticBoxSizer(
+            self.sizer_timeout_staticbox, wx.HORIZONTAL
+        )
         self.sizer_format_staticbox.Lower()
-        sizer_format = wx.StaticBoxSizer(self.sizer_format_staticbox, wx.VERTICAL)
+        sizer_format = wx.StaticBoxSizer(
+            self.sizer_format_staticbox, wx.VERTICAL
+        )
         grid_sizer_1 = wx.FlexGridSizer(3, 2, 0, 0)
         self.sizer_1_staticbox.Lower()
         sizer_1 = wx.StaticBoxSizer(self.sizer_1_staticbox, wx.VERTICAL)
@@ -175,21 +201,33 @@ class SerialConfigDialog(wx.Dialog):
         sizer_1.Add(sizer_basics, 0, wx.EXPAND, 0)
         sizer_2.Add(sizer_1, 0, wx.EXPAND, 0)
         grid_sizer_1.Add(self.label_3, 1, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 4)
-        grid_sizer_1.Add(self.choice_databits, 1, wx.EXPAND | wx.ALIGN_RIGHT, 0)
+        grid_sizer_1.Add(
+            self.choice_databits, 1, wx.EXPAND | wx.ALIGN_RIGHT, 0
+        )
         grid_sizer_1.Add(self.label_4, 1, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 4)
-        grid_sizer_1.Add(self.choice_stopbits, 1, wx.EXPAND | wx.ALIGN_RIGHT, 0)
+        grid_sizer_1.Add(
+            self.choice_stopbits, 1, wx.EXPAND | wx.ALIGN_RIGHT, 0
+        )
         grid_sizer_1.Add(self.label_5, 1, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 4)
         grid_sizer_1.Add(self.choice_parity, 1, wx.EXPAND | wx.ALIGN_RIGHT, 0)
         sizer_format.Add(grid_sizer_1, 1, wx.EXPAND, 0)
         self.panel_format.SetSizer(sizer_format)
         sizer_2.Add(self.panel_format, 0, wx.EXPAND, 0)
-        sizer_timeout.Add(self.checkbox_timeout, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 4)
+        sizer_timeout.Add(
+            self.checkbox_timeout, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 4
+        )
         sizer_timeout.Add(self.text_ctrl_timeout, 0, 0, 0)
-        sizer_timeout.Add(self.label_6, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 4)
+        sizer_timeout.Add(
+            self.label_6, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 4
+        )
         self.panel_timeout.SetSizer(sizer_timeout)
         sizer_2.Add(self.panel_timeout, 0, wx.EXPAND, 0)
-        sizer_flow.Add(self.checkbox_rtscts, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 4)
-        sizer_flow.Add(self.checkbox_xonxoff, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 4)
+        sizer_flow.Add(
+            self.checkbox_rtscts, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 4
+        )
+        sizer_flow.Add(
+            self.checkbox_xonxoff, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 4
+        )
         sizer_flow.Add((10, 10), 1, wx.EXPAND, 0)
         self.panel_flow.SetSizer(sizer_flow)
         sizer_2.Add(self.panel_flow, 0, wx.EXPAND, 0)
@@ -205,7 +243,9 @@ class SerialConfigDialog(wx.Dialog):
         wx.EVT_BUTTON(self, self.button_ok.GetId(), self.OnOK)
         wx.EVT_BUTTON(self, self.button_cancel.GetId(), self.OnCancel)
         if self.show & SHOW_TIMEOUT:
-            wx.EVT_CHECKBOX(self, self.checkbox_timeout.GetId(), self.OnTimeout)
+            wx.EVT_CHECKBOX(
+                self, self.checkbox_timeout.GetId(), self.OnTimeout
+            )
 
     def OnOK(self, events):
         success = True
@@ -215,31 +255,41 @@ class SerialConfigDialog(wx.Dialog):
                 b = int(self.combo_box_baudrate.GetValue())
             except ValueError:
                 with wx.MessageDialog(
-                        self,
-                        'Baudrate must be a numeric value',
-                        'Value Error',
-                        wx.OK | wx.ICON_ERROR) as dlg:
+                    self,
+                    'Baudrate must be a numeric value',
+                    'Value Error',
+                    wx.OK | wx.ICON_ERROR,
+                ) as dlg:
                     dlg.ShowModal()
                 success = False
             else:
                 self.serial.baudrate = b
         if self.show & SHOW_FORMAT:
-            self.serial.bytesize = self.serial.BYTESIZES[self.choice_databits.GetSelection()]
-            self.serial.stopbits = self.serial.STOPBITS[self.choice_stopbits.GetSelection()]
-            self.serial.parity = self.serial.PARITIES[self.choice_parity.GetSelection()]
+            self.serial.bytesize = self.serial.BYTESIZES[
+                self.choice_databits.GetSelection()
+            ]
+            self.serial.stopbits = self.serial.STOPBITS[
+                self.choice_stopbits.GetSelection()
+            ]
+            self.serial.parity = self.serial.PARITIES[
+                self.choice_parity.GetSelection()
+            ]
         if self.show & SHOW_FLOW:
             self.serial.rtscts = self.checkbox_rtscts.GetValue()
             self.serial.xonxoff = self.checkbox_xonxoff.GetValue()
         if self.show & SHOW_TIMEOUT:
             if self.checkbox_timeout.GetValue():
                 try:
-                    self.serial.timeout = float(self.text_ctrl_timeout.GetValue())
+                    self.serial.timeout = float(
+                        self.text_ctrl_timeout.GetValue()
+                    )
                 except ValueError:
                     with wx.MessageDialog(
-                            self,
-                            'Timeout must be a numeric value',
-                            'Value Error',
-                            wx.OK | wx.ICON_ERROR) as dlg:
+                        self,
+                        'Timeout must be a numeric value',
+                        'Value Error',
+                        wx.OK | wx.ICON_ERROR,
+                    ) as dlg:
                         dlg.ShowModal()
                     success = False
             else:
@@ -256,11 +306,13 @@ class SerialConfigDialog(wx.Dialog):
         else:
             self.text_ctrl_timeout.Enable(False)
 
+
 # end of class SerialConfigDialog
 
 
 class MyApp(wx.App):
     """Test code"""
+
     def OnInit(self):
         wx.InitAllImageHandlers()
 
@@ -269,8 +321,16 @@ class MyApp(wx.App):
         # loop until cancel is pressed, old values are used as start for the next run
         # show the different views, one after the other
         # value are kept.
-        for flags in (SHOW_BAUDRATE, SHOW_FLOW, SHOW_FORMAT, SHOW_TIMEOUT, SHOW_ALL):
-            dialog_serial_cfg = SerialConfigDialog(None, -1, "", serial=ser, show=flags)
+        for flags in (
+            SHOW_BAUDRATE,
+            SHOW_FLOW,
+            SHOW_FORMAT,
+            SHOW_TIMEOUT,
+            SHOW_ALL,
+        ):
+            dialog_serial_cfg = SerialConfigDialog(
+                None, -1, '', serial=ser, show=flags
+            )
             self.SetTopWindow(dialog_serial_cfg)
             result = dialog_serial_cfg.ShowModal()
             print(ser)
@@ -278,7 +338,7 @@ class MyApp(wx.App):
                 break
         # the user can play around with the values, CANCEL aborts the loop
         while True:
-            dialog_serial_cfg = SerialConfigDialog(None, -1, "", serial=ser)
+            dialog_serial_cfg = SerialConfigDialog(None, -1, '', serial=ser)
             self.SetTopWindow(dialog_serial_cfg)
             result = dialog_serial_cfg.ShowModal()
             print(ser)
@@ -286,8 +346,9 @@ class MyApp(wx.App):
                 break
         return 0
 
+
 # end of class MyApp
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app = MyApp(0)
     app.MainLoop()

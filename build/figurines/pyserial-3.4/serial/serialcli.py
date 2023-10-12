@@ -17,14 +17,33 @@ sab = System.Array[System.Byte]
 
 
 def as_byte_array(string):
-    return sab([ord(x) for x in string])  # XXX will require adaption when run with a 3.x compatible IronPython
+    return sab(
+        [ord(x) for x in string]
+    )  # XXX will require adaption when run with a 3.x compatible IronPython
 
 
 class Serial(SerialBase):
     """Serial port implementation for .NET/Mono."""
 
-    BAUDRATES = (50, 75, 110, 134, 150, 200, 300, 600, 1200, 1800, 2400, 4800,
-                 9600, 19200, 38400, 57600, 115200)
+    BAUDRATES = (
+        50,
+        75,
+        110,
+        134,
+        150,
+        200,
+        300,
+        600,
+        1200,
+        1800,
+        2400,
+        4800,
+        9600,
+        19200,
+        38400,
+        57600,
+        115200,
+    )
 
     def open(self):
         """\
@@ -32,14 +51,18 @@ class Serial(SerialBase):
         if the port cannot be opened.
         """
         if self._port is None:
-            raise SerialException("Port must be configured before it can be used.")
+            raise SerialException(
+                'Port must be configured before it can be used.'
+            )
         if self.is_open:
-            raise SerialException("Port is already open.")
+            raise SerialException('Port is already open.')
         try:
             self._port_handle = System.IO.Ports.SerialPort(self.portstr)
         except Exception as msg:
             self._port_handle = None
-            raise SerialException("could not open port %s: %s" % (self.portstr, msg))
+            raise SerialException(
+                'could not open port %s: %s' % (self.portstr, msg)
+            )
 
         # if RTS and/or DTR are not set before open, they default to True
         if self._rts_state is None:
@@ -59,20 +82,24 @@ class Serial(SerialBase):
     def _reconfigure_port(self):
         """Set communication parameters on opened port."""
         if not self._port_handle:
-            raise SerialException("Can only operate on a valid port handle")
+            raise SerialException('Can only operate on a valid port handle')
 
-        #~ self._port_handle.ReceivedBytesThreshold = 1
+        # ~ self._port_handle.ReceivedBytesThreshold = 1
 
         if self._timeout is None:
-            self._port_handle.ReadTimeout = System.IO.Ports.SerialPort.InfiniteTimeout
+            self._port_handle.ReadTimeout = (
+                System.IO.Ports.SerialPort.InfiniteTimeout
+            )
         else:
             self._port_handle.ReadTimeout = int(self._timeout * 1000)
 
         # if self._timeout != 0 and self._interCharTimeout is not None:
-            # timeouts = (int(self._interCharTimeout * 1000),) + timeouts[1:]
+        # timeouts = (int(self._interCharTimeout * 1000),) + timeouts[1:]
 
         if self._write_timeout is None:
-            self._port_handle.WriteTimeout = System.IO.Ports.SerialPort.InfiniteTimeout
+            self._port_handle.WriteTimeout = (
+                System.IO.Ports.SerialPort.InfiniteTimeout
+            )
         else:
             self._port_handle.WriteTimeout = int(self._write_timeout * 1000)
 
@@ -92,10 +119,14 @@ class Serial(SerialBase):
         elif self._bytesize == EIGHTBITS:
             self._port_handle.DataBits = 8
         else:
-            raise ValueError("Unsupported number of data bits: %r" % self._bytesize)
+            raise ValueError(
+                'Unsupported number of data bits: %r' % self._bytesize
+            )
 
         if self._parity == PARITY_NONE:
-            self._port_handle.Parity = getattr(System.IO.Ports.Parity, 'None')  # reserved keyword in Py3k
+            self._port_handle.Parity = getattr(
+                System.IO.Ports.Parity, 'None'
+            )  # reserved keyword in Py3k
         elif self._parity == PARITY_EVEN:
             self._port_handle.Parity = System.IO.Ports.Parity.Even
         elif self._parity == PARITY_ODD:
@@ -105,7 +136,7 @@ class Serial(SerialBase):
         elif self._parity == PARITY_SPACE:
             self._port_handle.Parity = System.IO.Ports.Parity.Space
         else:
-            raise ValueError("Unsupported parity mode: %r" % self._parity)
+            raise ValueError('Unsupported parity mode: %r' % self._parity)
 
         if self._stopbits == STOPBITS_ONE:
             self._port_handle.StopBits = System.IO.Ports.StopBits.One
@@ -114,19 +145,27 @@ class Serial(SerialBase):
         elif self._stopbits == STOPBITS_TWO:
             self._port_handle.StopBits = System.IO.Ports.StopBits.Two
         else:
-            raise ValueError("Unsupported number of stop bits: %r" % self._stopbits)
+            raise ValueError(
+                'Unsupported number of stop bits: %r' % self._stopbits
+            )
 
         if self._rtscts and self._xonxoff:
-            self._port_handle.Handshake = System.IO.Ports.Handshake.RequestToSendXOnXOff
+            self._port_handle.Handshake = (
+                System.IO.Ports.Handshake.RequestToSendXOnXOff
+            )
         elif self._rtscts:
-            self._port_handle.Handshake = System.IO.Ports.Handshake.RequestToSend
+            self._port_handle.Handshake = (
+                System.IO.Ports.Handshake.RequestToSend
+            )
         elif self._xonxoff:
             self._port_handle.Handshake = System.IO.Ports.Handshake.XOnXOff
         else:
-            self._port_handle.Handshake = getattr(System.IO.Ports.Handshake, 'None')   # reserved keyword in Py3k
+            self._port_handle.Handshake = getattr(
+                System.IO.Ports.Handshake, 'None'
+            )   # reserved keyword in Py3k
 
-    #~ def __del__(self):
-        #~ self.close()
+    # ~ def __del__(self):
+    # ~ self.close()
 
     def close(self):
         """Close port"""
@@ -173,8 +212,8 @@ class Serial(SerialBase):
         """Output the given string over the serial port."""
         if not self.is_open:
             raise portNotOpenError
-        #~ if not isinstance(data, (bytes, bytearray)):
-            #~ raise TypeError('expected %s or bytearray, got %s' % (bytes, type(data)))
+        # ~ if not isinstance(data, (bytes, bytearray)):
+        # ~ raise TypeError('expected %s or bytearray, got %s' % (bytes, type(data)))
         try:
             # must call overloaded method with byte array argument
             # as this is the only one not applying encodings
@@ -237,7 +276,7 @@ class Serial(SerialBase):
         """Read terminal status line: Ring Indicator"""
         if not self.is_open:
             raise portNotOpenError
-        #~ return self._port_handle.XXX
+        # ~ return self._port_handle.XXX
         return False  # XXX an error would be better
 
     @property

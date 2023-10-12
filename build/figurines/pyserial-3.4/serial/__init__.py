@@ -11,7 +11,8 @@ import sys
 import importlib
 
 from serial.serialutil import *
-#~ SerialBase, SerialException, to_bytes, iterbytes
+
+# ~ SerialBase, SerialException, to_bytes, iterbytes
 
 __version__ = '3.4'
 
@@ -22,15 +23,24 @@ if sys.platform == 'cli':
     from serial.serialcli import Serial
 else:
     import os
+
     # chose an implementation, depending on os
     if os.name == 'nt':  # sys.platform == 'win32':
         from serial.serialwin32 import Serial
     elif os.name == 'posix':
-        from serial.serialposix import Serial, PosixPollSerial, VTIMESerial  # noqa
+        from serial.serialposix import (
+            Serial,
+            PosixPollSerial,
+            VTIMESerial,
+        )  # noqa
     elif os.name == 'java':
         from serial.serialjava import Serial
     else:
-        raise ImportError("Sorry: no implementation for your platform ('{}') available".format(os.name))
+        raise ImportError(
+            "Sorry: no implementation for your platform ('{}') available".format(
+                os.name
+            )
+        )
 
 
 protocol_handler_packages = [
@@ -70,7 +80,9 @@ def serial_for_url(url, *args, **kwargs):
             for package_name in protocol_handler_packages:
                 try:
                     importlib.import_module(package_name)
-                    handler_module = importlib.import_module(module_name, package_name)
+                    handler_module = importlib.import_module(
+                        module_name, package_name
+                    )
                 except ImportError:
                     continue
                 else:
@@ -80,7 +92,9 @@ def serial_for_url(url, *args, **kwargs):
                         klass = handler_module.Serial
                     break
             else:
-                raise ValueError('invalid URL, protocol {!r} not known'.format(protocol))
+                raise ValueError(
+                    'invalid URL, protocol {!r} not known'.format(protocol)
+                )
     # instantiate and open when desired
     instance = klass(None, *args, **kwargs)
     instance.port = url

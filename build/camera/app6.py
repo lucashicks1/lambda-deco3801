@@ -12,19 +12,19 @@ result2 = cam.isOpened()
 print(result, result2)
 time.sleep(2.0)
 if result:
-    print("cam read")
-    # showing result, it take frame name and image 
+    print('cam read')
+    # showing result, it take frame name and image
     # output
-    cv.imshow("test", image)
-  
+    cv.imshow('test', image)
+
     # saving image in local storage
-    #cv.imwrite("test.png", image)
-  
-    # If keyboard interrupt occurs, destroy image 
+    # cv.imwrite("test.png", image)
+
+    # If keyboard interrupt occurs, destroy image
     # window
     cv.waitKey(0)
-    cv.destroyWindow("test")
-  
+    cv.destroyWindow('test')
+
 # If captured image is corrupted, moving to else part
 else:
-    print("No image detected. Please! try again")
+    print('No image detected. Please! try again')

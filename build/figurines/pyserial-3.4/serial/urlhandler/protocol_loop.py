@@ -16,6 +16,7 @@
 import logging
 import numbers
 import time
+
 try:
     import urlparse
 except ImportError:
@@ -25,7 +26,14 @@ try:
 except ImportError:
     import Queue as queue
 
-from serial.serialutil import SerialBase, SerialException, to_bytes, iterbytes, writeTimeoutError, portNotOpenError
+from serial.serialutil import (
+    SerialBase,
+    SerialException,
+    to_bytes,
+    iterbytes,
+    writeTimeoutError,
+    portNotOpenError,
+)
 
 # map log level names to constants. used in from_url()
 LOGGER_LEVELS = {
@@ -39,8 +47,25 @@ LOGGER_LEVELS = {
 class Serial(SerialBase):
     """Serial port implementation that simulates a loop back connection in plain software."""
 
-    BAUDRATES = (50, 75, 110, 134, 150, 200, 300, 600, 1200, 1800, 2400, 4800,
-                 9600, 19200, 38400, 57600, 115200)
+    BAUDRATES = (
+        50,
+        75,
+        110,
+        134,
+        150,
+        200,
+        300,
+        600,
+        1200,
+        1800,
+        2400,
+        4800,
+        9600,
+        19200,
+        38400,
+        57600,
+        115200,
+    )
 
     def __init__(self, *args, **kwargs):
         self.buffer_size = 4096
@@ -55,12 +80,14 @@ class Serial(SerialBase):
         if the port cannot be opened.
         """
         if self.is_open:
-            raise SerialException("Port is already open.")
+            raise SerialException('Port is already open.')
         self.logger = None
         self.queue = queue.Queue(self.buffer_size)
 
         if self._port is None:
-            raise SerialException("Port must be configured before it can be used.")
+            raise SerialException(
+                'Port must be configured before it can be used.'
+            )
         # not that there is anything to open, but the function applies the
         # options found in the URL
         self.from_url(self.port)
@@ -91,19 +118,23 @@ class Serial(SerialBase):
         protocol all settings are ignored!
         """
         # not that's it of any real use, but it helps in the unit tests
-        if not isinstance(self._baudrate, numbers.Integral) or not 0 < self._baudrate < 2 ** 32:
-            raise ValueError("invalid baudrate: {!r}".format(self._baudrate))
+        if (
+            not isinstance(self._baudrate, numbers.Integral)
+            or not 0 < self._baudrate < 2**32
+        ):
+            raise ValueError('invalid baudrate: {!r}'.format(self._baudrate))
         if self.logger:
             self.logger.info('_reconfigure_port()')
 
     def from_url(self, url):
         """extract host and port from an URL string"""
         parts = urlparse.urlsplit(url)
-        if parts.scheme != "loop":
+        if parts.scheme != 'loop':
             raise SerialException(
                 'expected a string in the form '
                 '"loop://[?logging={debug|info|warning|error}]": not starting '
-                'with loop:// ({!r})'.format(parts.scheme))
+                'with loop:// ({!r})'.format(parts.scheme)
+            )
         try:
             # process options now, directly altering self
             for option, values in urlparse.parse_qs(parts.query, True).items():
@@ -117,7 +148,8 @@ class Serial(SerialBase):
         except ValueError as e:
             raise SerialException(
                 'expected a string in the form '
-                '"loop://[?logging={debug|info|warning|error}]": {}'.format(e))
+                '"loop://[?logging={debug|info|warning|error}]": {}'.format(e)
+            )
 
     #  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 
@@ -147,7 +179,9 @@ class Serial(SerialBase):
         data = bytearray()
         while size > 0 and self.is_open:
             try:
-                b = self.queue.get(timeout=self._timeout)  # XXX inter char timeout
+                b = self.queue.get(
+                    timeout=self._timeout
+                )  # XXX inter char timeout
             except queue.Empty:
                 if self._timeout == 0:
                     break
@@ -185,7 +219,10 @@ class Serial(SerialBase):
         time_used_to_send = 10.0 * len(data) / self._baudrate
         # when a write timeout is configured check if we would be successful
         # (not sending anything, not even the part that would have time)
-        if self._write_timeout is not None and time_used_to_send > self._write_timeout:
+        if (
+            self._write_timeout is not None
+            and time_used_to_send > self._write_timeout
+        ):
             # must wait so that unit test succeeds
             time_left = self._write_timeout
             while time_left > 0 and not self._cancel_write:
@@ -231,17 +268,27 @@ class Serial(SerialBase):
         possible.
         """
         if self.logger:
-            self.logger.info('_update_break_state({!r})'.format(self._break_state))
+            self.logger.info(
+                '_update_break_state({!r})'.format(self._break_state)
+            )
 
     def _update_rts_state(self):
         """Set terminal status line: Request To Send"""
         if self.logger:
-            self.logger.info('_update_rts_state({!r}) -> state of CTS'.format(self._rts_state))
+            self.logger.info(
+                '_update_rts_state({!r}) -> state of CTS'.format(
+                    self._rts_state
+                )
+            )
 
     def _update_dtr_state(self):
         """Set terminal status line: Data Terminal Ready"""
         if self.logger:
-            self.logger.info('_update_dtr_state({!r}) -> state of DSR'.format(self._dtr_state))
+            self.logger.info(
+                '_update_dtr_state({!r}) -> state of DSR'.format(
+                    self._dtr_state
+                )
+            )
 
     @property
     def cts(self):
@@ -249,14 +296,18 @@ class Serial(SerialBase):
         if not self.is_open:
             raise portNotOpenError
         if self.logger:
-            self.logger.info('CTS -> state of RTS ({!r})'.format(self._rts_state))
+            self.logger.info(
+                'CTS -> state of RTS ({!r})'.format(self._rts_state)
+            )
         return self._rts_state
 
     @property
     def dsr(self):
         """Read terminal status line: Data Set Ready"""
         if self.logger:
-            self.logger.info('DSR -> state of DTR ({!r})'.format(self._dtr_state))
+            self.logger.info(
+                'DSR -> state of DTR ({!r})'.format(self._dtr_state)
+            )
         return self._dtr_state
 
     @property
@@ -284,12 +335,13 @@ class Serial(SerialBase):
 # simple client test
 if __name__ == '__main__':
     import sys
+
     s = Serial('loop://')
     sys.stdout.write('{}\n'.format(s))
 
-    sys.stdout.write("write...\n")
-    s.write("hello\n")
+    sys.stdout.write('write...\n')
+    s.write('hello\n')
     s.flush()
-    sys.stdout.write("read: {!r}\n".format(s.read(5)))
+    sys.stdout.write('read: {!r}\n'.format(s.read(5)))
 
     s.close()

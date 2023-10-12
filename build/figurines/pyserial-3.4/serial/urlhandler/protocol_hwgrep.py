@@ -31,6 +31,7 @@ except NameError:
 
 class Serial(serial.Serial):
     """Just inherit the native Serial port implementation and patch the port property."""
+
     # pylint: disable=no-member
 
     @serial.Serial.port.setter
@@ -43,7 +44,7 @@ class Serial(serial.Serial):
 
     def from_url(self, url):
         """extract host and port from an URL string"""
-        if url.lower().startswith("hwgrep://"):
+        if url.lower().startswith('hwgrep://'):
             url = url[9:]
         n = 0
         test_open = False
@@ -59,7 +60,11 @@ class Serial(serial.Serial):
                 # pick n'th element
                 n = int(value) - 1
                 if n < 1:
-                    raise ValueError('option "n" expects a positive integer larger than 1: {!r}'.format(value))
+                    raise ValueError(
+                        'option "n" expects a positive integer larger than 1: {!r}'.format(
+                            value
+                        )
+                    )
             elif option == 'skip_busy':
                 # open to test if port is available. not the nicest way..
                 test_open = True
@@ -80,7 +85,10 @@ class Serial(serial.Serial):
                 continue
             return port
         else:
-            raise serial.SerialException('no ports found matching regexp {!r}'.format(url))
+            raise serial.SerialException(
+                'no ports found matching regexp {!r}'.format(url)
+            )
+
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if __name__ == '__main__':

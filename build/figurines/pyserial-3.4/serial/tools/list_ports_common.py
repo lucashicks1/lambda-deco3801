@@ -62,8 +62,13 @@ class ListPortInfo(object):
         return 'USB VID:PID={:04X}:{:04X}{}{}'.format(
             self.vid or 0,
             self.pid or 0,
-            ' SER={}'.format(self.serial_number) if self.serial_number is not None else '',
-            ' LOCATION={}'.format(self.location) if self.location is not None else '')
+            ' SER={}'.format(self.serial_number)
+            if self.serial_number is not None
+            else '',
+            ' LOCATION={}'.format(self.location)
+            if self.location is not None
+            else '',
+        )
 
     def apply_usb_info(self):
         """update description and hwid from USB data"""
@@ -90,6 +95,7 @@ class ListPortInfo(object):
         else:
             raise IndexError('{} > 2'.format(index))
 
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 def list_links(devices):
     """\
@@ -101,6 +107,7 @@ def list_links(devices):
         if os.path.islink(device) and os.path.realpath(device) in devices:
             links.append(device)
     return links
+
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # test

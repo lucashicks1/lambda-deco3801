@@ -38,7 +38,10 @@ def sixteen(data):
     """
     n = 0
     for b in serial.iterbytes(data):
-        yield ('{:02X} '.format(ord(b)), b.decode('ascii') if b' ' <= b < b'\x7f' else '.')
+        yield (
+            '{:02X} '.format(ord(b)),
+            b.decode('ascii') if b' ' <= b < b'\x7f' else '.',
+        )
         n += 1
         if n == 8:
             yield (' ', '')
@@ -122,7 +125,9 @@ class FormatHexdump(object):
         self.control_color = '\x1b[37m'
 
     def write_line(self, timestamp, label, value, value2=''):
-        self.output.write('{:010.3f} {:4} {}{}\n'.format(timestamp, label, value, value2))
+        self.output.write(
+            '{:010.3f} {:4} {}{}\n'.format(timestamp, label, value, value2)
+        )
         self.output.flush()
 
     def rx(self, data):
@@ -131,7 +136,12 @@ class FormatHexdump(object):
             self.output.write(self.rx_color)
         if data:
             for offset, row in hexdump(data):
-                self.write_line(time.time() - self.start_time, 'RX', '{:04X}  '.format(offset), row)
+                self.write_line(
+                    time.time() - self.start_time,
+                    'RX',
+                    '{:04X}  '.format(offset),
+                    row,
+                )
         else:
             self.write_line(time.time() - self.start_time, 'RX', '<empty>')
 
@@ -140,7 +150,12 @@ class FormatHexdump(object):
         if self.color:
             self.output.write(self.tx_color)
         for offset, row in hexdump(data):
-            self.write_line(time.time() - self.start_time, 'TX', '{:04X}  '.format(offset), row)
+            self.write_line(
+                time.time() - self.start_time,
+                'TX',
+                '{:04X}  '.format(offset),
+                row,
+            )
 
     def control(self, name, value):
         """show control calls"""
@@ -154,6 +169,7 @@ class Serial(serial.Serial):
     Inherit the native Serial port implementation and wrap all the methods and
     attributes.
     """
+
     # pylint: disable=no-member
 
     def __init__(self, *args, **kwargs):
@@ -173,7 +189,8 @@ class Serial(serial.Serial):
             raise serial.SerialException(
                 'expected a string in the form '
                 '"spy://port[?option[=value][&option[=value]]]": '
-                'not starting with spy:// ({!r})'.format(parts.scheme))
+                'not starting with spy:// ({!r})'.format(parts.scheme)
+            )
         # process options now, directly altering self
         formatter = FormatHexdump
         color = False
@@ -193,7 +210,8 @@ class Serial(serial.Serial):
         except ValueError as e:
             raise serial.SerialException(
                 'expected a string in the form '
-                '"spy://port[?option[=value][&option[=value]]]": {}'.format(e))
+                '"spy://port[?option[=value][&option[=value]]]": {}'.format(e)
+            )
         self.formatter = formatter(output, color)
         return ''.join([parts.netloc, parts.path])
 
@@ -208,11 +226,13 @@ class Serial(serial.Serial):
         return rx
 
     if hasattr(serial.Serial, 'cancel_read'):
+
         def cancel_read(self):
             self.formatter.control('Q-RX', 'cancel_read')
             super(Serial, self).cancel_read()
 
     if hasattr(serial.Serial, 'cancel_write'):
+
         def cancel_write(self):
             self.formatter.control('Q-TX', 'cancel_write')
             super(Serial, self).cancel_write()
@@ -278,6 +298,7 @@ class Serial(serial.Serial):
         level = super(Serial, self).cd
         self.formatter.control('CD', 'active' if level else 'inactive')
         return level
+
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if __name__ == '__main__':

@@ -9,7 +9,7 @@ def reset_db():
 
     # Adds users
     for user in constants.USERS:
-        user_col.insert_one({"user_id": user})
+        user_col.insert_one({'user_id': user})
 
     # Adds timeslots
     for day in constants.DAYS:
@@ -18,10 +18,12 @@ def reset_db():
         timeslot_num: int = 0
         while hour < 24:
             document = {
-                "day": day,
-                "time": f"{hour:02}:{minute:02}",
-                "slot_num": timeslot_num,
-                "booked_users": random.sample(constants.USERS, random.randint(0, len(constants.USERS)))
+                'day': day,
+                'time': f'{hour:02}:{minute:02}',
+                'slot_num': timeslot_num,
+                'booked_users': random.sample(
+                    constants.USERS, random.randint(0, len(constants.USERS))
+                ),
             }
             cal_col.insert_one(document)
             minute += constants.TIMESLOT_LEN
@@ -30,12 +32,12 @@ def reset_db():
                 hour += 1
             timeslot_num += 1
 
-    print("\nTIMESLOTS")
+    print('\nTIMESLOTS')
     cursor = cal_col.find({})
     for doc in cursor:
         print(doc)
 
-    print("\nUSERS")
+    print('\nUSERS')
     cursor = user_col.find({})
     for doc in cursor:
         print(doc)

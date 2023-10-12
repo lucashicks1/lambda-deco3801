@@ -37,13 +37,15 @@ class TestTimeoutClass(unittest.TestCase):
         t = serialutil.Timeout(None)
         self.assertFalse(t.is_non_blocking)
         self.assertTrue(t.is_infinite)
-        #~ self.assertFalse(t.expired())
+        # ~ self.assertFalse(t.expired())
 
     def test_changing_clock(self):
         """Test recovery from chaning clock"""
+
         class T(serialutil.Timeout):
             def TIME(self):
                 return test_time
+
         test_time = 1000
         t = T(10)
         self.assertEqual(t.target_time, 1010)

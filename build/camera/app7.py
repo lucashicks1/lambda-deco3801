@@ -33,7 +33,7 @@ while True:
     grey = cv2.GaussianBlur(grey, (21, 21), 0)
 
     if avg is None:
-        avg = grey.copy().astype("float")
+        avg = grey.copy().astype('float')
         continue
 
     cv2.accumulateWeighted(grey, avg, 0.5)
@@ -41,7 +41,9 @@ while True:
     thresh = cv2.threshold(frameDelta, 15, 255, cv2.THRESH_BINARY)[1]
     thresh = cv2.dilate(thresh, None, iterations=2)
 
-    contours = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    contours = cv2.findContours(
+        thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
+    )
     contours = imutils.grab_contours(contours)
 
     for c in contours:
@@ -54,17 +56,25 @@ while True:
 
     noMotionTime = timestamp - noMotionTimeStamp
     if noMotionTime > datetime.timedelta(seconds=3) and thereWasMotion is True:
-        text = timestamp.strftime("%A %d %B %Y %I:%M:%S%p")
-        cv2.putText(frame, text, (10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+        text = timestamp.strftime('%A %d %B %Y %I:%M:%S%p')
+        cv2.putText(
+            frame,
+            text,
+            (10, 20),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.5,
+            (0, 255, 0),
+            2,
+        )
         cv2.imwrite(path, frame)
         noMotionTimeStamp = datetime.datetime.now()
         thereWasMotion = False
     # show the frame and record if the user presses a key
-    cv2.imshow("Epic Motion Epicness Detection Camera", frame)
+    cv2.imshow('Epic Motion Epicness Detection Camera', frame)
     key = cv2.waitKey(1) & 0xFF
 
     # if the `q` key is pressed, break from the loop
-    if key == ord("q"):
+    if key == ord('q'):
         break
 
 # cleanup the camera and close any open windows

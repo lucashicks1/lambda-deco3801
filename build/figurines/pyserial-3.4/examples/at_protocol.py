@@ -9,6 +9,7 @@ http://www.itu.int/rec/T-REC-V.250-200307-I/en
 from __future__ import print_function
 
 import sys
+
 sys.path.insert(0, '..')
 
 import logging
@@ -85,13 +86,15 @@ class ATProtocol(serial.threaded.LineReader):
             while True:
                 try:
                     line = self.responses.get(timeout=timeout)
-                    #~ print("%s -> %r" % (command, line))
+                    # ~ print("%s -> %r" % (command, line))
                     if line == response:
                         return lines
                     else:
                         lines.append(line)
                 except queue.Empty:
-                    raise ATException('AT command timeout ({!r})'.format(command))
+                    raise ATException(
+                        'AT command timeout ({!r})'.format(command)
+                    )
 
 
 # test
@@ -121,9 +124,13 @@ if __name__ == '__main__':
 
         def handle_event(self, event):
             """Handle events and command responses starting with '+...'"""
-            if event.startswith('+RRBDRES') and self._awaiting_response_for.startswith('AT+JRBD'):
-                rev = event[9:9 + 12]
-                mac = ':'.join('{:02X}'.format(ord(x)) for x in rev.decode('hex')[::-1])
+            if event.startswith(
+                '+RRBDRES'
+            ) and self._awaiting_response_for.startswith('AT+JRBD'):
+                rev = event[9 : 9 + 12]
+                mac = ':'.join(
+                    '{:02X}'.format(ord(x)) for x in rev.decode('hex')[::-1]
+                )
                 self.event_responses.put(mac)
             else:
                 logging.warning('unhandled event: {!r}'.format(event))
@@ -132,7 +139,11 @@ if __name__ == '__main__':
             """Send a command that responds with '+...' line"""
             with self.lock:  # ensure that just one thread is sending commands at once
                 self._awaiting_response_for = command
-                self.transport.write(b'{}\r\n'.format(command.encode(self.ENCODING, self.UNICODE_HANDLING)))
+                self.transport.write(
+                    b'{}\r\n'.format(
+                        command.encode(self.ENCODING, self.UNICODE_HANDLING)
+                    )
+                )
                 response = self.event_responses.get()
                 self._awaiting_response_for = None
                 return response
@@ -140,15 +151,15 @@ if __name__ == '__main__':
         # - - - example commands
 
         def reset(self):
-            self.command("AT+JRES", response='ROK')      # SW-Reset BT module
+            self.command('AT+JRES', response='ROK')      # SW-Reset BT module
 
         def get_mac_address(self):
             # requests hardware / calibration info as event
-            return self.command_with_event_response("AT+JRBD")
+            return self.command_with_event_response('AT+JRBD')
 
     ser = serial.serial_for_url('spy://COM1', baudrate=115200, timeout=1)
-    #~ ser = serial.Serial('COM1', baudrate=115200, timeout=1)
+    # ~ ser = serial.Serial('COM1', baudrate=115200, timeout=1)
     with serial.threaded.ReaderThread(ser, PAN1322) as bt_module:
         bt_module.reset()
-        print("reset OK")
-        print("MAC address is", bt_module.get_mac_address())
+        print('reset OK')
+        print('MAC address is', bt_module.get_mac_address())
