@@ -14,9 +14,7 @@ router = APIRouter(prefix='/figurines', tags=['Figurines'])
     summary='Gets map of all users and their availability for that timeslot. 1 represents busy, '
     '0 represents free',
 )
-def get_available() -> Annotated[
-    dict, Body(examples=[FIGURINES_EXAMPLE])
-]:
+def get_available() -> Annotated[dict, Body(examples=[FIGURINES_EXAMPLE])]:
     """Endpoint that determines whether a user is free or not
 
     Returns:

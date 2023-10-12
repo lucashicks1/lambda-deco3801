@@ -6,7 +6,8 @@ from app.dependencies.database import cal_col, user_col
 from app.examples.display_payloads import (
     FREE_TIMESLOTS_EXAMPLE,
     USER_TOTALS_EXAMPLES,
-    FAMILY_TIMESLOTS_EXAMPLE)
+    FAMILY_TIMESLOTS_EXAMPLE,
+)
 from app import constants
 
 router = APIRouter(prefix='/display', tags=['Display'])
@@ -16,9 +17,7 @@ router = APIRouter(prefix='/display', tags=['Display'])
     '/user-totals',
     summary='Calculates the total number of booked hours for each user.',
 )
-def get_user_hours() -> Annotated[
-    dict, Body(examples=[USER_TOTALS_EXAMPLES])
-]:
+def get_user_hours() -> Annotated[dict, Body(examples=[USER_TOTALS_EXAMPLES])]:
     """Endpoint that returns the total number of booked hours for each user.
 
     Returns:
