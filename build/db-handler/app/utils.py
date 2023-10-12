@@ -1,7 +1,7 @@
 """Utils file for basic utility functions used throughout the database handler"""
 from datetime import datetime
-import app.constants as constants
-import app.dependencies.database as db
+from app import constants
+from app.dependencies import database as db
 
 
 def current_to_timeslot() -> str:

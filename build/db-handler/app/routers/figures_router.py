@@ -1,8 +1,9 @@
+"""Router for figurine endpoints"""
 import time as time_lib
 from typing import Annotated
 from fastapi import Body, APIRouter
 from app.dependencies.database import cal_col, user_col
-import app.utils as utils
+from app import utils
 from app.examples.figurines_payloads import FIGURINES_EXAMPLE
 
 router = APIRouter(prefix='/figurines', tags=['Figurines'])

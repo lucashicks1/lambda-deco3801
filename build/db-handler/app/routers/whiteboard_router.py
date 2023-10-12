@@ -1,3 +1,4 @@
+"""Router for whiteboard endpoints"""
 from typing import Annotated
 from fastapi import Body, APIRouter, HTTPException
 from app.dependencies.database import cal_col, user_col
@@ -21,7 +22,7 @@ def modify_calendar(
         HTTPException: 400 status code if the user provided is not valid
 
     Returns:
-        dict: success message_description_
+        dict: added timeslots
     """
     users = user_col.distinct('user_id')
     if user not in users:

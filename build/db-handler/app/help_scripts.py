@@ -1,10 +1,10 @@
 """Help scripts that are used throughout the app"""
 import random
 from app.dependencies.database import cal_col, user_col
-import app.constants as constants
-
+import constants
 
 def reset_db():
+    """Resets the database and adds random timeslots"""
     cal_col.delete_many({})
     user_col.delete_many({})
 
