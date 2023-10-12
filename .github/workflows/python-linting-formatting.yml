@@ -22,6 +22,7 @@ jobs:
         pip install --upgrade pip
         pip install blue
         pip install pylint
+        pip list
     - name: Run formatter and linter
       run: |
         pip list
