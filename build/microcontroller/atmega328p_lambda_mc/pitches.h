@@ -1,8 +1,12 @@
-/*************************************************
+/**
+  ******************************************************************************
+  * @file    pitches.h
+  * @author  Dylan Fleming - 45313345
+  * @brief   Pitch library for Piezo Buzzer
+  ******************************************************************************
+**/
 
- * Public Constants
-
- *************************************************/
+/*=============================== CONSTANTS ===============================*/
 
 #define NOTE_B0  31
 #define NOTE_C1  33
@@ -94,6 +98,8 @@
 #define NOTE_D8  4699
 #define NOTE_DS8 4978
 #define REST 0
+
+/*=============================== FUNCTIONALITY ===============================*/
 
 // Notes in the melody for "Never Gonna Give You Up" by Rick Astley. Obtained from library created 
 // by Robson Couto https://github.com/robsoncouto/arduino-songs/tree/master

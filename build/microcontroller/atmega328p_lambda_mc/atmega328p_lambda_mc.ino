@@ -1,5 +1,16 @@
+/**
+  ******************************************************************************
+  * @file    atmega328p_lambda_mc.ino
+  * @author  Dylan Fleming - 45313345
+  * @brief   Microcontroller code for Team \Lamdba Installation
+  ******************************************************************************
+**/
+
+/*=============================== INCLUDES ===============================*/
 #include <Servo.h>
 #include "pitches.h"
+
+/*=============================== DEFINES ===============================*/
 
 #define MESSAGE_OFFSET 3
 #define SERVO_OFFSET 4
@@ -13,8 +24,18 @@ char previousMessage[9] = ""; //Previous message
 
 Servo servoSignal[NUM_OF_SERVOS]; //Array of servo controllers
 
+/*============================== FUNCTIONS ==============================*/
+
 /**
- * family_buzzer_writing(void) 
+ * family_buzzer_writing(void)
+ * ----------------------------
+ * Controls the buzzer for the family song tune
+ * 
+ * Arguments:
+ *        None
+ *
+ * Returns:
+ *        N/A
 **/
 void family_buzzer_writing(void) { //
   for (int i = 0; i < familyNotes * 2; i = i + 2) {
@@ -41,6 +62,17 @@ void family_buzzer_writing(void) { //
   }
 }
 
+/**
+ * buzzer_writing(int number)
+ * ----------------------------
+ * Controls the buzzer for the family song tune
+ * 
+ * Arguments:
+ *        number - The user to access for the buzzer tune
+ *
+ * Returns:
+ *        N/A
+**/
 void buzzer_writing(int number) {
   for (int i = 0; i < numOfTones; i++) {
     int noteDuration = 1000 / userNoteDurations[number][i];
@@ -60,7 +92,18 @@ void buzzer_writing(int number) {
   delay(1000);
 }
 
-
+/**
+ * servo_write_cycle(char* message)
+ * ----------------------------
+ * Checks the message from the serial port and makes alterations to 
+ * servos as required
+ * 
+ * Arguments:
+ *        message - The message received from the serial port connection
+ *
+ * Returns:
+ *        N/A
+**/
 void servo_write_cycle(char* message) {
   for (int i = 0; i < NUM_OF_SERVOS; i++) {
     int newPosition = ((message[i + SERVO_OFFSET] - '0') * 180); // Set angle for servo motor
@@ -81,15 +124,38 @@ void servo_write_cycle(char* message) {
   }
 }
 
-void servo_write_reset() {
+/**
+ * servo_write_reset(void)
+ * ----------------------------
+ * Writes all servos to default state
+ * 
+ * Arguments:
+ *        N/A
+ *
+ * Returns:
+ *        N/A
+**/
+void servo_write_reset(void) {
+  // Iterate over all servos
   for (int i = 0; i < NUM_OF_SERVOS; i++) {
     int newPosition = 0;
-    if (newPosition != servoSignal[i].read()) {
-      servoSignal[i].write(newPosition);
+    if (newPosition != servoSignal[i].read()) { // Check if servo is already not in default state
+      servoSignal[i].write(newPosition); // Write to servo
     }
   }
 }
 
+/**
+ * setup()
+ * ----------------------------
+ * Default setup processes for start up of device
+ * 
+ * Arguments:
+ *        N/A
+ *
+ * Returns:
+ *        N/A
+**/
 void setup() {
   // Initialize serial communication
   Serial.begin(9600);
@@ -102,6 +168,17 @@ void setup() {
   pinMode(pwmBuzzerPin, OUTPUT);
 }
 
+/**
+ * loop()
+ * ----------------------------
+ * Main looping process of code functionality
+ * 
+ * Arguments:
+ *        N/A
+ *
+ * Returns:
+ *        N/A
+**/
 void loop() {
   if (Serial.available() >= 8) { // Check if there are at least 8 characters available in the serial buffer
     char currentMessage[9]; // Buffer to store the received message
@@ -110,16 +187,16 @@ void loop() {
 
     if (strncmp(currentMessage, previousMessage, 8) != 0) {
       if ((currentMessage[MESSAGE_OFFSET] == '1')) {
-        if((currentMessage[MESSAGE_OFFSET] != previousMessage[MESSAGE_OFFSET])) {
-          servo_write_reset();
-          family_buzzer_writing();
+        if((currentMessage[MESSAGE_OFFSET] != previousMessage[MESSAGE_OFFSET])) { //Check that previous message was also not a family event
+          servo_write_reset(); // Reset the servos to default
+          family_buzzer_writing(); // Start family buzzer event
         }
         delay(1000);
       } else {
-        servo_write_cycle(currentMessage);
+        servo_write_cycle(currentMessage); //Write servos
         delay(1000);
       }
-      strncpy(previousMessage, currentMessage, 8);
+      strncpy(previousMessage, currentMessage, 8); // Copy current message to previous message
     }
 
   }
