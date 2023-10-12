@@ -14,7 +14,7 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: '3.11'
-    - name: Install formatter and linter
+    - name: Install and run formatter and linter
       run: |
         export PYTHONPATH=$GITHUB_PATH
         python -m venv venv
@@ -22,10 +22,6 @@ jobs:
         pip install --upgrade pip
         pip install blue
         pip install pylint
-        pip list
-    - name: Run formatter and linter
-      run: |
-        pip list
         pylint camera
         pylint db-handler
         pylint figurines
