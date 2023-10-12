@@ -22,7 +22,7 @@ jobs:
         pip install --upgrade pip
         pip install blue
         pip install pylint
-        pylint camera
-        pylint db-handler
-        pylint figurines
-        pylint vision
+        pylint build/camera
+        pylint build/db-handler
+        pylint build/figurines
+        pylint build/vision
