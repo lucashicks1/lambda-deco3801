@@ -6,6 +6,7 @@ These programs rely on the following libraries
 numpy
 Pillow
 Pytesseract
+opencv-python-headless
 ```
 
 The calibration script relies on the above, as well as
@@ -20,14 +21,25 @@ You can create and activate this environment with the following.
 
 ```
 conda env create -f environment.yaml
-conda activate env
+conda activate lambda-vision
+```
+
+Or you can create your own environment and install the packages with
+
+```
+conda create -n your_env_name
+conda activate your_env_name
+conda install numpy pillow pytesseract matplotlib
+pip install opencv-python-headless
 ```
 
 When installation of dependencies is complete, from the environment you are using
-run 
+run
+
 ```
 which python
 ```
+
 and put the result of that into constants.py in place of python_path
 
 # Reader Script
@@ -101,11 +113,9 @@ We can then run the script with
 python capture.py [-v] [-t]
 ```
 
-The optional arguments give power over the following 
+The optional arguments give power over the following
 
-- [-v] - visualiser. This will open a cv2 window to see what the camera
-is seeing as well as where the motion detected contours are. For use in trouble shooting.
-- [-t] - timer. This will control printing to stdout how long it takes for the
-reader script to process an image. For use in trouble shooting and optimisation tests.
-
-
+- \[-v\] - visualiser. This will open a cv2 window to see what the camera
+  is seeing as well as where the motion detected contours are. For use in trouble shooting.
+- \[-t\] - timer. This will control printing to stdout how long it takes for the
+  reader script to process an image. For use in trouble shooting and optimisation tests.
