@@ -22,7 +22,7 @@ jobs:
         pip install --upgrade pip
         pip install blue
         pip install pylint
-        blue --check --exclude '' build/
+        blue --diff --exclude '' build/
         pylint build/camera --exit-zero
         pylint build/db-handler/app --exit-zero
         pylint build/figurines --exit-zero
