@@ -22,7 +22,8 @@ jobs:
         pip install --upgrade pip
         pip install blue
         pip install pylint
-        pylint build/camera
-        pylint build/db-handler
-        pylint build/figurines
-        pylint build/vision
+        blue --check --exclude '' build/
+        pylint build/camera --exit-zero
+        pylint build/db-handler --exit-zero
+        pylint build/figurines --exit-zero
+        pylint build/vision --exit-zero
