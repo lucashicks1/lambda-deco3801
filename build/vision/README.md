@@ -1,31 +1,42 @@
-# Reader Script
+# Dependencies
 
-______________________________________________________________________
-
-## Usage
-
-### Setup
-
-#### Dependencies
-
-This program relies on the following dependencies
+These programs rely on the following libraries
 
 ```
 numpy
 Pillow
 Pytesseract
+```
+
+The calibration script relies on the above, as well as
+
+```
 matplotlib
 ```
 
-You can install these requirements and activate the environment by using the
-`environment.yaml` in this directory with
+For your convenience, there is an `environment.yaml` for you to create a conda
+virtual environment with our libraries installed already for this section.
+You can create and activate this environment with the following.
 
 ```
 conda env create -f environment.yaml
 conda activate env
 ```
 
-#### Calibration
+# Reader Script
+
+This script uses an image of the calendar and given some presets created by a
+calibration script will go through the image and look at each time slot in the
+calendar and determine if there is anything written in each cell. If something
+is, then it will record what colour (red, blue, or black) and if applicable, will
+use Pytesseract for OCR and save the text written in the cell.
+
+This information is then saved in json format to a file called `coloured_time_slots.json`
+to be read by another program.
+
+## Usage
+
+### Setup and calibration
 
 Run the calibration script with
 
@@ -33,16 +44,21 @@ Run the calibration script with
 python calibrate.py
 ```
 
-This will then open a matplotlib window containing a picture that you should
+This will then open a open cv window containing a picture that you should
 take manually with the camera set up in the position it will be in during program
-run time.
+run time. Using this you can decide on a rotation angle for the image (must be one
+of 0, 90, 180, or 270) in degrees for a clockwise rotation.
+
+Then the program will open a matplotlib window with an image taken at this rotation
+angle
 
 Using this matplotlib window and image, zoom in to find the top left corner of the
-calendar and record the x, y coordinate of this. Then record the height and width of
+calendar (as in the top left corner of the top left most time slot, not in the column
+or row names) and record the x, y coordinate of this. Then record the height and width of
 each time slot cell. Then, when prompted, enter each into the terminal after closing
-the matplotlib window. Now the script is calibrated for your current set up.
+the matplotlib window. Now the we have the calibration for your set up.
 
-##### constants.py
+##### [constants.py](./constants.py)
 
 Your camera may get different colour levels to mine, so if you are running into issues,
 look into the `constants.py` file and change around some of the thresholds to ensure you
@@ -50,13 +66,39 @@ are not losing pixels that should be certain colours.
 
 ### Running
 
-Run the script with
+This script is typically run by `capture.py` but if you want to manually check if the
+program works in debugging, you can do this with:
 
 ```
-python reader.py local/path/to/image.jpg[png]
+python reader.py local/path/to/image.jpg
 ```
 
-In operation, this script will is run by the motion detection program, so only needs
-to be run manually in testing. This will return a .json file that will contain
-every time slot that has been coloured in, with information for the day, time, colour,
-and what text (if any) has been written inside the cell.
+# Capture Script
+
+This is the main script that handles opening the webcam, detecting movement. Then
+taking an image when there is no movement detected for 3 seconds, after movement.
+This prevents having to process images when nothing has changed, and also ensures
+we wait until after the user has finished with the whiteboard before processing
+an image.
+
+## Usage
+
+As this script calls [reader.py](#reader-script), we need to ensure we have first done the usage
+instruction in its [section](#setup-and-calibration)
+
+### Running
+
+We can then run the script with
+
+```
+python capture.py [-v] [-t]
+```
+
+The optional arguments give power over the following 
+
+- [-v] - visualiser. This will open a cv2 window to see what the camera
+is seeing as well as where the motion detected contours are. For use in trouble shooting.
+- [-t] - timer. This will control printing to stdout how long it takes for the
+reader script to process an image. For use in trouble shooting and optimisation tests.
+
+

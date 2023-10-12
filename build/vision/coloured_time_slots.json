@@ -1,117 +1,81 @@
 [
     {
         "day": "Tuesday",
-        "time_slot": "0730",
+        "time_slot": "1730",
         "colour": "red",
         "data": ""
     },
     {
         "day": "Tuesday",
-        "time_slot": "0800",
-        "colour": "red",
-        "data": ""
-    },
-    {
-        "day": "Tuesday",
-        "time_slot": "0900",
-        "colour": "blue",
-        "data": ""
-    },
-    {
-        "day": "Tuesday",
-        "time_slot": "0900",
-        "colour": "red",
-        "data": ""
-    },
-    {
-        "day": "Tuesday",
-        "time_slot": "0930",
-        "colour": "red",
-        "data": ""
-    },
-    {
-        "day": "Tuesday",
-        "time_slot": "1000",
-        "colour": "red",
-        "data": ""
-    },
-    {
-        "day": "Tuesday",
-        "time_slot": "1030",
-        "colour": "red",
-        "data": ""
-    },
-    {
-        "day": "Tuesday",
-        "time_slot": "1530",
-        "colour": "red",
-        "data": ""
-    },
-    {
-        "day": "Tuesday",
-        "time_slot": "1530",
+        "time_slot": "1800",
         "colour": "black",
-        "data": "Session\n"
+        "data": ""
     },
     {
         "day": "Tuesday",
-        "time_slot": "1600",
-        "colour": "black",
-        "data": "SESS\n"
+        "time_slot": "1830",
+        "colour": "red",
+        "data": ""
     },
     {
         "day": "Tuesday",
-        "time_slot": "1630",
+        "time_slot": "1830",
         "colour": "black",
-        "data": "SESSTON\n"
-    },
-    {
-        "day": "Wednesday",
-        "time_slot": "0900",
-        "colour": "blue",
         "data": ""
     },
     {
-        "day": "Wednesday",
-        "time_slot": "0930",
-        "colour": "blue",
+        "day": "Tuesday",
+        "time_slot": "1930",
+        "colour": "red",
         "data": ""
     },
     {
-        "day": "Wednesday",
-        "time_slot": "1000",
-        "colour": "blue",
+        "day": "Tuesday",
+        "time_slot": "2000",
+        "colour": "red",
         "data": ""
     },
     {
-        "day": "Wednesday",
-        "time_slot": "1030",
-        "colour": "blue",
+        "day": "Tuesday",
+        "time_slot": "2030",
+        "colour": "black",
         "data": ""
     },
     {
-        "day": "Wednesday",
-        "time_slot": "1100",
-        "colour": "blue",
+        "day": "Tuesday",
+        "time_slot": "2100",
+        "colour": "black",
         "data": ""
     },
     {
-        "day": "Wednesday",
-        "time_slot": "1300",
+        "day": "Tuesday",
+        "time_slot": "2130",
+        "colour": "black",
+        "data": ""
+    },
+    {
+        "day": "Tuesday",
+        "time_slot": "2200",
         "colour": "black",
         "data": ""
     },
     {
         "day": "Wednesday",
-        "time_slot": "1500",
-        "colour": "red",
+        "time_slot": "1700",
+        "colour": "black",
         "data": ""
     },
     {
         "day": "Wednesday",
-        "time_slot": "1500",
+        "time_slot": "1730",
         "colour": "black",
-        "data": "Ture\n"
+        "data": ""
+    },
+    {
+        "day": "Wednesday",
+        "time_slot": "1800",
+        "colour": "red",
+        "data": ""
     },
     {
         "day": "Wednesday",
@@ -122,6 +86,12 @@
     {
         "day": "Wednesday",
         "time_slot": "1830",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Wednesday",
+        "time_slot": "1900",
         "colour": "black",
         "data": ""
     },
@@ -132,129 +102,177 @@
         "data": ""
     },
     {
-        "day": "Thursday",
-        "time_slot": "0530",
-        "colour": "black",
+        "day": "Wednesday",
+        "time_slot": "2000",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Wednesday",
+        "time_slot": "2030",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Wednesday",
+        "time_slot": "2200",
+        "colour": "red",
         "data": ""
     },
     {
         "day": "Thursday",
         "time_slot": "0730",
-        "colour": "black",
-        "data": ""
-    },
-    {
-        "day": "Thursday",
-        "time_slot": "1300",
-        "colour": "black",
-        "data": "S TUOY]\n"
-    },
-    {
-        "day": "Thursday",
-        "time_slot": "1400",
-        "colour": "black",
-        "data": ""
-    },
-    {
-        "day": "Friday",
-        "time_slot": "0530",
-        "colour": "black",
-        "data": ""
-    },
-    {
-        "day": "Friday",
-        "time_slot": "1100",
-        "colour": "black",
-        "data": ""
-    },
-    {
-        "day": "Friday",
-        "time_slot": "1130",
         "colour": "red",
         "data": ""
     },
     {
-        "day": "Friday",
-        "time_slot": "1130",
-        "colour": "black",
-        "data": "DINNER\n"
+        "day": "Thursday",
+        "time_slot": "0800",
+        "colour": "red",
+        "data": ""
     },
     {
-        "day": "Saturday",
+        "day": "Thursday",
+        "time_slot": "0830",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Thursday",
         "time_slot": "0900",
-        "colour": "black",
+        "colour": "red",
         "data": ""
     },
     {
-        "day": "Saturday",
+        "day": "Thursday",
+        "time_slot": "0930",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Thursday",
+        "time_slot": "1000",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Thursday",
         "time_slot": "1030",
         "colour": "red",
         "data": ""
     },
     {
-        "day": "Saturday",
-        "time_slot": "1030",
-        "colour": "black",
-        "data": "[HELLO\n"
+        "day": "Thursday",
+        "time_slot": "1100",
+        "colour": "red",
+        "data": ""
     },
     {
-        "day": "Saturday",
+        "day": "Thursday",
+        "time_slot": "1130",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Thursday",
+        "time_slot": "1200",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Thursday",
         "time_slot": "1230",
         "colour": "red",
         "data": ""
     },
     {
-        "day": "Saturday",
+        "day": "Thursday",
         "time_slot": "1300",
-        "colour": "black",
-        "data": "TOATE\n"
-    },
-    {
-        "day": "Saturday",
-        "time_slot": "1400",
-        "colour": "black",
-        "data": "MOVIE\n"
-    },
-    {
-        "day": "Saturday",
-        "time_slot": "1500",
         "colour": "red",
         "data": ""
     },
     {
-        "day": "Saturday",
+        "day": "Thursday",
+        "time_slot": "1330",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Thursday",
+        "time_slot": "1400",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Thursday",
+        "time_slot": "1700",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Thursday",
         "time_slot": "1730",
-        "colour": "black",
+        "colour": "red",
         "data": ""
     },
     {
-        "day": "Saturday",
+        "day": "Thursday",
         "time_slot": "1800",
-        "colour": "black",
+        "colour": "red",
         "data": ""
     },
     {
-        "day": "Sunday",
-        "time_slot": "0630",
-        "colour": "black",
+        "day": "Thursday",
+        "time_slot": "1830",
+        "colour": "red",
         "data": ""
     },
     {
-        "day": "Sunday",
-        "time_slot": "1030",
-        "colour": "black",
+        "day": "Thursday",
+        "time_slot": "1900",
+        "colour": "red",
         "data": ""
     },
     {
-        "day": "Sunday",
-        "time_slot": "1130",
-        "colour": "black",
+        "day": "Thursday",
+        "time_slot": "1930",
+        "colour": "red",
         "data": ""
     },
     {
-        "day": "Sunday",
-        "time_slot": "1200",
-        "colour": "black",
+        "day": "Thursday",
+        "time_slot": "2000",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Thursday",
+        "time_slot": "2030",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Thursday",
+        "time_slot": "2100",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Thursday",
+        "time_slot": "2130",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Thursday",
+        "time_slot": "2200",
+        "colour": "red",
+        "data": ""
+    },
+    {
+        "day": "Friday",
+        "time_slot": "0730",
+        "colour": "red",
         "data": ""
     }
 ]

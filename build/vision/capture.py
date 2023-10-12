@@ -1,4 +1,3 @@
-# import the necessary packages
 import datetime
 import os
 import subprocess
@@ -12,15 +11,13 @@ from constants import python_path
 # https://pyimagesearch.com/2015/06/01/home-surveillance-and-motion-detection-with-the-raspberry-pi-python-and-opencv/
 # Following the license found on:
 # https://pyimagesearch.com/faqs/single-faq/what-is-the-code-license-associated-with-your-examples/
-# A screenshot of the license is also found in /Lambda-Deco3081/assets/pyimagesearchlicense.png
+# A screenshot of the license is also found in assets/pyimagesearchlicense.png
 
 
 cv2.destroyAllWindows()
 path = './images/capture.jpg'
 path = os.path.abspath(path)
 cap = cv2.VideoCapture(0)
-# cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
-# cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 time.sleep(1.0)   # ensure webcam is opened and balanced first
 noMotionTime = 0
 noMotionTimeStamp = datetime.datetime.now()

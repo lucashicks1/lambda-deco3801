@@ -13,7 +13,6 @@ from constants import colour_thresholds
 from constants import days_of_the_week
 from constants import num_days
 from constants import num_time_slots
-from constants import time_slots
 from PIL import Image
 
 Point = namedtuple('Point', ['X', 'Y'])
@@ -78,34 +77,28 @@ def main(image: Image):
             pcent_blue = (num_coloured_blue / time_slot_size) * 100
             pcent_black = (num_coloured_black / time_slot_size) * 100
 
+            is_blue = pcent_blue >= 2
+            is_red = pcent_red >= 2
+            is_black = pcent_black >= 18
+
+            is_coloured = is_blue or is_red or is_black
+            colour = []
+
             if pcent_blue >= 2:
-                ocr_result = pytesseract.image_to_string(output_blue)
-                coloured_time_slots.append(
-                    {
-                        'day': days_of_the_week.get(day),
-                        'time_slot': time_slots.get(time_slot),
-                        'colour': 'blue',
-                        'data': ocr_result,
-                    }
-                )
+                colour.append("blue")
             if pcent_red >= 2:
-                ocr_result = pytesseract.image_to_string(output_red)
-                coloured_time_slots.append(
-                    {
-                        'day': days_of_the_week.get(day),
-                        'time_slot': time_slots.get(time_slot),
-                        'colour': 'red',
-                        'data': ocr_result,
-                    }
-                )
+                colour.append("red")
             if pcent_black >= 18:
+                colour.append("black")
+
+            if is_coloured:
                 ocr_result = pytesseract.image_to_string(output_black)
                 coloured_time_slots.append(
                     {
                         'day': days_of_the_week.get(day),
-                        'time_slot': time_slots.get(time_slot),
-                        'colour': 'black',
+                        'time_slot': time_slot,
                         'data': ocr_result,
+                        'colour': ','.join(colour),
                     }
                 )
 
