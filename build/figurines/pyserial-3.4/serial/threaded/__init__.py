@@ -66,7 +66,9 @@ class Packetizer(Protocol):
 
     def handle_packet(self, packet):
         """Process packets - to be overridden by subclassing"""
-        raise NotImplementedError('please implement functionality in handle_packet')
+        raise NotImplementedError(
+            'please implement functionality in handle_packet'
+        )
 
 
 class FramedPacket(Protocol):
@@ -102,7 +104,7 @@ class FramedPacket(Protocol):
                 self.in_packet = True
             elif byte == self.STOP:
                 self.in_packet = False
-                self.handle_packet(bytes(self.packet)) # make read-only copy
+                self.handle_packet(bytes(self.packet))   # make read-only copy
                 del self.packet[:]
             elif self.in_packet:
                 self.packet.extend(byte)
@@ -111,7 +113,9 @@ class FramedPacket(Protocol):
 
     def handle_packet(self, packet):
         """Process packets - to be overridden by subclassing"""
-        raise NotImplementedError('please implement functionality in handle_packet')
+        raise NotImplementedError(
+            'please implement functionality in handle_packet'
+        )
 
     def handle_out_of_packet_data(self, data):
         """Process data that is received outside of packets"""
@@ -133,7 +137,9 @@ class LineReader(Packetizer):
 
     def handle_line(self, line):
         """Process one line - to be overridden by subclassing"""
-        raise NotImplementedError('please implement functionality in handle_line')
+        raise NotImplementedError(
+            'please implement functionality in handle_line'
+        )
 
     def write_line(self, text):
         """
@@ -141,7 +147,9 @@ class LineReader(Packetizer):
         is applied before sending ans also the newline is append.
         """
         # + is not the best choice but bytes does not support % or .format in py3 and we want a single write call
-        self.transport.write(text.encode(self.ENCODING, self.UNICODE_HANDLING) + self.TERMINATOR)
+        self.transport.write(
+            text.encode(self.ENCODING, self.UNICODE_HANDLING) + self.TERMINATOR
+        )
 
 
 class ReaderThread(threading.Thread):
@@ -263,7 +271,7 @@ if __name__ == '__main__':
     import time
     import traceback
 
-    #~ PORT = 'spy:///dev/ttyUSB0'
+    # ~ PORT = 'spy:///dev/ttyUSB0'
     PORT = 'loop://'
 
     class PrintLines(LineReader):

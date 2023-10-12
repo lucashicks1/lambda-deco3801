@@ -15,14 +15,37 @@ import time
 from serial import win32
 
 import serial
-from serial.serialutil import SerialBase, SerialException, to_bytes, portNotOpenError, writeTimeoutError
+from serial.serialutil import (
+    SerialBase,
+    SerialException,
+    to_bytes,
+    portNotOpenError,
+    writeTimeoutError,
+)
 
 
 class Serial(SerialBase):
     """Serial port implementation for Win32 based on ctypes."""
 
-    BAUDRATES = (50, 75, 110, 134, 150, 200, 300, 600, 1200, 1800, 2400, 4800,
-                 9600, 19200, 38400, 57600, 115200)
+    BAUDRATES = (
+        50,
+        75,
+        110,
+        134,
+        150,
+        200,
+        300,
+        600,
+        1200,
+        1800,
+        2400,
+        4800,
+        9600,
+        19200,
+        38400,
+        57600,
+        115200,
+    )
 
     def __init__(self, *args, **kwargs):
         self._port_handle = None
@@ -36,9 +59,11 @@ class Serial(SerialBase):
         if the port cannot be opened.
         """
         if self._port is None:
-            raise SerialException("Port must be configured before it can be used.")
+            raise SerialException(
+                'Port must be configured before it can be used.'
+            )
         if self.is_open:
-            raise SerialException("Port is already open.")
+            raise SerialException('Port is already open.')
         # the "\\.\COMx" format is required for devices other than COM1-COM8
         # not all versions of windows seem to support this properly
         # so that the first few ports are used with the DOS device name
@@ -56,16 +81,21 @@ class Serial(SerialBase):
             None,  # no security
             win32.OPEN_EXISTING,
             win32.FILE_ATTRIBUTE_NORMAL | win32.FILE_FLAG_OVERLAPPED,
-            0)
+            0,
+        )
         if self._port_handle == win32.INVALID_HANDLE_VALUE:
             self._port_handle = None    # 'cause __del__ is called anyway
-            raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+            raise SerialException(
+                'could not open port {!r}: {!r}'.format(
+                    self.portstr, ctypes.WinError()
+                )
+            )
 
         try:
             self._overlapped_read = win32.OVERLAPPED()
             self._overlapped_read.hEvent = win32.CreateEvent(None, 1, 0, None)
             self._overlapped_write = win32.OVERLAPPED()
-            #~ self._overlapped_write.hEvent = win32.CreateEvent(None, 1, 0, None)
+            # ~ self._overlapped_write.hEvent = win32.CreateEvent(None, 1, 0, None)
             self._overlapped_write.hEvent = win32.CreateEvent(None, 0, 0, None)
 
             # Setup a 4k buffer
@@ -73,7 +103,9 @@ class Serial(SerialBase):
 
             # Save original timeout values:
             self._orgTimeouts = win32.COMMTIMEOUTS()
-            win32.GetCommTimeouts(self._port_handle, ctypes.byref(self._orgTimeouts))
+            win32.GetCommTimeouts(
+                self._port_handle, ctypes.byref(self._orgTimeouts)
+            )
 
             self._reconfigure_port()
 
@@ -81,8 +113,11 @@ class Serial(SerialBase):
             # Remove anything that was there
             win32.PurgeComm(
                 self._port_handle,
-                win32.PURGE_TXCLEAR | win32.PURGE_TXABORT |
-                win32.PURGE_RXCLEAR | win32.PURGE_RXABORT)
+                win32.PURGE_TXCLEAR
+                | win32.PURGE_TXABORT
+                | win32.PURGE_RXCLEAR
+                | win32.PURGE_RXABORT,
+            )
         except:
             try:
                 self._close()
@@ -98,7 +133,7 @@ class Serial(SerialBase):
     def _reconfigure_port(self):
         """Set communication parameters on opened port."""
         if not self._port_handle:
-            raise SerialException("Can only operate on a valid port handle")
+            raise SerialException('Can only operate on a valid port handle')
 
         # Set Windows timeout values
         # timeouts is a tuple with the following items:
@@ -111,16 +146,22 @@ class Serial(SerialBase):
         elif self._timeout == 0:
             timeouts.ReadIntervalTimeout = win32.MAXDWORD
         else:
-            timeouts.ReadTotalTimeoutConstant = max(int(self._timeout * 1000), 1)
+            timeouts.ReadTotalTimeoutConstant = max(
+                int(self._timeout * 1000), 1
+            )
         if self._timeout != 0 and self._inter_byte_timeout is not None:
-            timeouts.ReadIntervalTimeout = max(int(self._inter_byte_timeout * 1000), 1)
+            timeouts.ReadIntervalTimeout = max(
+                int(self._inter_byte_timeout * 1000), 1
+            )
 
         if self._write_timeout is None:
             pass
         elif self._write_timeout == 0:
             timeouts.WriteTotalTimeoutConstant = win32.MAXDWORD
         else:
-            timeouts.WriteTotalTimeoutConstant = max(int(self._write_timeout * 1000), 1)
+            timeouts.WriteTotalTimeoutConstant = max(
+                int(self._write_timeout * 1000), 1
+            )
         win32.SetCommTimeouts(self._port_handle, ctypes.byref(timeouts))
 
         win32.SetCommMask(self._port_handle, win32.EV_ERR)
@@ -140,7 +181,9 @@ class Serial(SerialBase):
         elif self._bytesize == serial.EIGHTBITS:
             comDCB.ByteSize = 8
         else:
-            raise ValueError("Unsupported number of data bits: {!r}".format(self._bytesize))
+            raise ValueError(
+                'Unsupported number of data bits: {!r}'.format(self._bytesize)
+            )
 
         if self._parity == serial.PARITY_NONE:
             comDCB.Parity = win32.NOPARITY
@@ -158,7 +201,9 @@ class Serial(SerialBase):
             comDCB.Parity = win32.SPACEPARITY
             comDCB.fParity = 1  # Enable Parity Check
         else:
-            raise ValueError("Unsupported parity mode: {!r}".format(self._parity))
+            raise ValueError(
+                'Unsupported parity mode: {!r}'.format(self._parity)
+            )
 
         if self._stopbits == serial.STOPBITS_ONE:
             comDCB.StopBits = win32.ONESTOPBIT
@@ -167,7 +212,9 @@ class Serial(SerialBase):
         elif self._stopbits == serial.STOPBITS_TWO:
             comDCB.StopBits = win32.TWOSTOPBITS
         else:
-            raise ValueError("Unsupported number of stop bits: {!r}".format(self._stopbits))
+            raise ValueError(
+                'Unsupported number of stop bits: {!r}'.format(self._stopbits)
+            )
 
         comDCB.fBinary = 1  # Enable Binary Transmission
         # Char. w/ Parity-Err are replaced with 0xff (if fErrorChar is set to TRUE)
@@ -175,7 +222,11 @@ class Serial(SerialBase):
             if self._rtscts:
                 comDCB.fRtsControl = win32.RTS_CONTROL_HANDSHAKE
             else:
-                comDCB.fRtsControl = win32.RTS_CONTROL_ENABLE if self._rts_state else win32.RTS_CONTROL_DISABLE
+                comDCB.fRtsControl = (
+                    win32.RTS_CONTROL_ENABLE
+                    if self._rts_state
+                    else win32.RTS_CONTROL_DISABLE
+                )
             comDCB.fOutxCtsFlow = self._rtscts
         else:
             # checks for unsupported settings
@@ -183,30 +234,44 @@ class Serial(SerialBase):
             if not self._rs485_mode.rts_level_for_tx:
                 raise ValueError(
                     'Unsupported value for RS485Settings.rts_level_for_tx: {!r}'.format(
-                        self._rs485_mode.rts_level_for_tx,))
+                        self._rs485_mode.rts_level_for_tx,
+                    )
+                )
             if self._rs485_mode.rts_level_for_rx:
                 raise ValueError(
                     'Unsupported value for RS485Settings.rts_level_for_rx: {!r}'.format(
-                        self._rs485_mode.rts_level_for_rx,))
+                        self._rs485_mode.rts_level_for_rx,
+                    )
+                )
             if self._rs485_mode.delay_before_tx is not None:
                 raise ValueError(
                     'Unsupported value for RS485Settings.delay_before_tx: {!r}'.format(
-                        self._rs485_mode.delay_before_tx,))
+                        self._rs485_mode.delay_before_tx,
+                    )
+                )
             if self._rs485_mode.delay_before_rx is not None:
                 raise ValueError(
                     'Unsupported value for RS485Settings.delay_before_rx: {!r}'.format(
-                        self._rs485_mode.delay_before_rx,))
+                        self._rs485_mode.delay_before_rx,
+                    )
+                )
             if self._rs485_mode.loopback:
                 raise ValueError(
                     'Unsupported value for RS485Settings.loopback: {!r}'.format(
-                        self._rs485_mode.loopback,))
+                        self._rs485_mode.loopback,
+                    )
+                )
             comDCB.fRtsControl = win32.RTS_CONTROL_TOGGLE
             comDCB.fOutxCtsFlow = 0
 
         if self._dsrdtr:
             comDCB.fDtrControl = win32.DTR_CONTROL_HANDSHAKE
         else:
-            comDCB.fDtrControl = win32.DTR_CONTROL_ENABLE if self._dtr_state else win32.DTR_CONTROL_DISABLE
+            comDCB.fDtrControl = (
+                win32.DTR_CONTROL_ENABLE
+                if self._dtr_state
+                else win32.DTR_CONTROL_DISABLE
+            )
         comDCB.fOutxDsrFlow = self._dsrdtr
         comDCB.fOutX = self._xonxoff
         comDCB.fInX = self._xonxoff
@@ -219,10 +284,11 @@ class Serial(SerialBase):
         if not win32.SetCommState(self._port_handle, ctypes.byref(comDCB)):
             raise SerialException(
                 'Cannot configure port, something went wrong. '
-                'Original message: {!r}'.format(ctypes.WinError()))
+                'Original message: {!r}'.format(ctypes.WinError())
+            )
 
-    #~ def __del__(self):
-        #~ self.close()
+    # ~ def __del__(self):
+    # ~ self.close()
 
     def _close(self):
         """internal close port helper"""
@@ -253,8 +319,12 @@ class Serial(SerialBase):
         """Return the number of bytes currently in the input buffer."""
         flags = win32.DWORD()
         comstat = win32.COMSTAT()
-        if not win32.ClearCommError(self._port_handle, ctypes.byref(flags), ctypes.byref(comstat)):
-            raise SerialException("ClearCommError failed ({!r})".format(ctypes.WinError()))
+        if not win32.ClearCommError(
+            self._port_handle, ctypes.byref(flags), ctypes.byref(comstat)
+        ):
+            raise SerialException(
+                'ClearCommError failed ({!r})'.format(ctypes.WinError())
+            )
         return comstat.cbInQue
 
     def read(self, size=1):
@@ -269,8 +339,12 @@ class Serial(SerialBase):
             win32.ResetEvent(self._overlapped_read.hEvent)
             flags = win32.DWORD()
             comstat = win32.COMSTAT()
-            if not win32.ClearCommError(self._port_handle, ctypes.byref(flags), ctypes.byref(comstat)):
-                raise SerialException("ClearCommError failed ({!r})".format(ctypes.WinError()))
+            if not win32.ClearCommError(
+                self._port_handle, ctypes.byref(flags), ctypes.byref(comstat)
+            ):
+                raise SerialException(
+                    'ClearCommError failed ({!r})'.format(ctypes.WinError())
+                )
             n = min(comstat.cbInQue, size) if self.timeout == 0 else size
             if n > 0:
                 buf = ctypes.create_string_buffer(n)
@@ -280,18 +354,29 @@ class Serial(SerialBase):
                     buf,
                     n,
                     ctypes.byref(rc),
-                    ctypes.byref(self._overlapped_read))
-                if not read_ok and win32.GetLastError() not in (win32.ERROR_SUCCESS, win32.ERROR_IO_PENDING):
-                    raise SerialException("ReadFile failed ({!r})".format(ctypes.WinError()))
+                    ctypes.byref(self._overlapped_read),
+                )
+                if not read_ok and win32.GetLastError() not in (
+                    win32.ERROR_SUCCESS,
+                    win32.ERROR_IO_PENDING,
+                ):
+                    raise SerialException(
+                        'ReadFile failed ({!r})'.format(ctypes.WinError())
+                    )
                 result_ok = win32.GetOverlappedResult(
                     self._port_handle,
                     ctypes.byref(self._overlapped_read),
                     ctypes.byref(rc),
-                    True)
+                    True,
+                )
                 if not result_ok:
                     if win32.GetLastError() != win32.ERROR_OPERATION_ABORTED:
-                        raise SerialException("GetOverlappedResult failed ({!r})".format(ctypes.WinError()))
-                read = buf.raw[:rc.value]
+                        raise SerialException(
+                            'GetOverlappedResult failed ({!r})'.format(
+                                ctypes.WinError()
+                            )
+                        )
+                read = buf.raw[: rc.value]
             else:
                 read = bytes()
         else:
@@ -302,36 +387,64 @@ class Serial(SerialBase):
         """Output the given byte string over the serial port."""
         if not self.is_open:
             raise portNotOpenError
-        #~ if not isinstance(data, (bytes, bytearray)):
-            #~ raise TypeError('expected %s or bytearray, got %s' % (bytes, type(data)))
+        # ~ if not isinstance(data, (bytes, bytearray)):
+        # ~ raise TypeError('expected %s or bytearray, got %s' % (bytes, type(data)))
         # convert data (needed in case of memoryview instance: Py 3.1 io lib), ctypes doesn't like memoryview
         data = to_bytes(data)
         if data:
-            #~ win32event.ResetEvent(self._overlapped_write.hEvent)
+            # ~ win32event.ResetEvent(self._overlapped_write.hEvent)
             n = win32.DWORD()
-            success = win32.WriteFile(self._port_handle, data, len(data), ctypes.byref(n), self._overlapped_write)
-            if self._write_timeout != 0:  # if blocking (None) or w/ write timeout (>0)
-                if not success and win32.GetLastError() not in (win32.ERROR_SUCCESS, win32.ERROR_IO_PENDING):
-                    raise SerialException("WriteFile failed ({!r})".format(ctypes.WinError()))
+            success = win32.WriteFile(
+                self._port_handle,
+                data,
+                len(data),
+                ctypes.byref(n),
+                self._overlapped_write,
+            )
+            if (
+                self._write_timeout != 0
+            ):  # if blocking (None) or w/ write timeout (>0)
+                if not success and win32.GetLastError() not in (
+                    win32.ERROR_SUCCESS,
+                    win32.ERROR_IO_PENDING,
+                ):
+                    raise SerialException(
+                        'WriteFile failed ({!r})'.format(ctypes.WinError())
+                    )
 
                 # Wait for the write to complete.
-                #~ win32.WaitForSingleObject(self._overlapped_write.hEvent, win32.INFINITE)
-                win32.GetOverlappedResult(self._port_handle, self._overlapped_write, ctypes.byref(n), True)
+                # ~ win32.WaitForSingleObject(self._overlapped_write.hEvent, win32.INFINITE)
+                win32.GetOverlappedResult(
+                    self._port_handle,
+                    self._overlapped_write,
+                    ctypes.byref(n),
+                    True,
+                )
                 if win32.GetLastError() == win32.ERROR_OPERATION_ABORTED:
                     return n.value  # canceled IO is no error
                 if n.value != len(data):
                     raise writeTimeoutError
                 return n.value
             else:
-                errorcode = win32.ERROR_SUCCESS if success else win32.GetLastError()
-                if errorcode in (win32.ERROR_INVALID_USER_BUFFER, win32.ERROR_NOT_ENOUGH_MEMORY,
-                                 win32.ERROR_OPERATION_ABORTED):
+                errorcode = (
+                    win32.ERROR_SUCCESS if success else win32.GetLastError()
+                )
+                if errorcode in (
+                    win32.ERROR_INVALID_USER_BUFFER,
+                    win32.ERROR_NOT_ENOUGH_MEMORY,
+                    win32.ERROR_OPERATION_ABORTED,
+                ):
                     return 0
-                elif errorcode in (win32.ERROR_SUCCESS, win32.ERROR_IO_PENDING):
+                elif errorcode in (
+                    win32.ERROR_SUCCESS,
+                    win32.ERROR_IO_PENDING,
+                ):
                     # no info on true length provided by OS function in async mode
                     return len(data)
                 else:
-                    raise SerialException("WriteFile failed ({!r})".format(ctypes.WinError()))
+                    raise SerialException(
+                        'WriteFile failed ({!r})'.format(ctypes.WinError())
+                    )
         else:
             return 0
 
@@ -350,7 +463,9 @@ class Serial(SerialBase):
         """Clear input buffer, discarding all that is in the buffer."""
         if not self.is_open:
             raise portNotOpenError
-        win32.PurgeComm(self._port_handle, win32.PURGE_RXCLEAR | win32.PURGE_RXABORT)
+        win32.PurgeComm(
+            self._port_handle, win32.PURGE_RXCLEAR | win32.PURGE_RXABORT
+        )
 
     def reset_output_buffer(self):
         """\
@@ -359,7 +474,9 @@ class Serial(SerialBase):
         """
         if not self.is_open:
             raise portNotOpenError
-        win32.PurgeComm(self._port_handle, win32.PURGE_TXCLEAR | win32.PURGE_TXABORT)
+        win32.PurgeComm(
+            self._port_handle, win32.PURGE_TXCLEAR | win32.PURGE_TXABORT
+        )
 
     def _update_break_state(self):
         """Set break: Controls TXD. When active, to transmitting is possible."""
@@ -441,8 +558,12 @@ class Serial(SerialBase):
         """Return how many bytes the in the outgoing buffer"""
         flags = win32.DWORD()
         comstat = win32.COMSTAT()
-        if not win32.ClearCommError(self._port_handle, ctypes.byref(flags), ctypes.byref(comstat)):
-            raise SerialException("ClearCommError failed ({!r})".format(ctypes.WinError()))
+        if not win32.ClearCommError(
+            self._port_handle, ctypes.byref(flags), ctypes.byref(comstat)
+        ):
+            raise SerialException(
+                'ClearCommError failed ({!r})'.format(ctypes.WinError())
+            )
         return comstat.cbOutQue
 
     def _cancel_overlapped_io(self, overlapped):
@@ -453,8 +574,12 @@ class Serial(SerialBase):
             self._port_handle,
             ctypes.byref(overlapped),
             ctypes.byref(rc),
-            False)
-        if not err and win32.GetLastError() in (win32.ERROR_IO_PENDING, win32.ERROR_IO_INCOMPLETE):
+            False,
+        )
+        if not err and win32.GetLastError() in (
+            win32.ERROR_IO_PENDING,
+            win32.ERROR_IO_INCOMPLETE,
+        ):
             # cancel, ignoring any errors (e.g. it may just have finished on its own)
             win32.CancelIoEx(self._port_handle, overlapped)
 
@@ -470,6 +595,10 @@ class Serial(SerialBase):
     def exclusive(self, exclusive):
         """Change the exclusive access setting."""
         if exclusive is not None and not exclusive:
-            raise ValueError('win32 only supports exclusive access (not: {})'.format(exclusive))
+            raise ValueError(
+                'win32 only supports exclusive access (not: {})'.format(
+                    exclusive
+                )
+            )
         else:
             serial.SerialBase.exclusive.__set__(self, exclusive)

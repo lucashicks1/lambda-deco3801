@@ -21,15 +21,19 @@ import os
 import re
 
 # chose an implementation, depending on os
-#~ if sys.platform == 'cli':
-#~ else:
+# ~ if sys.platform == 'cli':
+# ~ else:
 if os.name == 'nt':  # sys.platform == 'win32':
     from serial.tools.list_ports_windows import comports
 elif os.name == 'posix':
     from serial.tools.list_ports_posix import comports
-#~ elif os.name == 'java':
+# ~ elif os.name == 'java':
 else:
-    raise ImportError("Sorry: no implementation for your platform ('{}') available".format(os.name))
+    raise ImportError(
+        "Sorry: no implementation for your platform ('{}') available".format(
+            os.name
+        )
+    )
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -54,29 +58,25 @@ def main():
     parser = argparse.ArgumentParser(description='Serial port enumeration')
 
     parser.add_argument(
-        'regexp',
-        nargs='?',
-        help='only show ports that match this regex')
+        'regexp', nargs='?', help='only show ports that match this regex'
+    )
 
     parser.add_argument(
-        '-v', '--verbose',
+        '-v', '--verbose', action='store_true', help='show more messages'
+    )
+
+    parser.add_argument(
+        '-q', '--quiet', action='store_true', help='suppress all messages'
+    )
+
+    parser.add_argument('-n', type=int, help='only output the N-th entry')
+
+    parser.add_argument(
+        '-s',
+        '--include-links',
         action='store_true',
-        help='show more messages')
-
-    parser.add_argument(
-        '-q', '--quiet',
-        action='store_true',
-        help='suppress all messages')
-
-    parser.add_argument(
-        '-n',
-        type=int,
-        help='only output the N-th entry')
-
-    parser.add_argument(
-        '-s', '--include-links',
-        action='store_true',
-        help='include entries that are symlinks to real devices')
+        help='include entries that are symlinks to real devices',
+    )
 
     args = parser.parse_args()
 
@@ -84,23 +84,26 @@ def main():
     # get iteraror w/ or w/o filter
     if args.regexp:
         if not args.quiet:
-            sys.stderr.write("Filtered list with regexp: {!r}\n".format(args.regexp))
+            sys.stderr.write(
+                'Filtered list with regexp: {!r}\n'.format(args.regexp)
+            )
         iterator = sorted(grep(args.regexp, include_links=args.include_links))
     else:
         iterator = sorted(comports(include_links=args.include_links))
     # list them
     for n, (port, desc, hwid) in enumerate(iterator, 1):
         if args.n is None or args.n == n:
-            sys.stdout.write("{:20}\n".format(port))
+            sys.stdout.write('{:20}\n'.format(port))
             if args.verbose:
-                sys.stdout.write("    desc: {}\n".format(desc))
-                sys.stdout.write("    hwid: {}\n".format(hwid))
+                sys.stdout.write('    desc: {}\n'.format(desc))
+                sys.stdout.write('    hwid: {}\n'.format(hwid))
         hits += 1
     if not args.quiet:
         if hits:
-            sys.stderr.write("{} ports found\n".format(hits))
+            sys.stderr.write('{} ports found\n'.format(hits))
         else:
-            sys.stderr.write("no ports found\n")
+            sys.stderr.write('no ports found\n')
+
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # test

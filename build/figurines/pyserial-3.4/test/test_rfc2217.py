@@ -18,7 +18,9 @@ class Test_RFC2217(unittest.TestCase):
 
     def test_failed_connection(self):
         # connection to closed port
-        s = serial.serial_for_url('rfc2217://127.99.99.99:2217', do_not_open=True)
+        s = serial.serial_for_url(
+            'rfc2217://127.99.99.99:2217', do_not_open=True
+        )
         self.assertRaises(serial.SerialException, s.open)
         self.assertFalse(s.is_open)
         s.close()  # no errors expected
@@ -35,8 +37,9 @@ class Test_RFC2217(unittest.TestCase):
 
 if __name__ == '__main__':
     import sys
+
     sys.stdout.write(__doc__)
-    sys.stdout.write("Testing connection on localhost\n")
+    sys.stdout.write('Testing connection on localhost\n')
     sys.argv[1:] = ['-v']
     # When this module is executed from the command-line, it runs all its tests
     unittest.main()

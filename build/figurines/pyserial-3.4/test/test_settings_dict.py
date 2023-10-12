@@ -18,8 +18,18 @@ import serial
 PORT = 'loop://'
 
 
-SETTINGS = ('baudrate', 'bytesize', 'parity', 'stopbits', 'xonxoff',
-            'dsrdtr', 'rtscts', 'timeout', 'write_timeout', 'inter_byte_timeout')
+SETTINGS = (
+    'baudrate',
+    'bytesize',
+    'parity',
+    'stopbits',
+    'xonxoff',
+    'dsrdtr',
+    'rtscts',
+    'timeout',
+    'write_timeout',
+    'inter_byte_timeout',
+)
 
 
 class Test_SettingsDict(unittest.TestCase):
@@ -52,16 +62,17 @@ class Test_SettingsDict(unittest.TestCase):
     def test_init_sets_the_correct_attrs(self):
         """__init__ sets the fields that get_settings reads"""
         for setting, value in (
-                ('baudrate', 57600),
-                ('timeout', 7),
-                ('write_timeout', 12),
-                ('inter_byte_timeout', 15),
-                ('stopbits', serial.STOPBITS_TWO),
-                ('bytesize', serial.SEVENBITS),
-                ('parity', serial.PARITY_ODD),
-                ('xonxoff', True),
-                ('rtscts', True),
-                ('dsrdtr', True)):
+            ('baudrate', 57600),
+            ('timeout', 7),
+            ('write_timeout', 12),
+            ('inter_byte_timeout', 15),
+            ('stopbits', serial.STOPBITS_TWO),
+            ('bytesize', serial.SEVENBITS),
+            ('parity', serial.PARITY_ODD),
+            ('xonxoff', True),
+            ('rtscts', True),
+            ('dsrdtr', True),
+        ):
             kwargs = {'do_not_open': True, setting: value}
             ser = serial.serial_for_url(PORT, **kwargs)
             d = ser.get_settings()
@@ -71,10 +82,11 @@ class Test_SettingsDict(unittest.TestCase):
 
 if __name__ == '__main__':
     import sys
+
     sys.stdout.write(__doc__)
     if len(sys.argv) > 1:
         PORT = sys.argv[1]
-    sys.stdout.write("Testing port: {!r}\n".format(PORT))
+    sys.stdout.write('Testing port: {!r}\n'.format(PORT))
     sys.argv[1:] = ['-v']
     # When this module is executed from the command-line, it runs all its tests
     unittest.main()

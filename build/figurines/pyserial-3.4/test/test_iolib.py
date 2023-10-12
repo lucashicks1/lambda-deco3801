@@ -34,28 +34,29 @@ PORT = 'loop://'
 
 
 class Test_SerialAndIO(unittest.TestCase):
-
     def setUp(self):
         self.s = serial.serial_for_url(PORT, timeout=1)
-        #~ self.io = io.TextIOWrapper(self.s)
+        # ~ self.io = io.TextIOWrapper(self.s)
         self.io = io.TextIOWrapper(io.BufferedRWPair(self.s, self.s))
 
     def tearDown(self):
         self.s.close()
 
     def test_hello_raw(self):
-        self.io.write(b"hello\n".decode('utf-8'))
+        self.io.write(b'hello\n'.decode('utf-8'))
         self.io.flush()  # it is buffering. required to get the data out
         hello = self.io.readline()
-        self.assertEqual(hello, b"hello\n".decode('utf-8'))
+        self.assertEqual(hello, b'hello\n'.decode('utf-8'))
+
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if __name__ == '__main__':
     import sys
+
     sys.stdout.write(__doc__)
     if len(sys.argv) > 1:
         PORT = sys.argv[1]
-    sys.stdout.write("Testing port: {!r}\n".format(PORT))
+    sys.stdout.write('Testing port: {!r}\n'.format(PORT))
     sys.argv[1:] = ['-v']
     # When this module is executed from the command-line, it runs all its tests
     unittest.main()

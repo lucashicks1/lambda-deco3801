@@ -27,24 +27,25 @@ class Test_URL(unittest.TestCase):
 
     def test_bad_url(self):
         """invalid protocol specified"""
-        self.assertRaises(ValueError, serial.serial_for_url, "imnotknown://")
+        self.assertRaises(ValueError, serial.serial_for_url, 'imnotknown://')
 
     def test_custom_url(self):
         """custom protocol handlers"""
         # it's unknown
-        self.assertRaises(ValueError, serial.serial_for_url, "test://")
+        self.assertRaises(ValueError, serial.serial_for_url, 'test://')
         # add search path
         serial.protocol_handler_packages.append('handlers')
         # now it should work
-        serial.serial_for_url("test://")
+        serial.serial_for_url('test://')
         # remove our handler again
         serial.protocol_handler_packages.remove('handlers')
         # so it should not work anymore
-        self.assertRaises(ValueError, serial.serial_for_url, "test://")
+        self.assertRaises(ValueError, serial.serial_for_url, 'test://')
 
 
 if __name__ == '__main__':
     import sys
+
     sys.stdout.write(__doc__)
     sys.argv[1:] = ['-v']
     # When this module is executed from the command-line, it runs all its tests

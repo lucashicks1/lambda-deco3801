@@ -26,7 +26,7 @@ def read(*names, **kwargs):
     """
     with io.open(
         os.path.join(os.path.dirname(__file__), *names),
-        encoding=kwargs.get("encoding", "utf8")
+        encoding=kwargs.get('encoding', 'utf8'),
     ) as fp:
         return fp.read()
 
@@ -40,25 +40,31 @@ def find_version(*file_paths):
     Reads the supplied Python module as text without importing it.
     """
     version_file = read(*file_paths)
-    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
-                              version_file, re.M)
+    version_match = re.search(
+        r"^__version__ = ['\"]([^'\"]*)['\"]", version_file, re.M
+    )
     if version_match:
         return version_match.group(1)
-    raise RuntimeError("Unable to find version string.")
+    raise RuntimeError('Unable to find version string.')
 
 
 version = find_version('serial', '__init__.py')
 
 
 setup(
-    name="pyserial",
-    description="Python Serial Port Extension",
+    name='pyserial',
+    description='Python Serial Port Extension',
     version=version,
-    author="Chris Liechti",
-    author_email="cliechti@gmx.net",
-    url="https://github.com/pyserial/pyserial",
-    packages=['serial', 'serial.tools', 'serial.urlhandler', 'serial.threaded'],
-    license="BSD",
+    author='Chris Liechti',
+    author_email='cliechti@gmx.net',
+    url='https://github.com/pyserial/pyserial',
+    packages=[
+        'serial',
+        'serial.tools',
+        'serial.urlhandler',
+        'serial.threaded',
+    ],
+    license='BSD',
     long_description="""\
 Python Serial Port Extension for Win32, OSX, Linux, BSD, Jython, IronPython
 

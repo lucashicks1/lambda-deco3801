@@ -20,8 +20,11 @@ try:
 except (NameError, AttributeError):
     # implementation does not matter as we do not really use it.
     # it just must not inherit from something else we might care for.
-    class memoryview(object):   # pylint: disable=redefined-builtin,invalid-name
+    class memoryview(
+        object
+    ):   # pylint: disable=redefined-builtin,invalid-name
         pass
+
 
 try:
     unicode
@@ -31,7 +34,9 @@ except (NameError, AttributeError):
 try:
     basestring
 except (NameError, AttributeError):
-    basestring = (str,)    # for Python 3, pylint: disable=redefined-builtin,invalid-name
+    basestring = (
+        str,
+    )    # for Python 3, pylint: disable=redefined-builtin,invalid-name
 
 
 # "for byte in data" fails for python3 as it returns ints instead of bytes
@@ -41,7 +46,7 @@ def iterbytes(b):
         b = b.tobytes()
     i = 0
     while True:
-        a = b[i:i + 1]
+        a = b[i : i + 1]
         i += 1
         if a:
             yield a
@@ -60,7 +65,11 @@ def to_bytes(seq):
     elif isinstance(seq, memoryview):
         return seq.tobytes()
     elif isinstance(seq, unicode):
-        raise TypeError('unicode strings are not supported, please encode to bytes: {!r}'.format(seq))
+        raise TypeError(
+            'unicode strings are not supported, please encode to bytes: {!r}'.format(
+                seq
+            )
+        )
     else:
         # handle list of integers and bytes (one or more items) for Python 2 and 3
         return bytes(bytearray(seq))
@@ -74,7 +83,13 @@ CR = to_bytes([13])
 LF = to_bytes([10])
 
 
-PARITY_NONE, PARITY_EVEN, PARITY_ODD, PARITY_MARK, PARITY_SPACE = 'N', 'E', 'O', 'M', 'S'
+PARITY_NONE, PARITY_EVEN, PARITY_ODD, PARITY_MARK, PARITY_SPACE = (
+    'N',
+    'E',
+    'O',
+    'M',
+    'S',
+)
 STOPBITS_ONE, STOPBITS_ONE_POINT_FIVE, STOPBITS_TWO = (1, 1.5, 2)
 FIVEBITS, SIXBITS, SEVENBITS, EIGHTBITS = (5, 6, 7, 8)
 
@@ -108,6 +123,7 @@ class Timeout(object):
     non-blocking and fully blocking I/O operations. The attributes
     is_non_blocking and is_infinite are set accordingly.
     """
+
     if hasattr(time, 'monotonic'):
         # Timeout implementation with time.monotonic(). This function is only
         # supported by Python 3.3 and above. It returns a time in seconds
@@ -122,8 +138,8 @@ class Timeout(object):
 
     def __init__(self, duration):
         """Initialize a timeout with given duration"""
-        self.is_infinite = (duration is None)
-        self.is_non_blocking = (duration == 0)
+        self.is_infinite = duration is None
+        self.is_non_blocking = duration == 0
         self.duration = duration
         if duration is not None:
             self.target_time = self.TIME() + duration
@@ -165,28 +181,64 @@ class SerialBase(io.RawIOBase):
     """
 
     # default values, may be overridden in subclasses that do not support all values
-    BAUDRATES = (50, 75, 110, 134, 150, 200, 300, 600, 1200, 1800, 2400, 4800,
-                 9600, 19200, 38400, 57600, 115200, 230400, 460800, 500000,
-                 576000, 921600, 1000000, 1152000, 1500000, 2000000, 2500000,
-                 3000000, 3500000, 4000000)
+    BAUDRATES = (
+        50,
+        75,
+        110,
+        134,
+        150,
+        200,
+        300,
+        600,
+        1200,
+        1800,
+        2400,
+        4800,
+        9600,
+        19200,
+        38400,
+        57600,
+        115200,
+        230400,
+        460800,
+        500000,
+        576000,
+        921600,
+        1000000,
+        1152000,
+        1500000,
+        2000000,
+        2500000,
+        3000000,
+        3500000,
+        4000000,
+    )
     BYTESIZES = (FIVEBITS, SIXBITS, SEVENBITS, EIGHTBITS)
-    PARITIES = (PARITY_NONE, PARITY_EVEN, PARITY_ODD, PARITY_MARK, PARITY_SPACE)
+    PARITIES = (
+        PARITY_NONE,
+        PARITY_EVEN,
+        PARITY_ODD,
+        PARITY_MARK,
+        PARITY_SPACE,
+    )
     STOPBITS = (STOPBITS_ONE, STOPBITS_ONE_POINT_FIVE, STOPBITS_TWO)
 
-    def __init__(self,
-                 port=None,
-                 baudrate=9600,
-                 bytesize=EIGHTBITS,
-                 parity=PARITY_NONE,
-                 stopbits=STOPBITS_ONE,
-                 timeout=None,
-                 xonxoff=False,
-                 rtscts=False,
-                 write_timeout=None,
-                 dsrdtr=False,
-                 inter_byte_timeout=None,
-                 exclusive=None,
-                 **kwargs):
+    def __init__(
+        self,
+        port=None,
+        baudrate=9600,
+        bytesize=EIGHTBITS,
+        parity=PARITY_NONE,
+        stopbits=STOPBITS_ONE,
+        timeout=None,
+        xonxoff=False,
+        rtscts=False,
+        write_timeout=None,
+        dsrdtr=False,
+        inter_byte_timeout=None,
+        exclusive=None,
+        **kwargs
+    ):
         """\
         Initialize comm port object. If a "port" is given, then the port will be
         opened immediately. Otherwise a Serial port object in closed state
@@ -234,7 +286,9 @@ class SerialBase(io.RawIOBase):
         if 'interCharTimeout' in kwargs:
             self.inter_byte_timeout = kwargs.pop('interCharTimeout')
         if kwargs:
-            raise ValueError('unexpected keyword arguments: {!r}'.format(kwargs))
+            raise ValueError(
+                'unexpected keyword arguments: {!r}'.format(kwargs)
+            )
 
         if port is not None:
             self.open()
@@ -261,7 +315,9 @@ class SerialBase(io.RawIOBase):
         Change the port.
         """
         if port is not None and not isinstance(port, basestring):
-            raise ValueError('"port" must be None or a string, not {}'.format(type(port)))
+            raise ValueError(
+                '"port" must be None or a string, not {}'.format(type(port))
+            )
         was_open = self.is_open
         if was_open:
             self.close()
@@ -286,10 +342,10 @@ class SerialBase(io.RawIOBase):
         try:
             b = int(baudrate)
         except TypeError:
-            raise ValueError("Not a valid baudrate: {!r}".format(baudrate))
+            raise ValueError('Not a valid baudrate: {!r}'.format(baudrate))
         else:
             if b < 0:
-                raise ValueError("Not a valid baudrate: {!r}".format(baudrate))
+                raise ValueError('Not a valid baudrate: {!r}'.format(baudrate))
             self._baudrate = b
             if self.is_open:
                 self._reconfigure_port()
@@ -303,7 +359,7 @@ class SerialBase(io.RawIOBase):
     def bytesize(self, bytesize):
         """Change byte size."""
         if bytesize not in self.BYTESIZES:
-            raise ValueError("Not a valid byte size: {!r}".format(bytesize))
+            raise ValueError('Not a valid byte size: {!r}'.format(bytesize))
         self._bytesize = bytesize
         if self.is_open:
             self._reconfigure_port()
@@ -329,7 +385,7 @@ class SerialBase(io.RawIOBase):
     def parity(self, parity):
         """Change parity setting."""
         if parity not in self.PARITIES:
-            raise ValueError("Not a valid parity: {!r}".format(parity))
+            raise ValueError('Not a valid parity: {!r}'.format(parity))
         self._parity = parity
         if self.is_open:
             self._reconfigure_port()
@@ -343,7 +399,9 @@ class SerialBase(io.RawIOBase):
     def stopbits(self, stopbits):
         """Change stop bits size."""
         if stopbits not in self.STOPBITS:
-            raise ValueError("Not a valid stop bit size: {!r}".format(stopbits))
+            raise ValueError(
+                'Not a valid stop bit size: {!r}'.format(stopbits)
+            )
         self._stopbits = stopbits
         if self.is_open:
             self._reconfigure_port()
@@ -358,11 +416,13 @@ class SerialBase(io.RawIOBase):
         """Change timeout setting."""
         if timeout is not None:
             try:
-                timeout + 1     # test if it's a number, will throw a TypeError if not...
+                (
+                    timeout + 1
+                )     # test if it's a number, will throw a TypeError if not...
             except TypeError:
-                raise ValueError("Not a valid timeout: {!r}".format(timeout))
+                raise ValueError('Not a valid timeout: {!r}'.format(timeout))
             if timeout < 0:
-                raise ValueError("Not a valid timeout: {!r}".format(timeout))
+                raise ValueError('Not a valid timeout: {!r}'.format(timeout))
         self._timeout = timeout
         if self.is_open:
             self._reconfigure_port()
@@ -377,11 +437,13 @@ class SerialBase(io.RawIOBase):
         """Change timeout setting."""
         if timeout is not None:
             if timeout < 0:
-                raise ValueError("Not a valid timeout: {!r}".format(timeout))
+                raise ValueError('Not a valid timeout: {!r}'.format(timeout))
             try:
-                timeout + 1     # test if it's a number, will throw a TypeError if not...
+                (
+                    timeout + 1
+                )     # test if it's a number, will throw a TypeError if not...
             except TypeError:
-                raise ValueError("Not a valid timeout: {!r}".format(timeout))
+                raise ValueError('Not a valid timeout: {!r}'.format(timeout))
 
         self._write_timeout = timeout
         if self.is_open:
@@ -397,11 +459,17 @@ class SerialBase(io.RawIOBase):
         """Change inter-byte timeout setting."""
         if ic_timeout is not None:
             if ic_timeout < 0:
-                raise ValueError("Not a valid timeout: {!r}".format(ic_timeout))
+                raise ValueError(
+                    'Not a valid timeout: {!r}'.format(ic_timeout)
+                )
             try:
-                ic_timeout + 1     # test if it's a number, will throw a TypeError if not...
+                (
+                    ic_timeout + 1
+                )     # test if it's a number, will throw a TypeError if not...
             except TypeError:
-                raise ValueError("Not a valid timeout: {!r}".format(ic_timeout))
+                raise ValueError(
+                    'Not a valid timeout: {!r}'.format(ic_timeout)
+                )
 
         self._inter_byte_timeout = ic_timeout
         if self.is_open:
@@ -497,16 +565,27 @@ class SerialBase(io.RawIOBase):
 
     #  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 
-    _SAVED_SETTINGS = ('baudrate', 'bytesize', 'parity', 'stopbits', 'xonxoff',
-                       'dsrdtr', 'rtscts', 'timeout', 'write_timeout',
-                       'inter_byte_timeout')
+    _SAVED_SETTINGS = (
+        'baudrate',
+        'bytesize',
+        'parity',
+        'stopbits',
+        'xonxoff',
+        'dsrdtr',
+        'rtscts',
+        'timeout',
+        'write_timeout',
+        'inter_byte_timeout',
+    )
 
     def get_settings(self):
         """\
         Get current port settings as a dictionary. For use with
         apply_settings().
         """
-        return dict([(key, getattr(self, '_' + key)) for key in self._SAVED_SETTINGS])
+        return dict(
+            [(key, getattr(self, '_' + key)) for key in self._SAVED_SETTINGS]
+        )
 
     def apply_settings(self, d):
         """\
@@ -515,18 +594,25 @@ class SerialBase(io.RawIOBase):
         values will simply left unchanged.
         """
         for key in self._SAVED_SETTINGS:
-            if key in d and d[key] != getattr(self, '_' + key):   # check against internal "_" value
-                setattr(self, key, d[key])          # set non "_" value to use properties write function
+            if key in d and d[key] != getattr(
+                self, '_' + key
+            ):   # check against internal "_" value
+                setattr(
+                    self, key, d[key]
+                )          # set non "_" value to use properties write function
 
     #  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 
     def __repr__(self):
         """String representation of the current port settings and its state."""
-        return '{name}<id=0x{id:x}, open={p.is_open}>(port={p.portstr!r}, ' \
-               'baudrate={p.baudrate!r}, bytesize={p.bytesize!r}, parity={p.parity!r}, ' \
-               'stopbits={p.stopbits!r}, timeout={p.timeout!r}, xonxoff={p.xonxoff!r}, ' \
-               'rtscts={p.rtscts!r}, dsrdtr={p.dsrdtr!r})'.format(
-                   name=self.__class__.__name__, id=id(self), p=self)
+        return (
+            '{name}<id=0x{id:x}, open={p.is_open}>(port={p.portstr!r}, '
+            'baudrate={p.baudrate!r}, bytesize={p.bytesize!r}, parity={p.parity!r}, '
+            'stopbits={p.stopbits!r}, timeout={p.timeout!r}, xonxoff={p.xonxoff!r}, '
+            'rtscts={p.rtscts!r}, dsrdtr={p.dsrdtr!r})'.format(
+                name=self.__class__.__name__, id=id(self), p=self
+            )
+        )
 
     #  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
     # compatibility with io library
@@ -548,6 +634,7 @@ class SerialBase(io.RawIOBase):
             b[:n] = data
         except TypeError as err:
             import array
+
             if not isinstance(b, array.array):
                 raise err
             b[:n] = array.array('b', data)
@@ -684,6 +771,7 @@ class SerialBase(io.RawIOBase):
 #  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 if __name__ == '__main__':
     import sys
+
     s = SerialBase()
     sys.stdout.write('port name:  {}\n'.format(s.name))
     sys.stdout.write('baud rates: {}\n'.format(s.BAUDRATES))

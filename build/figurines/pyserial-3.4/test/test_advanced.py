@@ -60,7 +60,9 @@ class Test_ChangeAttributes(unittest.TestCase):
             self.assertEqual(self.s._baudrate, baudrate)
         # test illegal values
         for illegal_value in (-300, -1, 'a', None):
-            self.assertRaises(ValueError, setattr, self.s, 'baudrate', illegal_value)
+            self.assertRaises(
+                ValueError, setattr, self.s, 'baudrate', illegal_value
+            )
 
     # skip this test as pyserial now tries to set even non standard baud rates.
     # therefore the test can not choose a value that fails on any system.
@@ -68,7 +70,9 @@ class Test_ChangeAttributes(unittest.TestCase):
         # test illegal values, depending on machine/port some of these may be valid...
         self.s.open()
         for illegal_value in (500000, 576000, 921600, 92160):
-            self.assertRaises(ValueError, setattr, self.s, 'baudrate', illegal_value)
+            self.assertRaises(
+                ValueError, setattr, self.s, 'baudrate', illegal_value
+            )
 
     def test_BytesizeSetting(self):
         for bytesize in (5, 6, 7, 8):
@@ -79,10 +83,16 @@ class Test_ChangeAttributes(unittest.TestCase):
             self.assertEqual(self.s._bytesize, bytesize)
         # test illegal values
         for illegal_value in (0, 1, 3, 4, 9, 10, 'a', None):
-            self.assertRaises(ValueError, setattr, self.s, 'bytesize', illegal_value)
+            self.assertRaises(
+                ValueError, setattr, self.s, 'bytesize', illegal_value
+            )
 
     def test_ParitySetting(self):
-        for parity in (serial.PARITY_NONE, serial.PARITY_EVEN, serial.PARITY_ODD):
+        for parity in (
+            serial.PARITY_NONE,
+            serial.PARITY_EVEN,
+            serial.PARITY_ODD,
+        ):
             self.s.parity = parity
             # test get method
             self.assertEqual(self.s.parity, parity)
@@ -90,7 +100,9 @@ class Test_ChangeAttributes(unittest.TestCase):
             self.assertEqual(self.s._parity, parity)
         # test illegal values
         for illegal_value in (0, 57, 'a', None):
-            self.assertRaises(ValueError, setattr, self.s, 'parity', illegal_value)
+            self.assertRaises(
+                ValueError, setattr, self.s, 'parity', illegal_value
+            )
 
     def test_StopbitsSetting(self):
         for stopbits in (1, 2):
@@ -101,7 +113,9 @@ class Test_ChangeAttributes(unittest.TestCase):
             self.assertEqual(self.s._stopbits, stopbits)
         # test illegal values
         for illegal_value in (0, 3, 2.5, 57, 'a', None):
-            self.assertRaises(ValueError, setattr, self.s, 'stopbits', illegal_value)
+            self.assertRaises(
+                ValueError, setattr, self.s, 'stopbits', illegal_value
+            )
 
     def test_TimeoutSetting(self):
         for timeout in (None, 0, 1, 3.14159, 10, 1000, 3600):
@@ -112,7 +126,9 @@ class Test_ChangeAttributes(unittest.TestCase):
             self.assertEqual(self.s._timeout, timeout)
         # test illegal values
         for illegal_value in (-1, 'a'):
-            self.assertRaises(ValueError, setattr, self.s, 'timeout', illegal_value)
+            self.assertRaises(
+                ValueError, setattr, self.s, 'timeout', illegal_value
+            )
 
     def test_XonXoffSetting(self):
         for xonxoff in (True, False):
@@ -152,10 +168,11 @@ class Test_ChangeAttributes(unittest.TestCase):
 
 if __name__ == '__main__':
     import sys
+
     sys.stdout.write(__doc__)
     if len(sys.argv) > 1:
         PORT = sys.argv[1]
-    sys.stdout.write("Testing port: {!r}\n".format(PORT))
+    sys.stdout.write('Testing port: {!r}\n'.format(PORT))
     sys.argv[1:] = ['-v']
     # When this module is executed from the command-line, it runs all its tests
     unittest.main()

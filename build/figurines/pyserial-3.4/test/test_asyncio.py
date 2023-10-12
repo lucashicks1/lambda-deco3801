@@ -23,7 +23,7 @@ except (ImportError, SyntaxError):
     pass
 else:
 
-    @unittest.skipIf(os.name != 'posix', "asyncio not supported on platform")
+    @unittest.skipIf(os.name != 'posix', 'asyncio not supported on platform')
     class Test_asyncio(unittest.TestCase):
         """Test asyncio related functionality"""
 
@@ -47,7 +47,7 @@ else:
                     transport.write(TEXT)
 
                 def data_received(self, data):
-                    #~ print('data received', repr(data))
+                    # ~ print('data received', repr(data))
                     received.append(data)
                     if b'\n' in data:
                         self.transport.close()
@@ -64,7 +64,9 @@ else:
                     actions.append('resume')
                     print(self.transport.get_write_buffer_size())
 
-            coro = serial.aio.create_serial_connection(self.loop, Output, PORT, baudrate=115200)
+            coro = serial.aio.create_serial_connection(
+                self.loop, Output, PORT, baudrate=115200
+            )
             self.loop.run_until_complete(coro)
             self.loop.run_forever()
             self.assertEqual(b''.join(received), TEXT)
@@ -73,10 +75,11 @@ else:
 
 if __name__ == '__main__':
     import sys
+
     sys.stdout.write(__doc__)
     if len(sys.argv) > 1:
         PORT = sys.argv[1]
-    sys.stdout.write("Testing port: {!r}\n".format(PORT))
+    sys.stdout.write('Testing port: {!r}\n'.format(PORT))
     sys.argv[1:] = ['-v']
     # When this module is executed from the command-line, it runs all its tests
     unittest.main()

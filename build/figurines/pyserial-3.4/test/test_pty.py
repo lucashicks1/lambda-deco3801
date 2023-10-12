@@ -20,7 +20,8 @@ import serial
 
 DATA = b'Hello\n'
 
-@unittest.skipIf(pty is None, "pty module not supported on platform")
+
+@unittest.skipIf(pty is None, 'pty module not supported on platform')
 class Test_Pty_Serial_Open(unittest.TestCase):
     """Test PTY serial open"""
 
@@ -34,7 +35,7 @@ class Test_Pty_Serial_Open(unittest.TestCase):
 
     def test_pty_serial_write(self):
         with serial.Serial(os.ttyname(self.slave), timeout=1) as slave:
-            with os.fdopen(self.master, "wb") as fd:
+            with os.fdopen(self.master, 'wb') as fd:
                 fd.write(DATA)
                 fd.flush()
                 out = slave.read(len(DATA))
@@ -42,11 +43,12 @@ class Test_Pty_Serial_Open(unittest.TestCase):
 
     def test_pty_serial_read(self):
         with serial.Serial(os.ttyname(self.slave), timeout=1) as slave:
-            with os.fdopen(self.master, "rb") as fd:
+            with os.fdopen(self.master, 'rb') as fd:
                 slave.write(DATA)
                 slave.flush()
                 out = fd.read(len(DATA))
                 self.assertEqual(DATA, out)
+
 
 if __name__ == '__main__':
     sys.stdout.write(__doc__)

@@ -23,19 +23,14 @@ setup(
             'dist_dir': 'dist',
         }
     },
-
-    name="wxTerminal",
+    name='wxTerminal',
     windows=[
-        {
-            'script': "wxTerminal.py",
-            'icon_resources': [(0x0004, icon)]
-        },
+        {'script': 'wxTerminal.py', 'icon_resources': [(0x0004, icon)]},
     ],
-    zipfile="stuff.lib",
-
-    description="Simple serial terminal application",
-    version="0.1",
-    author="Chris Liechti",
-    author_email="cliechti@gmx.net",
-    url="https://github.com/pyserial/pyserial/",
+    zipfile='stuff.lib',
+    description='Simple serial terminal application',
+    version='0.1',
+    author='Chris Liechti',
+    author_email='cliechti@gmx.net',
+    url='https://github.com/pyserial/pyserial/',
 )

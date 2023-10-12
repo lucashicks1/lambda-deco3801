@@ -43,6 +43,7 @@ class Test_Context(unittest.TestCase):
 
 if __name__ == '__main__':
     import sys
+
     sys.stdout.write(__doc__)
     sys.argv[1:] = ['-v']
     # When this module is executed from the command-line, it runs all its tests

@@ -33,6 +33,7 @@ HEXDIGITS = '0123456789ABCDEF'
 
 # Codec APIs
 
+
 def hex_encode(data, errors='strict'):
     """'40 41 42' -> b'@ab'"""
     return (serial.to_bytes([int(h, 16) for h in data.split()]), len(data))
@@ -40,7 +41,12 @@ def hex_encode(data, errors='strict'):
 
 def hex_decode(data, errors='strict'):
     """b'@ab' -> '40 41 42'"""
-    return (unicode(''.join('{:02X} '.format(ord(b)) for b in serial.iterbytes(data))), len(data))
+    return (
+        unicode(
+            ''.join('{:02X} '.format(ord(b)) for b in serial.iterbytes(data))
+        ),
+        len(data),
+    )
 
 
 class Codec(codecs.Codec):
@@ -50,7 +56,9 @@ class Codec(codecs.Codec):
 
     def decode(self, data, errors='strict'):
         """b'@ab' -> '40 41 42'"""
-        return unicode(''.join('{:02X} '.format(ord(b)) for b in serial.iterbytes(data)))
+        return unicode(
+            ''.join('{:02X} '.format(ord(b)) for b in serial.iterbytes(data))
+        )
 
 
 class IncrementalEncoder(codecs.IncrementalEncoder):
@@ -81,7 +89,7 @@ class IncrementalEncoder(codecs.IncrementalEncoder):
             if c in HEXDIGITS:
                 z = HEXDIGITS.index(c)
                 if state:
-                    encoded.append(z + (state & 0xf0))
+                    encoded.append(z + (state & 0xF0))
                     state = 0
                 else:
                     state = 0x100 + (z << 4)
@@ -98,8 +106,11 @@ class IncrementalEncoder(codecs.IncrementalEncoder):
 
 class IncrementalDecoder(codecs.IncrementalDecoder):
     """Incremental decoder"""
+
     def decode(self, data, final=False):
-        return unicode(''.join('{:02X} '.format(ord(b)) for b in serial.iterbytes(data)))
+        return unicode(
+            ''.join('{:02X} '.format(ord(b)) for b in serial.iterbytes(data))
+        )
 
 
 class StreamWriter(Codec, codecs.StreamWriter):
@@ -120,5 +131,5 @@ def getregentry():
         incrementaldecoder=IncrementalDecoder,
         streamwriter=StreamWriter,
         streamreader=StreamReader,
-        #~ _is_text_encoding=True,
+        # ~ _is_text_encoding=True,
     )

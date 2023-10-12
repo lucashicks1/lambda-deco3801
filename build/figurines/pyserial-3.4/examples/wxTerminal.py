@@ -33,6 +33,7 @@ class SerialRxEvent(wx.PyCommandEvent):
     def Clone(self):
         self.__class__(self.GetId(), self.data)
 
+
 # ----------------------------------------------------------------------
 
 ID_CLEAR = wx.NewId()
@@ -53,6 +54,7 @@ class TerminalSetup:
     Placeholder for various terminal settings. Used to pass the
     options to the TerminalSettingsDialog.
     """
+
     def __init__(self):
         self.echo = False
         self.unprintable = False
@@ -66,14 +68,23 @@ class TerminalSettingsDialog(wx.Dialog):
         self.settings = kwds['settings']
         del kwds['settings']
         # begin wxGlade: TerminalSettingsDialog.__init__
-        kwds["style"] = wx.DEFAULT_DIALOG_STYLE
+        kwds['style'] = wx.DEFAULT_DIALOG_STYLE
         wx.Dialog.__init__(self, *args, **kwds)
-        self.checkbox_echo = wx.CheckBox(self, -1, "Local Echo")
-        self.checkbox_unprintable = wx.CheckBox(self, -1, "Show unprintable characters")
-        self.radio_box_newline = wx.RadioBox(self, -1, "Newline Handling", choices=["CR only", "LF only", "CR+LF"], majorDimension=0, style=wx.RA_SPECIFY_ROWS)
-        self.sizer_4_staticbox = wx.StaticBox(self, -1, "Input/Output")
-        self.button_ok = wx.Button(self, wx.ID_OK, "")
-        self.button_cancel = wx.Button(self, wx.ID_CANCEL, "")
+        self.checkbox_echo = wx.CheckBox(self, -1, 'Local Echo')
+        self.checkbox_unprintable = wx.CheckBox(
+            self, -1, 'Show unprintable characters'
+        )
+        self.radio_box_newline = wx.RadioBox(
+            self,
+            -1,
+            'Newline Handling',
+            choices=['CR only', 'LF only', 'CR+LF'],
+            majorDimension=0,
+            style=wx.RA_SPECIFY_ROWS,
+        )
+        self.sizer_4_staticbox = wx.StaticBox(self, -1, 'Input/Output')
+        self.button_ok = wx.Button(self, wx.ID_OK, '')
+        self.button_cancel = wx.Button(self, wx.ID_CANCEL, '')
 
         self.__set_properties()
         self.__do_layout()
@@ -85,7 +96,7 @@ class TerminalSettingsDialog(wx.Dialog):
 
     def __set_properties(self):
         # begin wxGlade: TerminalSettingsDialog.__set_properties
-        self.SetTitle("Terminal Settings")
+        self.SetTitle('Terminal Settings')
         self.radio_box_newline.SetSelection(0)
         self.button_ok.SetDefault()
         # end wxGlade
@@ -123,6 +134,7 @@ class TerminalSettingsDialog(wx.Dialog):
         """Do not update data but close dialog."""
         self.EndModal(wx.ID_CANCEL)
 
+
 # end of class TerminalSettingsDialog
 
 
@@ -136,27 +148,35 @@ class TerminalFrame(wx.Frame):
         self.thread = None
         self.alive = threading.Event()
         # begin wxGlade: TerminalFrame.__init__
-        kwds["style"] = wx.DEFAULT_FRAME_STYLE
+        kwds['style'] = wx.DEFAULT_FRAME_STYLE
         wx.Frame.__init__(self, *args, **kwds)
 
         # Menu Bar
         self.frame_terminal_menubar = wx.MenuBar()
         wxglade_tmp_menu = wx.Menu()
-        wxglade_tmp_menu.Append(ID_CLEAR, "&Clear", "", wx.ITEM_NORMAL)
-        wxglade_tmp_menu.Append(ID_SAVEAS, "&Save Text As...", "", wx.ITEM_NORMAL)
+        wxglade_tmp_menu.Append(ID_CLEAR, '&Clear', '', wx.ITEM_NORMAL)
+        wxglade_tmp_menu.Append(
+            ID_SAVEAS, '&Save Text As...', '', wx.ITEM_NORMAL
+        )
         wxglade_tmp_menu.AppendSeparator()
-        wxglade_tmp_menu.Append(ID_TERM, "&Terminal Settings...", "", wx.ITEM_NORMAL)
+        wxglade_tmp_menu.Append(
+            ID_TERM, '&Terminal Settings...', '', wx.ITEM_NORMAL
+        )
         wxglade_tmp_menu.AppendSeparator()
-        wxglade_tmp_menu.Append(ID_EXIT, "&Exit", "", wx.ITEM_NORMAL)
-        self.frame_terminal_menubar.Append(wxglade_tmp_menu, "&File")
+        wxglade_tmp_menu.Append(ID_EXIT, '&Exit', '', wx.ITEM_NORMAL)
+        self.frame_terminal_menubar.Append(wxglade_tmp_menu, '&File')
         wxglade_tmp_menu = wx.Menu()
-        wxglade_tmp_menu.Append(ID_RTS, "RTS", "", wx.ITEM_CHECK)
-        wxglade_tmp_menu.Append(ID_DTR, "&DTR", "", wx.ITEM_CHECK)
-        wxglade_tmp_menu.Append(ID_SETTINGS, "&Port Settings...", "", wx.ITEM_NORMAL)
-        self.frame_terminal_menubar.Append(wxglade_tmp_menu, "Serial Port")
+        wxglade_tmp_menu.Append(ID_RTS, 'RTS', '', wx.ITEM_CHECK)
+        wxglade_tmp_menu.Append(ID_DTR, '&DTR', '', wx.ITEM_CHECK)
+        wxglade_tmp_menu.Append(
+            ID_SETTINGS, '&Port Settings...', '', wx.ITEM_NORMAL
+        )
+        self.frame_terminal_menubar.Append(wxglade_tmp_menu, 'Serial Port')
         self.SetMenuBar(self.frame_terminal_menubar)
         # Menu Bar end
-        self.text_ctrl_output = wx.TextCtrl(self, -1, "", style=wx.TE_MULTILINE | wx.TE_READONLY)
+        self.text_ctrl_output = wx.TextCtrl(
+            self, -1, '', style=wx.TE_MULTILINE | wx.TE_READONLY
+        )
 
         self.__set_properties()
         self.__do_layout()
@@ -170,7 +190,9 @@ class TerminalFrame(wx.Frame):
         self.Bind(wx.EVT_MENU, self.OnPortSettings, id=ID_SETTINGS)
         # end wxGlade
         self.__attach_events()          # register events
-        self.OnPortSettings(None)       # call setup dialog on startup, opens port
+        self.OnPortSettings(
+            None
+        )       # call setup dialog on startup, opens port
         if not self.alive.isSet():
             self.Close()
 
@@ -194,9 +216,11 @@ class TerminalFrame(wx.Frame):
 
     def __set_properties(self):
         # begin wxGlade: TerminalFrame.__set_properties
-        self.SetTitle("Serial Terminal")
+        self.SetTitle('Serial Terminal')
         self.SetSize((546, 383))
-        self.text_ctrl_output.SetFont(wx.Font(9, wx.MODERN, wx.NORMAL, wx.NORMAL, 0, ""))
+        self.text_ctrl_output.SetFont(
+            wx.Font(9, wx.MODERN, wx.NORMAL, wx.NORMAL, 0, '')
+        )
         # end wxGlade
 
     def __do_layout(self):
@@ -231,16 +255,17 @@ class TerminalFrame(wx.Frame):
     def OnSaveAs(self, event):  # wxGlade: TerminalFrame.<event_handler>
         """Save contents of output window."""
         with wx.FileDialog(
-                None,
-                "Save Text As...",
-                ".",
-                "",
-                "Text File|*.txt|All Files|*",
-                wx.SAVE) as dlg:
+            None,
+            'Save Text As...',
+            '.',
+            '',
+            'Text File|*.txt|All Files|*',
+            wx.SAVE,
+        ) as dlg:
             if dlg.ShowModal() == wx.ID_OK:
                 filename = dlg.GetPath()
                 with codecs.open(filename, 'w', encoding='utf-8') as f:
-                    text = self.text_ctrl_output.GetValue().encode("utf-8")
+                    text = self.text_ctrl_output.GetValue().encode('utf-8')
                     f.write(text)
 
     def OnClear(self, event):  # wxGlade: TerminalFrame.<event_handler>
@@ -258,11 +283,14 @@ class TerminalFrame(wx.Frame):
         ok = False
         while not ok:
             with wxSerialConfigDialog.SerialConfigDialog(
-                    self,
-                    -1,
-                    "",
-                    show=wxSerialConfigDialog.SHOW_BAUDRATE | wxSerialConfigDialog.SHOW_FORMAT | wxSerialConfigDialog.SHOW_FLOW,
-                    serial=self.serial) as dialog_serial_cfg:
+                self,
+                -1,
+                '',
+                show=wxSerialConfigDialog.SHOW_BAUDRATE
+                | wxSerialConfigDialog.SHOW_FORMAT
+                | wxSerialConfigDialog.SHOW_FLOW,
+                serial=self.serial,
+            ) as dialog_serial_cfg:
                 dialog_serial_cfg.CenterOnParent()
                 result = dialog_serial_cfg.ShowModal()
             # open port if not called on startup, open it on startup and OK too
@@ -270,19 +298,26 @@ class TerminalFrame(wx.Frame):
                 try:
                     self.serial.open()
                 except serial.SerialException as e:
-                    with wx.MessageDialog(self, str(e), "Serial Port Error", wx.OK | wx.ICON_ERROR)as dlg:
+                    with wx.MessageDialog(
+                        self,
+                        str(e),
+                        'Serial Port Error',
+                        wx.OK | wx.ICON_ERROR,
+                    ) as dlg:
                         dlg.ShowModal()
                 else:
                     self.StartThread()
-                    self.SetTitle("Serial Terminal on {} [{},{},{},{}{}{}]".format(
-                        self.serial.portstr,
-                        self.serial.baudrate,
-                        self.serial.bytesize,
-                        self.serial.parity,
-                        self.serial.stopbits,
-                        ' RTS/CTS' if self.serial.rtscts else '',
-                        ' Xon/Xoff' if self.serial.xonxoff else '',
-                        ))
+                    self.SetTitle(
+                        'Serial Terminal on {} [{},{},{},{}{}{}]'.format(
+                            self.serial.portstr,
+                            self.serial.baudrate,
+                            self.serial.bytesize,
+                            self.serial.parity,
+                            self.serial.stopbits,
+                            ' RTS/CTS' if self.serial.rtscts else '',
+                            ' Xon/Xoff' if self.serial.xonxoff else '',
+                        )
+                    )
                     ok = True
             else:
                 # on startup, dialog aborted
@@ -294,7 +329,9 @@ class TerminalFrame(wx.Frame):
         Menu point Terminal Settings. Show the settings dialog
         with the current terminal settings.
         """
-        with TerminalSettingsDialog(self, -1, "", settings=self.settings) as dialog:
+        with TerminalSettingsDialog(
+            self, -1, '', settings=self.settings
+        ) as dialog:
             dialog.CenterOnParent()
             dialog.ShowModal()
 
@@ -304,9 +341,13 @@ class TerminalFrame(wx.Frame):
         serial port. Newline handling and local echo is also done here.
         """
         code = event.GetUnicodeKey()
-        if code < 256:   # XXX bug in some versions of wx returning only capital letters
+        if (
+            code < 256
+        ):   # XXX bug in some versions of wx returning only capital letters
             code = event.GetKeyCode()
-        if code == 13:                      # is it a newline? (check for CR which is the RETURN key)
+        if (
+            code == 13
+        ):                      # is it a newline? (check for CR which is the RETURN key)
             if self.settings.echo:          # do echo if needed
                 self.text_ctrl_output.AppendText('\n')
             if self.settings.newline == NEWLINE_CR:
@@ -319,11 +360,20 @@ class TerminalFrame(wx.Frame):
             char = unichr(code)
             if self.settings.echo:          # do echo if needed
                 self.WriteText(char)
-            self.serial.write(char.encode('UTF-8', 'replace'))         # send the character
+            self.serial.write(
+                char.encode('UTF-8', 'replace')
+            )         # send the character
 
     def WriteText(self, text):
         if self.settings.unprintable:
-            text = ''.join([c if (c >= ' ' and c != '\x7f') else unichr(0x2400 + ord(c)) for c in text])
+            text = ''.join(
+                [
+                    c
+                    if (c >= ' ' and c != '\x7f')
+                    else unichr(0x2400 + ord(c))
+                    for c in text
+                ]
+            )
         self.text_ctrl_output.AppendText(text)
 
     def OnSerialRead(self, event):
@@ -354,19 +404,21 @@ class TerminalFrame(wx.Frame):
     def OnDTR(self, event):  # wxGlade: TerminalFrame.<event_handler>
         self.serial.dtr = event.Checked()
 
+
 # end of class TerminalFrame
 
 
 class MyApp(wx.App):
     def OnInit(self):
         wx.InitAllImageHandlers()
-        frame_terminal = TerminalFrame(None, -1, "")
+        frame_terminal = TerminalFrame(None, -1, '')
         self.SetTopWindow(frame_terminal)
         frame_terminal.Show(True)
         return 1
 
+
 # end of class MyApp
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app = MyApp(0)
     app.MainLoop()

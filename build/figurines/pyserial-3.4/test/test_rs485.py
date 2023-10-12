@@ -28,9 +28,13 @@ class Test_RS485_settings(unittest.TestCase):
 
     def test_enable_RS485(self):
         # XXX open() port - but will result in fail for most HW...
-        #~ self.s.open()
-        self.assertEqual(self.s._rs485_mode, None, 'RS485 is disabled by default')
-        self.assertEqual(self.s.rs485_mode, None, 'RS485 is disabled by default')
+        # ~ self.s.open()
+        self.assertEqual(
+            self.s._rs485_mode, None, 'RS485 is disabled by default'
+        )
+        self.assertEqual(
+            self.s.rs485_mode, None, 'RS485 is disabled by default'
+        )
         self.s.rs485_mode = serial.rs485.RS485Settings()
         self.assertTrue(self.s._rs485_mode is not None, 'RS485 is enabled')
         self.assertTrue(self.s.rs485_mode is not None, 'RS485 is enabled')
@@ -44,7 +48,9 @@ class Test_RS485_class(unittest.TestCase):
 
     def setUp(self):
         if not isinstance(serial.serial_for_url(PORT), serial.Serial):
-            raise unittest.SkipTest("RS485 test only compatible with real serial port")
+            raise unittest.SkipTest(
+                'RS485 test only compatible with real serial port'
+            )
         self.s = serial.rs485.RS485(PORT, timeout=1)
 
     def tearDown(self):
@@ -58,10 +64,11 @@ class Test_RS485_class(unittest.TestCase):
 
 if __name__ == '__main__':
     import sys
+
     sys.stdout.write(__doc__)
     if len(sys.argv) > 1:
         PORT = sys.argv[1]
-    sys.stdout.write("Testing port: {!r}\n".format(PORT))
+    sys.stdout.write('Testing port: {!r}\n'.format(PORT))
     sys.argv[1:] = ['-v']
     # When this module is executed from the command-line, it runs all its tests
     unittest.main()

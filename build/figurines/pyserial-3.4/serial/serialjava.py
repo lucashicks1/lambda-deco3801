@@ -27,16 +27,18 @@ def detect_java_comm(names):
             return mod
         except (ImportError, AttributeError):
             pass
-    raise ImportError("No Java Communications API implementation found")
+    raise ImportError('No Java Communications API implementation found')
 
 
 # Java Communications API implementations
 # http://mho.republika.pl/java/comm/
 
-comm = detect_java_comm([
-    'javax.comm',  # Sun/IBM
-    'gnu.io',      # RXTX
-])
+comm = detect_java_comm(
+    [
+        'javax.comm',  # Sun/IBM
+        'gnu.io',  # RXTX
+    ]
+)
 
 
 def device(portnumber):
@@ -62,18 +64,22 @@ class Serial(SerialBase):
         if the port cannot be opened.
         """
         if self._port is None:
-            raise SerialException("Port must be configured before it can be used.")
+            raise SerialException(
+                'Port must be configured before it can be used.'
+            )
         if self.is_open:
-            raise SerialException("Port is already open.")
+            raise SerialException('Port is already open.')
         if type(self._port) == type(''):      # strings are taken directly
             portId = comm.CommPortIdentifier.getPortIdentifier(self._port)
         else:
-            portId = comm.CommPortIdentifier.getPortIdentifier(device(self._port))     # numbers are transformed to a comport id obj
+            portId = comm.CommPortIdentifier.getPortIdentifier(
+                device(self._port)
+            )     # numbers are transformed to a comport id obj
         try:
-            self.sPort = portId.open("python serial module", 10)
+            self.sPort = portId.open('python serial module', 10)
         except Exception as msg:
             self.sPort = None
-            raise SerialException("Could not open port: %s" % msg)
+            raise SerialException('Could not open port: %s' % msg)
         self._reconfigurePort()
         self._instream = self.sPort.getInputStream()
         self._outstream = self.sPort.getOutputStream()
@@ -82,7 +88,7 @@ class Serial(SerialBase):
     def _reconfigurePort(self):
         """Set communication parameters on opened port."""
         if not self.sPort:
-            raise SerialException("Can only operate on a valid port handle")
+            raise SerialException('Can only operate on a valid port handle')
 
         self.sPort.enableReceiveTimeout(30)
         if self._bytesize == FIVEBITS:
@@ -94,7 +100,7 @@ class Serial(SerialBase):
         elif self._bytesize == EIGHTBITS:
             jdatabits = comm.SerialPort.DATABITS_8
         else:
-            raise ValueError("unsupported bytesize: %r" % self._bytesize)
+            raise ValueError('unsupported bytesize: %r' % self._bytesize)
 
         if self._stopbits == STOPBITS_ONE:
             jstopbits = comm.SerialPort.STOPBITS_1
@@ -103,7 +109,9 @@ class Serial(SerialBase):
         elif self._stopbits == STOPBITS_TWO:
             jstopbits = comm.SerialPort.STOPBITS_2
         else:
-            raise ValueError("unsupported number of stopbits: %r" % self._stopbits)
+            raise ValueError(
+                'unsupported number of stopbits: %r' % self._stopbits
+            )
 
         if self._parity == PARITY_NONE:
             jparity = comm.SerialPort.PARITY_NONE
@@ -116,7 +124,7 @@ class Serial(SerialBase):
         elif self._parity == PARITY_SPACE:
             jparity = comm.SerialPort.PARITY_SPACE
         else:
-            raise ValueError("unsupported parity type: %r" % self._parity)
+            raise ValueError('unsupported parity type: %r' % self._parity)
 
         jflowin = jflowout = 0
         if self._rtscts:
@@ -126,11 +134,13 @@ class Serial(SerialBase):
             jflowin |= comm.SerialPort.FLOWCONTROL_XONXOFF_IN
             jflowout |= comm.SerialPort.FLOWCONTROL_XONXOFF_OUT
 
-        self.sPort.setSerialPortParams(self._baudrate, jdatabits, jstopbits, jparity)
+        self.sPort.setSerialPortParams(
+            self._baudrate, jdatabits, jstopbits, jparity
+        )
         self.sPort.setFlowControlMode(jflowin | jflowout)
 
         if self._timeout >= 0:
-            self.sPort.enableReceiveTimeout(int(self._timeout*1000))
+            self.sPort.enableReceiveTimeout(int(self._timeout * 1000))
         else:
             self.sPort.disableReceiveTimeout()
 
@@ -177,7 +187,9 @@ class Serial(SerialBase):
         if not self.sPort:
             raise portNotOpenError
         if not isinstance(data, (bytes, bytearray)):
-            raise TypeError('expected %s or bytearray, got %s' % (bytes, type(data)))
+            raise TypeError(
+                'expected %s or bytearray, got %s' % (bytes, type(data))
+            )
         self._outstream.write(data)
         return len(data)
 
@@ -200,13 +212,15 @@ class Serial(SerialBase):
         """Send break condition. Timed, returns to idle state after given duration."""
         if not self.sPort:
             raise portNotOpenError
-        self.sPort.sendBreak(duration*1000.0)
+        self.sPort.sendBreak(duration * 1000.0)
 
     def _update_break_state(self):
         """Set break: Controls TXD. When active, to transmitting is possible."""
         if self.fd is None:
             raise portNotOpenError
-        raise SerialException("The _update_break_state function is not implemented in java.")
+        raise SerialException(
+            'The _update_break_state function is not implemented in java.'
+        )
 
     def _update_rts_state(self):
         """Set terminal status line: Request To Send"""
