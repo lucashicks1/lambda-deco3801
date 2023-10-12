@@ -1,0 +1,30 @@
+name: Python formatter and linter
+
+on: [push]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest # Run the runner on a ubuntu image
+    strategy:
+      max-parallel: 5
+
+    steps:
+    - uses: actions/checkout@v3 # Checkout the repo to the runner
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.11'
+    - name: Install formatter and linter
+      run: |
+        export PYTHONPATH = $GITHUB_PATH
+        python -m venv venv
+        source ./venv/bin/activate
+        pip install --upgrade pip
+        pip install blue
+        pip install pylint
+    - name: Run formatter and linter
+      run: |
+        pylint camera
+        pylint db-handler
+        pylint figurines
+        pylint vision
