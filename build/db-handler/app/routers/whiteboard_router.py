@@ -1,9 +1,8 @@
 from fastapi import Body, APIRouter, HTTPException
 from app.dependencies.database import cal_col, user_col
-from typing import Annotated, List, Dict
+from typing import Annotated
 from app.models.whiteboard_models import WhiteboardRequest
 from app.examples.whiteboard_payloads import POST_WHITEBOARD, RESPONSE_WHITEBOARD
-from app import constants
 
 router = APIRouter(
     prefix="/whiteboard",
@@ -12,23 +11,31 @@ router = APIRouter(
 
 
 @router.post("/{user}")
-def modify_calendar(user: str, payload: Annotated[WhiteboardRequest, Body(examples=[POST_WHITEBOARD])]) -> Annotated[
+def modify_calendar(user: str,
+                    payload: Annotated[
+                        WhiteboardRequest,
+                        Body(examples=[POST_WHITEBOARD])
+                    ]) -> Annotated[
     dict, Body(examples=[RESPONSE_WHITEBOARD])]:
     users = user_col.distinct("user_id")
     if user not in users:
         raise HTTPException(status_code=400, detail="That user_id is not valid")
 
+    # Deletes the user from the db timeslots
     cal_col.update_many({}, {"$pull": {"booked_users": user}})
 
+    # Goes through each payload and updates the database
     for time_slot in payload.body:
         cal_col.update_one(
             {
                 "day": time_slot.day,
-                "slot_num": time_slot.time_slot
+                "slot_num": time_slot.time_slot,
+                "data": time_slot.data
             },
             {
                 "$push": {
-                    "booked_users": user
+                    "booked_users": user,
+                    "colour": time_slot.colour.split(",")
                 }
             }
         )

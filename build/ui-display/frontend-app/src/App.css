@@ -1,0 +1,61 @@
+.App {
+  text-align: center;
+  width: 1080px;
+  height: 1920px;
+  margin: auto;
+  background: #FFAFCC;
+  border-width: 1px;
+  border-style: dashed;
+  border-color: #000000;
+}
+
+.App-header {
+  background-color: #edf6f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  border-radius: 20px;
+}
+
+.Sky-box {
+  border-radius: 20px;
+  border: 1px solid #454545;
+  background: var(--blue);
+  width: 962px;
+  height: 1100px;
+  margin: auto;
+  position: relative;
+
+}
+
+.Grass-box {
+  border-radius: 20px;
+  border: 1px solid #454545;
+  background: var(--lightgreen);
+  width: 962px;
+  height: 279px;
+  bottom: 0px;
+  position: absolute
+  ;
+}
+
+:root {
+  --purple: #8ea8f6;
+  --hotpink: #f18eca;
+  --lightpink: #fcaac6;
+  --red: #e4685a;
+  --orange: #e8945b;
+  --yellow: #fec12d;
+  --tan: #dac8ba;
+  --darkgrey: #393939;
+  --blue: #a2e3f6;
+  --aqua: #84e5ec;
+  --lightaqua: #aaecdd;
+  --darkgreen: #02a774;
+  --lightgreen: #a6d48d;
+  --lightlime: #e8f3b2;
+  --cream: #fdf7f0;
+}
