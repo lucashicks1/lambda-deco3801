@@ -4,6 +4,7 @@ import time
 from time import sleep
 import requests
 import socket
+import json
 
 POLL_DELAY = 15
 
@@ -121,9 +122,9 @@ def main():
             continue
         if serialPort.is_open:
             try:
-                response = requests.get("http://127.0.0.1:8000/figurines")
-                if response.text != figurine_status:
-                    figurine_status = response.text
+                response = json.loads(requests.get("http://127.0.0.1:8000/figurines").text)
+                if response != figurine_status:
+                    figurine_status = response
                     send_to_controller(figurine_status)
                 sleep(POLL_DELAY)
             except Exception as e:
