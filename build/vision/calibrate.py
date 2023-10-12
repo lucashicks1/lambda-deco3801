@@ -48,10 +48,6 @@ def get_rot_angle(path: str = 'cap.jpg') -> int:
             break
 
         rows, cols, _ = frame.shape
-        # rotation_matrix = cv2.getRotationMatrix2D(
-        # (cols / 2, rows / 2), angle, 1
-        # )
-        # rotated_frame = cv2.warpAffine(frame, rotation_matrix, (cols, rows))
         if angle == 0:
             rotated_frame = frame
         elif angle == 90:
