@@ -1,3 +1,4 @@
+"""Payloads for display endpoints"""
 USER_TOTALS_EXAMPLES = {
     'user_1': 81.5,
     'user_2': 85.25,

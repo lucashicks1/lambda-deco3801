@@ -1,5 +1,6 @@
-from pymongo import MongoClient, collection, server_api
+"""Database file that connects to pymongo db"""
 from os import environ
+from pymongo import MongoClient, collection, server_api
 
 # Grab db details from environment
 DB_USER = environ.get('DB_USER')
@@ -10,10 +11,10 @@ DB_HOST = 'localhost'
 DB_PORT = 27017
 DB_NAME = 'mydb'
 
-args = 'retryWrites=true&w=majority&tls=true&tlsCAFile=app/cert.pem'
+ARGS = 'retryWrites=true&w=majority&tls=true&tlsCAFile=app/cert.pem'
 
 # URI for mongodb cluster hosted on mongodb atlas
-uri = f'mongodb+srv://lambdadb:{DB_PASS}@lambdacluster.vch8k4d.mongodb.net/?{args}'
+uri = f'mongodb+srv://lambdadb:{DB_PASS}@lambdacluster.vch8k4d.mongodb.net/?{ARGS}'
 
 client: MongoClient = MongoClient(uri, server_api=server_api.ServerApi('1'))
 

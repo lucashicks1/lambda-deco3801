@@ -1,3 +1,4 @@
+"""Payloads for whiteboard endpoints"""
 POST_WHITEBOARD = {
     'body': [
         {

@@ -60,7 +60,7 @@ def get_family_timeslots() -> Annotated[
 
 @router.get(
     '/user-free-timeslots',
-    summary='Gets the timeslots that have a certain number of free users.
+    summary='Gets the timeslots that have a certain number of free users.'
     'Each slot is sorted in descending '
     'order in terms of how many people are free during it',
 )
