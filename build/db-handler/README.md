@@ -4,6 +4,68 @@
 
 This database handler is a web-based RESTful API microservice which is solely responsible for all of the CRUD operations that are done on the database. As a result, all of the services that require the database will call this microservice to perform GET, POST, PATCH and DELETE operations on the database.
 
+## Getting Started
+
+### Installation
+
+You need a couple of dependencies if you want to run the uvicorn server locally to serve the API. Run these:
+
+* `pip install fastapi`
+* `pip install "uvicorn[standard]"`
+* `pip install pymongo`
+* `pip install pydantic`
+
+*Note: A python environment with every project dependency is available for use, so this step could be skipped if the other environment is set up.*
+
+### Database Setup
+This API microservice uses either a local monogbd database or a remote database hosted in the cloud. If the microservice is unable to connect to the remote instance running in the cloud, it will connect to the local database as a backup.
+
+#### Cloud instance
+To enable the app to connect to the remote database, your application must be authenticated with the database. In order to not store database secrets in the code repository, these secrets (username, password) are loaded in from your environment. Therefore you must set both the `DB_USER` and `DB_PASS` environment variables to the correct values.
+
+**\<USERNAME\> and \<PASSWORD\> are both placeholders. To obtain the actual values, please contact team Lambda.**
+
+On a mac/linux machine to set a temporary environment variable run the following in your shell:
+
+```
+export DB_USER=<USERNAME>
+export DB_PASS=<PASSWORD>
+```
+
+#### Remote instance
+
+##### Installation
+If you want to connect to a local database instance, you must first install mongodb on your system and then must run it.
+
+To install mongodb on your computer, follow the appropriate guide for your system:
+- [Mac](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/#install-mongodb-community-edition)
+- [Windows](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/#install-mongodb-community-edition)
+- [Linux](https://www.mongodb.com/docs/manual/administration/install-on-linux/)
+
+*Note: If you are installing this on a linux machine, take careful note of your distribution as different distributions require different installation procedures.*
+
+##### Run
+
+Once installed, run mongodb using the following guides:
+- [Mac](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/#run-mongodb-community-edition)
+- [Windows](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/#run-mongodb-community-edition-as-a-windows-service)
+
+*Note: for linux distributions follow the installation guide you used to run the database.*
+
+## Running the API
+
+To run the API, ensure that you are in the [`db-handler`](https://github.com/lucashicks1/lambda-deco3801/tree/main/build/db-handler) directory. Once you are in this directory, run the following command:
+
+`uvicorn app.main:app`
+
+*Note: If you have issues with you python installation and uvicorn can't be found, run `python -m uvicorn app.main:app`.
+
+- `{app.main}` - location of the python file that contains the FastAPI app
+- `{app}` - name of the FastAPI app instance in the file
+- `--reload` - optional flag that can be used when running the uvicorn server, so that it reloads after any changes are made to the directory 
+- `--port XXXX` - optional flag to specify what port the server will run on - port 8000 by default
+
+
 ## Database
 
 ### Overview
@@ -37,52 +99,11 @@ For family events, the `"family"` string will be stored in array stored under th
 }
 ```
 
-### Installation
-
-* [MacOS](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/)
-* [Windows](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/)
-
-### Usage
-
-To stop and start the server:
-
-```
-### MacOS ###
-brew services start mongodb-community@7.0
-
-brew services stop mongodb-community@7.0
-
-### Windows ###
-
-Too difficult - why does every windows terminal suck?
-```
-
 ## Microservice
 
 ### Overview
 
 Planning to use the FastAPI library in Python to create the web-based API. This will be running on a ASGI web server (probably Uvicorn). 
-
-### Installation
-
-You need a couple of dependencies if you want to run the uvicorn server locally to serve the API. Run these:
-
-* `pip install fastapi`
-* `pip install "uvicorn[standard]"`
-* `pip install pymongo`
-* `pip install pydantic`
-
-### Usage
-
-To run the uvicorn server, run the following: 
-
-`uvicorn app.main:app --reload`
-
-*Note: If you have issues where uvicorn can't be found, run* `python -m uvicorn app.main:app --reload`
-
-- *{app.main}* - location of the python file that has the FastAPI app instance
-- *{app}* - name of the FastAPI instance
-- *--reload* - flag to force the server to reload everytime changes are made - helpful during dev
 
 ### Example Interaction with Microservice
 
