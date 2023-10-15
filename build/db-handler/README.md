@@ -8,21 +8,11 @@ This database handler is a web-based RESTful API microservice which is solely re
 
 ### Installation
 
-You need a couple of dependencies if you want to run the uvicorn server locally to serve the API. Run these options:
+**NOTE: These steps can be skipped if the initial install instructions have been followed on the overall build [`README`](https://github.com/lucashicks1/lambda-deco3801/tree/main/build)**
 
-1. Install using conda environment
-
-For convinience, a conda environment has been created so that all project dependencies can be installed using as few commands as possible. See more on this option [here](https://github.com/lucashicks1/lambda-deco3801/blob/main/build/vision/README.md#dependencies)
-
-2. Install with `requirements.txt`:
+If you have not setup the conda environment, run the following command:
 
 `pip install -r requirements.txt`
-
-3. Install all dependencies individually:
-
-`pip install fastapi pymongo pydantic "uvicorn[standard]"`
-
-*Note: A python environment with every project dependency is available for use, so this step could be skipped if the other environment is set up.*
 
 ### Database Setup
 This API microservice uses either a local monogbd database or a remote database hosted in the cloud. If the microservice is unable to connect to the remote instance running in the cloud, it will connect to the local database as a backup.
