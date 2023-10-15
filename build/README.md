@@ -1,5 +1,5 @@
-# BUILD
-Build code goes here when project underway
+# Build guide
+Please follow these instructions to run the project.
 
 ## Initial Environment Setup
 Our project relies on several different libraries in order for it to function. As most of our project is written in Python, there is an [`environment.yaml`](https://github.com/lucashicks1/lambda-deco3801/blob/main/environment.yaml) file that has been created, allowing you to create your own conda virtual environment. You can create and activate this environment with the following:
