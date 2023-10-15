@@ -1,4 +1,4 @@
-# Database handler
+# Database Handler
 
 ## Overview
 

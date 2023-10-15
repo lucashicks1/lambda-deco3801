@@ -21,8 +21,8 @@ pip install opencv-python-headless
 Once this environment is setup, all the needed dependencies for our python components should be installed.
 
 ## Build Instructions for each project component
-1. [Database](../build/db-handler/README.md)
-2. [Camera](../build/vision/README.md)
+1. [Database Handler](../build/db-handler/README.md)
+2. [Image Recognition](../build/vision/README.md)
 3. [Display](../build/ui-display/frontend-app/README.md)
 4. [Microcontroller](../build/microcontroller/README.md)
 5. [Microcontroller Communication](../build/figurines/README.md)
