@@ -137,7 +137,7 @@ def main():
         if serialPort.is_open:
             try:
                 response = json.loads(
-                    requests.get('http://127.0.0.1:8000/figurines').text
+                    requests.get('http://127.0.0.1:8000/figurines', timeout=5).text
                 )
                 if response != figurine_status:
                     figurine_status = response

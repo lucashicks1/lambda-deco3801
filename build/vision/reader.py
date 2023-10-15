@@ -3,6 +3,7 @@ import sys
 from collections import namedtuple
 
 import numpy as np
+import requests
 import pytesseract
 from camera_constants import left
 from camera_constants import time_slot_height
@@ -16,6 +17,8 @@ from PIL import Image
 
 Point = namedtuple('Point', ['X', 'Y'])
 TimeSlot = namedtuple('TimeSlot', ['top_left', 'bottom_right'])
+
+USER_NAME = "family"
 
 
 def main(image: Image):
@@ -59,9 +62,15 @@ def main(image: Image):
                         'colour': ','.join(colour),  # logic to get out of list
                     }
                 )
+    
+    request_body = {"body": coloured_time_slots}
+    try:
+        requests.post(f"http://127.0.0.1:8000/whiteboard/{USER_NAME}", json=request_body, timeout=30)
+    except requests.exceptions.ConnectionError as e:
+        print(f"Error making HTTP request - {e}")
 
-    with open('coloured_time_slots.json', 'w') as json_file:
-        json.dump(coloured_time_slots, json_file, indent=4)
+    # with open('coloured_time_slots.json', 'w') as json_file:
+    #     json.dump(coloured_time_slots, json_file, indent=4)
 
 
 def get_info(time_slot_array: np.ndarray) -> (bool, [str], str):
