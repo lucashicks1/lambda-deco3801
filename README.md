@@ -23,8 +23,7 @@ Within a particular ecosystem, there may be a common way of installing things, s
 Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
 ## Support
-If you have any issues building or running this project yourself, please feel free to make a new issue for the team to address. You can also reach out to the project lead (Ali) at a.laherty@uq.edu.au. **For access to the database credentials, please contact Lucas at l.hicks@uqconnect.edu.au, or if DECO3801 staff you may also refer to our technical report submission.**
-!TODO did we need somebody to provide the password?
+If you have any issues building or running this project yourself, please feel free to make a new issue for the team to address. You can also reach out to the project lead (Ali) at a.laherty@uq.edu.au. ***For access to the database credentials, please contact Lucas at l.hicks@uqconnect.edu.au, or if DECO3801 staff you may also refer to our technical report submission.***
 
 ## Roadmap
 If you have ideas for releases in the future, it is a good idea to list them in the README.
