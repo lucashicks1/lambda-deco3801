@@ -1,11 +1,5 @@
 # Lambda - Deco3801
 
-# Hi Rosti 🪩 Please read! 
-We really wanted to have our READMEs finished for the snapshot so we could get your feedback on them but unfortunately we're all a bit slammed until the weekend and probably won't make it to them in time :( 
-We'll just do our best to finish it up & maybe ping you a lot until next studio instead. Hope that's okay! And sorry for the lack of good docs in most places at the moment.
-*Promise* they'll be shipshape for the real submission. 
-
-
 1. top-level explanation of product
 2. overview of github directory structure
 3. guide to getting started — order to build in and links to longer readmes for each section 
