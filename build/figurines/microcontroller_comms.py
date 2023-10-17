@@ -123,8 +123,12 @@ def start_thread():
 
 
 def main():
+    """Main script loop that will attempt to connect to the microcontroller.
+    If so, it will send data via serial to move the servo motors
+    """
+
     global port, connect_status
-    figurine_status = {}
+    # figurine_status = {}
 
     connection_count = 0
 
