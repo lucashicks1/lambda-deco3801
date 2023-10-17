@@ -75,8 +75,8 @@ def get_cell_dims(img: Image, top_left: (int, int)) -> (float, float):
     cropped_array = np.array(cropped)
     plt.imshow(cropped_array)
     plt.show(block=False)
-    width = float(input('Please enter the width of a cell'))
-    height = float(input('Please enter the height of a cell'))
+    width = float(input('Please enter the width of a cell: '))
+    height = float(input('Please enter the height of a cell: '))
 
     plt.close('all')
     return (width, height)
