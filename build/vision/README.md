@@ -50,16 +50,17 @@ calendar and determine if there is anything written in each cell. If something
 is, then it will record what colour (red, blue, or black) and if applicable, will
 use Pytesseract for OCR and save the text written in the cell.
 
-This information is then saved in json format to a file called `coloured_time_slots.json`
-to be read by another program.
+This information is then saved in json format and sent as a request to the database
 
 ## Usage
 
 ### Setup and calibration
 
-Run the calibration script with
+First run the `calibrate_rotate.py` script to get a rotation angle. Then run the `calibrate.py`
+script to set the top-left corner and the cell height and width. Run these scripts with
 
 ```
+python calibrate_rotate.py
 python calibrate.py
 ```
 
