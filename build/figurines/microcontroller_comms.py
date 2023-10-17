@@ -54,8 +54,8 @@ def initialise_serial(port):
 def serial_disconnect():
     global serialPort, connect_status
     _LOGGER.info("Disconnecting serial port")
-    serialPort.flushInput()
-    serialPort.flushOutput()
+    serialPort.reset_input_buffer()
+    serialPort.reset_output_buffer()
     _LOGGER.info("Flushing input and output")
     serialPort.close()
     _LOGGER.info("Closing serial port")
