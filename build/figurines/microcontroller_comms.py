@@ -33,8 +33,8 @@ read_state = True  # True when serial starts up connection
 
 # =========================== SERIAL HANDLING ================================== #
 
+logging.basicConfig(level=logging.DEBUG, format="%(asctime)s %(levelname)s %(message)s")
 _LOGGER = logging.getLogger(__name__)
-_LOGGER.setLevel(logging.DEBUG)
 
 def initialise_serial(port):
     global serialPort, connect_status
