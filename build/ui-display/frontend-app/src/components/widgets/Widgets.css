@@ -1,4 +1,5 @@
 @import "../../App.css";
+@import "../../font.css";
 
 .Clock-box {
     background-color: var(--cream);
@@ -12,6 +13,8 @@
     border-radius: 20px;
     margin-top: 0%;
     text-shadow: 0 2px 2px var(--darkgrey);
+    font-family: Nightingale;
+    letter-spacing: 30px;
 }
 
 .Date-box {
@@ -23,6 +26,5 @@
     align-items: center;
     justify-content: center;
     font-size: calc(5px + 2vmin);
-    background-color: var(--cream);
-
 }
+

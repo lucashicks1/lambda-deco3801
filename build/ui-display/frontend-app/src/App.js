@@ -3,6 +3,7 @@ import DateWidget from './components/widgets/DateWidget';
 import ClockWidget from './components/widgets/ClockWidget';
 import WeatherWidget from './components/widgets/WeatherWidget';
 import SuggestedActivityWidget from './components/widgets/SuggestedActivityWidget';
+import './font.css';
 import BusiestWidget from './components/widgets/BusiestWidget';
 import SuggestedTimeWidget from './components/widgets/SuggestedTimeWidget';
 
