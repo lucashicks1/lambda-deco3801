@@ -1,35 +1,38 @@
 """Fast api app that is run when api starts"""
+import logging
 from fastapi import FastAPI, responses
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers import figures_router, whiteboard_router, display_router
 from app import help_scripts
+from app.constants import LOGGER_FORMAT
+from app.dependencies.database import cal_col
 
 tags_metadata = [
     {
-        'name': 'Display',
-        'description': 'All endpoints used by the family display',
+        "name": "Display",
+        "description": "All endpoints used by the family display",
     },
     {
-        'name': 'Figurines',
-        'description': 'All endpoints used by the figurines display',
+        "name": "Figurines",
+        "description": "All endpoints used by the figurines display",
     },
     {
-        'name': 'Whiteboard',
-        'description': 'All endpoints used by the lambda board',
+        "name": "Whiteboard",
+        "description": "All endpoints used by the lambda board",
     },
 ]
 
-origins = ['http://0.0.0.0:3000', 'http://localhost:3000']
+origins = ["http://0.0.0.0:3000", "http://localhost:3000"]
 
-app = FastAPI(title='Lambda DB Handler', openapi_tags=tags_metadata)
+app = FastAPI(title="Lambda DB Handler", openapi_tags=tags_metadata)
 
 # Adds CORS middleware for react app
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=['*'],
-    allow_headers=['*'],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Includes all of the endpoint routers
@@ -37,18 +40,33 @@ app.include_router(figures_router.router)
 app.include_router(whiteboard_router.router)
 app.include_router(display_router.router)
 
+logging.basicConfig(level=logging.INFO, format=LOGGER_FORMAT)
+_LOGGER = logging.getLogger(__name__)
+logging.getLogger(__name__).setLevel(logging.DEBUG)
+
 
 # Redirect main endpoint to the docs
-@app.get(
-    '/', summary='Default landing page which will redirect you to the docs'
-)
+@app.get("/", summary="Default landing page which will redirect you to the docs")
 def main():
-    """0th level of the API that redirects to the API docs"""
+    """root endpoint of the API that redirects to the API docs"""
     # Redirects you to doc page
-    return responses.RedirectResponse('/docs')
+    return responses.RedirectResponse("/docs")
 
 
-@app.get('/reset', summary='Resets the state of the database')
+@app.get(
+    "/dump",
+    summary="Private endpoint that is used to quickly dump the database contents",
+)
+def dump():
+    """Private endpoint solely used to dump the current contents of the database.
+    Endpoint would not be public facing"""
+    cursor = cal_col.find()
+    for value in cursor:
+        print(value)
+    return {"body": list(cal_col.find({}, {"_id": 0}))}
+
+
+@app.get("/reset", summary="Resets the state of the database")
 def reset(state: bool = False):
     """Resets the database if state is true
 
@@ -56,4 +74,5 @@ def reset(state: bool = False):
         state (bool, optional): Whether the database will be reset. Defaults to False.
     """
     if state:
+        _LOGGER.info("Resetting database state")
         help_scripts.reset_db()
