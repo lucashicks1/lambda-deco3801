@@ -1,5 +1,5 @@
 """App constants"""
-TIMESLOT_LEN = 15
+TIMESLOT_LEN = 30
 FAMILY_NAME = 'family'
 USERS = ['user_1', 'user_2', 'user_3', 'user_4', FAMILY_NAME]
 DAYS = [

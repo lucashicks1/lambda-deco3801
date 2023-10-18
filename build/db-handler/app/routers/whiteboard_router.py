@@ -10,6 +10,12 @@ from app.examples.whiteboard_payloads import (
 
 router = APIRouter(prefix='/whiteboard', tags=['Whiteboard'])
 
+@router.get("/")
+def dump():
+    cursor = cal_col.find()
+    for val in cursor:
+        print(val)
+    return {"test": "test"}
 
 @router.post('/{user}')
 def modify_calendar(
