@@ -3,7 +3,7 @@ import logging
 from fastapi import FastAPI, HTTPException, responses
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers import figures_router, whiteboard_router, display_router
-from app.constants import LOGGER_FORMAT
+from app.constants import LOGGER_FORMAT, LOGGER_TIME_FORMAT
 from app.dependencies.database import cal_col
 from app import utils
 
@@ -40,7 +40,7 @@ app.include_router(figures_router.router)
 app.include_router(whiteboard_router.router)
 app.include_router(display_router.router)
 
-logging.basicConfig(level=logging.INFO, format=LOGGER_FORMAT)
+logging.basicConfig(level=logging.INFO, format=LOGGER_FORMAT, datefmt=LOGGER_TIME_FORMAT)
 _LOGGER = logging.getLogger(__name__)
 logging.getLogger(__name__).setLevel(logging.DEBUG)
 
