@@ -1,5 +1,6 @@
 """Utils file for basic utility functions used throughout the database handler"""
 from datetime import datetime
+import random
 from app import constants
 from app.dependencies import database as db
 
@@ -29,42 +30,36 @@ def current_to_timeslot_num() -> int:
     return hour_slot + minute_slot
 
 
-def reset_db():
+def reset_db(populate: bool = False):
     """Resets the database and adds in random timeslot information"""
     db.cal_col.delete_many({})
     db.user_col.delete_many({})
 
+    # Go through the hours betwen the start hour until the hour just before the end hour
+    # Create the documents in the collection
+
     for day in constants.DAYS:
-        minute: int = 0
-        hour: int = 0
         timeslot_num: int = 0
-        while hour < 24:
+        for hour in range(constants.START_HOUR, constants.END_HOUR):
+            for minute in range(60 // constants.TIMESLOT_LEN):
+                users = random.sample(constants.USERS, random.randint(0, len(constants.USERS))) if populate else []
+                document = {
+                    'day': day,
+                    'time': f'{hour:02}:{(minute * constants.TIMESLOT_LEN):02}',
+                    'slot_num': timeslot_num,
+                    'booked_users': users
+                }
+                db.cal_col.insert_one(document)
+                timeslot_num += 1
+        minute = 0
+        # Adds the last hour of the calendar as a document
+        while minute <= constants.END_MINUTE:
             document = {
                 'day': day,
-                'time': f'{hour:02}:{minute:02}',
+                'time': f'{constants.END_HOUR:02}:{minute:02}',
                 'slot_num': timeslot_num,
-                'booked_users': [],
+                'booked_users': []
             }
             db.cal_col.insert_one(document)
             minute += constants.TIMESLOT_LEN
-            if minute == 60:
-                minute = 0
-                hour += 1
             timeslot_num += 1
-
-    db.cal_col.update_many(
-        filter={}, update={'$set': {'booked_users': [constants.USERS[0]]}}
-    )
-
-    for user in constants.USERS:
-        db.user_col.insert_one({'user_id': user})
-
-    cursor = db.cal_col.find({})
-
-    for doc in cursor:
-        print(doc)
-
-    cursor = db.user_col.find({})
-
-    for doc in cursor:
-        print(doc)

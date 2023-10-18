@@ -3,9 +3,9 @@ import logging
 from fastapi import FastAPI, HTTPException, responses
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers import figures_router, whiteboard_router, display_router
-from app import help_scripts
 from app.constants import LOGGER_FORMAT
 from app.dependencies.database import cal_col
+from app import utils
 
 tags_metadata = [
     {
@@ -60,26 +60,29 @@ def main():
 def dump():
     """Private endpoint solely used to dump the current contents of the database.
     Endpoint would not be public facing"""
-    cursor = cal_col.find()
-    for value in cursor:
-        print(value)
     return {"body": list(cal_col.find({}, {"_id": 0}))}
 
 
 @app.get("/reset", summary="Resets the state of the database")
-def reset(state: bool = False, populate: bool = True):
+def reset(reset: bool = False, populate: bool = True):
     """Resets the database if state is true
 
     Args:
-        state (bool, optional): Whether the database will be reset. Defaults to False.
+        reset (bool, optional): Whether the database will be reset. Defaults to False.
         populate (bool, optional): Whether the database will be populated with random timeslots when reset
     """
-    if state:
+    if reset:
         _LOGGER.info("Resetting database state")
-        help_scripts.reset_db()
+        utils.reset_db(populate=populate)
         if populate:
-            pass
-    elif populate:
-        raise HTTPException(status_code=400, detail="You cannot populate the database without resetting it.")
+            _LOGGER.info("Populating database")
 
-    
+        return {"body": list(cal_col.find({}, {"_id": 0}))}
+
+    elif populate:
+        raise HTTPException(
+            status_code=400,
+            detail="You cannot populate the database without resetting it.",
+        )
+    else:
+        return None
