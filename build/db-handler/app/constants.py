@@ -4,7 +4,8 @@ TIMESLOT_LEN = 30
 START_HOUR = 5
 START_MINUTE = 0
 
-END_HOUR = 20
+END_HOUR = 22
+END_MINUTE = 0
 
 FAMILY_NAME = 'family'
 USERS = ['user_1', 'user_2', 'user_3', 'user_4', FAMILY_NAME]

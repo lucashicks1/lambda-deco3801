@@ -32,6 +32,10 @@ def reset_db(populate: bool = False):
     db.cal_col.delete_many({})
     db.user_col.delete_many({})
 
+    # Adds users
+    for user in constants.USERS:
+        db.user_col.insert_one({'user_id': user})
+
     # Go through the hours betwen the start hour until the hour just before the end hour
     # Create the documents in the collection
 
