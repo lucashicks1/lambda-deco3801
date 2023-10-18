@@ -16,18 +16,15 @@ def current_to_timeslot() -> str:
     return f'{now.hour:02}:{now.minute // constants.TIMESLOT_LEN * constants.TIMESLOT_LEN:02}'
 
 
-def current_to_timeslot_num() -> int:
-    """Calculates the current timeslot to a number that is used in the database
+def timeslot_num_to_time(slot_num: int) -> str:
+    """Calculates the time for a given timeslot number
 
     Returns:
-        int: int representation of the current timeslot
+        str: str representation of the time for that timeslot
     """
-    now = datetime.now()
-    hour_slot: int = now.hour * 60 / constants.TIMESLOT_LEN
-    minute_slot: int = (
-        now.minute // constants.TIMESLOT_LEN * constants.TIMESLOT_LEN
-    ) / constants.TIMESLOT_LEN
-    return hour_slot + minute_slot
+    hour: str = slot_num // (60 // constants.TIMESLOT_LEN) + constants.START_HOUR
+    minute: str = (slot_num % (60 // constants.TIMESLOT_LEN)) * constants.TIMESLOT_LEN
+    return f"{hour:02}:{minute:02}"
 
 
 def reset_db(populate: bool = False):
