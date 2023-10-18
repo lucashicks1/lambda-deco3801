@@ -46,11 +46,12 @@ def modify_calendar(
     # Goes through each payload and updates the database
     for time_slot in payload.body:
         _LOGGER.debug(
-            "Day: %s Slot_number: %d Time: %s, Data: %s",
+            "Day: %s Slot_number: %d Time: %s, Data: %s Colour: %s",
             time_slot.day,
             time_slot.time_slot,
             utils.timeslot_num_to_time(time_slot.time_slot),
             time_slot.data,
+            time_slot.colour.split(",")
         )
         cal_col.update_one(filter,
             {
@@ -58,10 +59,12 @@ def modify_calendar(
                 "slot_num": time_slot.time_slot
             },
             {
-                "data": time_slot.data,
                 "$push": {
-                    "booked_users": user,
-                    "colour": time_slot.colour.split(","),
+                    "booked_users": user
+                },
+                "$set": {
+                    "data": time_slot.data,
+                    "colour": time_slot.colour.split(",")
                 }
             },
         )
