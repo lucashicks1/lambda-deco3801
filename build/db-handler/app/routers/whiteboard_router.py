@@ -46,14 +46,14 @@ def modify_calendar(
     # Goes through each payload and updates the database
     for time_slot in payload.body:
         _LOGGER.debug(
-            "Day: %s Slot_number: %d Time: %s, Data: %s Colour: %s",
+            "Day: %s | Slot_number: %d | Time: %s | Data: %s | Colour: %s",
             time_slot.day,
             time_slot.time_slot,
             utils.timeslot_num_to_time(time_slot.time_slot),
             time_slot.data,
             time_slot.colour.split(",")
         )
-        cal_col.update_one(filter,
+        cal_col.update_one(
             {
                 "day": time_slot.day,
                 "slot_num": time_slot.time_slot
