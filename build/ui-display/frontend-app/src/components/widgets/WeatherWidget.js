@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from 'axios';
 
+
 class WeatherWidget extends Component {
     state = {
         temperature: null,
@@ -35,22 +36,28 @@ class WeatherWidget extends Component {
     };
 
     render() {
-        const { temperature, icon, condition } = this.state;
+        const { temperature, condition } = this.state;
+
+        const weatherIcons = {
+            'Thunderstorm': '../../weather-icons/Thunderstorm.png',
+            'Drizzle': '../../weather-icons/Drizzle.png',
+            'Rain': '../../weather-icons/Rain.png',
+            'Clear': '../../weather-icons/Clear.png',
+            'Clouds': '../../weather-icons/Clouds.png'
+        };
+
+        const currentWeatherIcon = weatherIcons[condition] || '';
 
         return (
-            <div>
+            <div className="Weather-box">
+                <img
+                    src={currentWeatherIcon}
+                    alt={condition}
+                />
                 {temperature !== null && (
                     <div>
-                        {icon && (
-                            <img
-                                src={`https://openweathermap.org/img/w/${icon}.png`}
-                                alt="Weather Icon"
-                            />
-                        )}
-                        <h1>{temperature}°C</h1>
-                        <h1>
-                            {condition}
-                        </h1>
+                        <h2>{temperature}°C</h2>
+                        <h2>{condition.toLowerCase()}</h2>
                     </div>
                 )}
             </div>

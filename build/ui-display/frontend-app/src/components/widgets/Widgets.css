@@ -7,24 +7,41 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: calc(10px + 2vmin);
-    height: 20%;
+    font-size: calc(30px + 2vmin);
+    /* height: 20%; */
     color: var(--darkgrey);
     border-radius: 20px;
-    margin-top: 0%;
     text-shadow: 0 2px 2px var(--darkgrey);
     font-family: Nightingale;
     letter-spacing: 30px;
+    padding-bottom: 0px;
 }
 
 .Date-box {
     border-radius: 20px;
     margin-bottom: 0%;
-    height: 5%;
+    padding-top: 0px;
     display: flex;
     width: 100%;
     align-items: center;
     justify-content: center;
     font-size: calc(5px + 2vmin);
 }
+
+.SuggestedActivity-box {
+    padding: 50px;
+    font-family: Nightingale;
+    font-size: 40px;
+}
+
+.Weather-box {
+    font-family: Nightingale;
+    font-size: 30px;
+    /* background-image: url('../../weather-icons/Rain.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100px; */
+}
+
+
 
