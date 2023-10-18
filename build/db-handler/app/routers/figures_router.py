@@ -6,7 +6,7 @@ from fastapi import Body, APIRouter
 from app.dependencies.database import cal_col, user_col
 from app import utils
 from app.examples.figurines_payloads import FIGURINES_EXAMPLE
-from app.constants import LOGGER_FORMAT, LOGGER_TIME_FORMAT
+from app.constants import LOGGER_FORMAT, LOGGER_TIME_FORMAT, BUSY, FREE
 
 router = APIRouter(prefix='/figurines', tags=['Figurines'])
 
@@ -39,13 +39,13 @@ def get_available() -> Annotated[dict, Body(examples=[FIGURINES_EXAMPLE])]:
     # Populates dictionary. 1 if user is booked, 0 is free
     if booked_timeslot is None:
         _LOGGER.info("Current time is not shown on calendar")
-        return {key:0 for key in user_col.distinct("user_id")}
+        return {key:BUSY for key in user_col.distinct("user_id")}
             
     _LOGGER.debug("Received timeslot back: %s", str(booked_timeslot))
     booked_users = booked_timeslot.get("booked_users")
 
     # Populates dictionary. 1 if user is booked, 0 is free
-    return {user: 1 if user in booked_users else 0 for user in user_col.distinct("user_id")}
+    return {user:BUSY if user in booked_users else FREE for user in user_col.distinct("user_id")}
 
     # for user in user_col.distinct('user_id'):
     #     status = 1 if user in booked_users else 0

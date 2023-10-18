@@ -20,3 +20,7 @@ DAYS = [
 ]
 LOGGER_FORMAT = "%(asctime)s %(levelname)s %(message)s"
 LOGGER_TIME_FORMAT = '%I:%M:%S %p'
+
+# Values for microcontroller and servos/actuators
+FREE = 0  # 0 is sent to the microcontroller if user is not busy
+BUSY = 1  # 1 is sent to the microcontroller if user is busy
