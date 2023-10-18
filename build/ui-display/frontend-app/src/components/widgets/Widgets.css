@@ -1,14 +1,28 @@
 @import "../../App.css";
 
 .Clock-box {
-    background-color: var(--purple);
+    background-color: var(--cream);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: calc(10px + 2vmin);
-    color: white;
+    height: 20%;
+    color: var(--darkgrey);
     border-radius: 20px;
-    margin-top: 200px;
+    margin-top: 0%;
+    text-shadow: 0 2px 2px var(--darkgrey);
 }
 
+.Date-box {
+    border-radius: 20px;
+    margin-bottom: 0%;
+    height: 5%;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(5px + 2vmin);
+    background-color: var(--cream);
+
+}

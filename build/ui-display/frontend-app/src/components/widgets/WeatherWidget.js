@@ -35,19 +35,22 @@ class WeatherWidget extends Component {
     };
 
     render() {
-        const { temperature, icon } = this.state;
+        const { temperature, icon, condition } = this.state;
 
         return (
             <div>
                 {temperature !== null && (
                     <div>
-                        <h2>{temperature}°C</h2>
                         {icon && (
                             <img
                                 src={`https://openweathermap.org/img/w/${icon}.png`}
                                 alt="Weather Icon"
                             />
                         )}
+                        <h1>{temperature}°C</h1>
+                        <h1>
+                            {condition}
+                        </h1>
                     </div>
                 )}
             </div>
