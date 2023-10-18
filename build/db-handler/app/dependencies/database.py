@@ -30,7 +30,6 @@ client: MongoClient = MongoClient(uri, server_api=server_api.ServerApi('1'))
 try:
     client.admin.command('ping')
     _LOGGER.info("Connected to hosted database successfully")
-    print('SUCCESSFUL - CONNECTING TO CLOUD DB')
 except Exception as e:
     print(e)
     _LOGGER.error("Couldn't connect to hosted database")
