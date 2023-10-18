@@ -12,6 +12,7 @@ def current_to_timeslot() -> str:
         str: string representation of the current timeslot
     """
     now = datetime.now()
+    print(now)
     # Gets current time with minutes rounded down to the closest 15 minute timeslot
     return f'{now.hour:02}:{now.minute // constants.TIMESLOT_LEN * constants.TIMESLOT_LEN:02}'
 

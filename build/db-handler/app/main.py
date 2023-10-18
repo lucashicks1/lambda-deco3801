@@ -84,5 +84,4 @@ def reset(reset: bool = False, populate: bool = True):
             status_code=400,
             detail="You cannot populate the database without resetting it.",
         )
-    else:
-        return None
+    return None

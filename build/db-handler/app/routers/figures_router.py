@@ -29,16 +29,25 @@ def get_available() -> Annotated[dict, Body(examples=[FIGURINES_EXAMPLE])]:
         dict: map, mapping a user to their status
     """
     users: dict = {}
-    timeslot: str = utils.current_to_timeslot()
-    _LOGGER.info("Getting availability for %s", timeslot)
+    timeslot_time: str = utils.current_to_timeslot()
+    _LOGGER.info("Getting availability for %s", timeslot_time)
     # Finds the timeslot in the database at the current time
-    booked_users = cal_col.find_one(
-        {'day': time_lib.strftime('%A').lower(), 'time': timeslot}
-    ).get('booked_users')
-    _LOGGER.debug("Received request back: %s", str(booked_users))
+    booked_timeslot = cal_col.find_one(
+        {'day': time_lib.strftime('%A').lower(), 'time': timeslot_time}
+    )
 
     # Populates dictionary. 1 if user is booked, 0 is free
-    for user in user_col.distinct('user_id'):
-        status = 1 if user in booked_users else 0
-        users[user] = status
-    return users
+    if booked_timeslot is None:
+        _LOGGER.info("Current time is not shown on calendar")
+        return {key:0 for key in user_col.distinct("user_id")}
+            
+    _LOGGER.debug("Received timeslot back: %s", str(booked_timeslot))
+    booked_users = booked_timeslot.get("booked_users")
+
+    # Populates dictionary. 1 if user is booked, 0 is free
+    return {user: 1 if user in booked_users else 0 for user in user_col.distinct("user_id")}
+
+    # for user in user_col.distinct('user_id'):
+    #     status = 1 if user in booked_users else 0
+    #     users[user] = status
+    # return users
