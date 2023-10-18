@@ -1,5 +1,11 @@
 """App constants"""
 TIMESLOT_LEN = 30
+
+START_HOUR = 5
+START_MINUTE = 0
+
+END_HOUR = 20
+
 FAMILY_NAME = 'family'
 USERS = ['user_1', 'user_2', 'user_3', 'user_4', FAMILY_NAME]
 DAYS = [
@@ -11,3 +17,5 @@ DAYS = [
     'saturday',
     'sunday',
 ]
+LOGGER_FORMAT = "%(asctime)s %(levelname)s %(message)s"
+LOGGER_TIME_FORMAT = '%I:%M:%S %p'
