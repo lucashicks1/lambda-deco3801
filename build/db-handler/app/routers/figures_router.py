@@ -1,12 +1,20 @@
 """Router for figurine endpoints"""
 import time as time_lib
+import logging
 from typing import Annotated
 from fastapi import Body, APIRouter
 from app.dependencies.database import cal_col, user_col
 from app import utils
 from app.examples.figurines_payloads import FIGURINES_EXAMPLE
+from app.constants import LOGGER_FORMAT, LOGGER_TIME_FORMAT
 
 router = APIRouter(prefix='/figurines', tags=['Figurines'])
+
+
+
+logging.basicConfig(level=logging.INFO, format=LOGGER_FORMAT, datefmt=LOGGER_TIME_FORMAT)
+_LOGGER = logging.getLogger(__name__)
+logging.getLogger(__name__).setLevel(logging.DEBUG)
 
 
 @router.get(
@@ -22,10 +30,12 @@ def get_available() -> Annotated[dict, Body(examples=[FIGURINES_EXAMPLE])]:
     """
     users: dict = {}
     timeslot: str = utils.current_to_timeslot()
+    _LOGGER.info("Getting availability for %s", timeslot)
     # Finds the timeslot in the database at the current time
     booked_users = cal_col.find_one(
         {'day': time_lib.strftime('%A').lower(), 'time': timeslot}
     ).get('booked_users')
+    _LOGGER.debug("Received request back: %s", str(booked_users))
 
     # Populates dictionary. 1 if user is booked, 0 is free
     for user in user_col.distinct('user_id'):
