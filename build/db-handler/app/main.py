@@ -1,6 +1,6 @@
 """Fast api app that is run when api starts"""
 import logging
-from fastapi import FastAPI, responses
+from fastapi import FastAPI, HTTPException, responses
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers import figures_router, whiteboard_router, display_router
 from app import help_scripts
@@ -67,12 +67,19 @@ def dump():
 
 
 @app.get("/reset", summary="Resets the state of the database")
-def reset(state: bool = False):
+def reset(state: bool = False, populate: bool = True):
     """Resets the database if state is true
 
     Args:
         state (bool, optional): Whether the database will be reset. Defaults to False.
+        populate (bool, optional): Whether the database will be populated with random timeslots when reset
     """
     if state:
         _LOGGER.info("Resetting database state")
         help_scripts.reset_db()
+        if populate:
+            pass
+    elif populate:
+        raise HTTPException(status_code=400, detail="You cannot populate the database without resetting it.")
+
+    
