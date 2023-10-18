@@ -63,7 +63,7 @@ def dump():
     return {"body": list(cal_col.find({}, {"_id": 0}))}
 
 
-@app.get("/reset", summary="Resets the state of the database")
+@app.post("/reset", summary="Resets the state of the database")
 def reset(reset: bool = False, populate: bool = True):
     """Resets the database if state is true
 
