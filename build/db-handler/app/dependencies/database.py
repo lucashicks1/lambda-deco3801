@@ -1,6 +1,15 @@
 """Database file that connects to pymongo db"""
 from os import environ
+import logging
+
 from pymongo import MongoClient, collection, server_api
+
+from app.constants import LOGGER_FORMAT
+
+
+logging.basicConfig(level=logging.INFO, format=LOGGER_FORMAT)
+_LOGGER = logging.getLogger(__name__)
+logging.getLogger(__name__).setLevel(logging.DEBUG)
 
 # Grab db details from environment
 DB_USER = environ.get('DB_USER')
@@ -20,11 +29,12 @@ client: MongoClient = MongoClient(uri, server_api=server_api.ServerApi('1'))
 
 try:
     client.admin.command('ping')
+    _LOGGER.info("Connected to hosted database successfully")
     print('SUCCESSFUL - CONNECTING TO CLOUD DB')
 except Exception as e:
     print(e)
-    print('UNSUCCESSFUL - CONNECTING TO CLOUD DB')
-    print('SUCCESSFUL - SWAPPING TO LOCAL DB')
+    _LOGGER.error("Couldn't connect to hosted database")
+    _LOGGER.info("Connecting to local database")
     client = MongoClient(DB_HOST, DB_PORT)
 
 cal_col: collection = client[DB_NAME]['calendar']
