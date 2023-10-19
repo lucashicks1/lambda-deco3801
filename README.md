@@ -61,7 +61,7 @@ nvm use latest
 
 If you don't wish to use NVM then use your chosen package manager to install [Node Latest](https://nodejs.org/en/download).
 
-Then we can install our node packages with:
+Then we can install the required node packages with:
 
 ```
 npm install react --save
@@ -71,20 +71,6 @@ npm install -g serve
 This will install all of our node requirements so that you can run the display app.
 
 ## Build Instructions
-
-### Specifics
-
-Due to the number of components in this project. It is best to go to the individual
-READMEs for each component individual component. For your convenience we have listed
-these below:
-
-- [Database Handler](./db-handler/README.md)
-- [Image Recognition](./vision/README.md)
-- [Display](./ui-display/frontend-app/README.md)
-- [Microcontroller](./microcontroller/README.md)
-- [Microcontroller Communication](./figurines/README.md)
-
-### Overall
 
 Generally for running this program however, you should first set up a camera so that it
 is viewing the whiteboard calendar. Ensure the image taken and the calendar itself are as
