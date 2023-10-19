@@ -1,7 +1,6 @@
 import numpy as np
 
-python_path = '/Users/alexviller/micromamba/envs/tmp/bin/python'
-
+python_path = '/Users/alexviller/miniconda3/envs/lambda-env/bin/python'
 
 colour_thresholds = {
     'red_min': np.array([100, 0, 0]),
