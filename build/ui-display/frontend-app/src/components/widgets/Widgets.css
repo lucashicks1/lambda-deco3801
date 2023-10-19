@@ -8,7 +8,6 @@
     align-items: center;
     justify-content: center;
     font-size: calc(30px + 2vmin);
-    /* height: 20%; */
     color: var(--darkgrey);
     border-radius: 20px;
     text-shadow: 0 2px 2px var(--darkgrey);
@@ -32,15 +31,13 @@
     padding: 50px;
     font-family: Nightingale;
     font-size: 40px;
+    color: var(--darkgrey);
 }
 
 .Weather-box {
     font-family: Nightingale;
     font-size: 30px;
-    /* background-image: url('../../weather-icons/Rain.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100px; */
+    color: var(--darkgrey);
 }
 
 
