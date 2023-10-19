@@ -29,17 +29,13 @@ function App() {
           </div>
         </div>
         <div className="SuggestedTime-box">
-          {/* <SuggestedTimeWidget /> */}
+          <SuggestedTimeWidget />
         </div>
         <div className="shared-div">
           <div className="left-widget">
             <BusiestWidget />
           </div>
           <div className="right-widget">
-            {/* <img
-              src={require('../src/flower-icons/bee.png')}
-              style={{width: '100px', height: 'auto'}}
-            /> */}
             <div className="Joke-box">
               <h3>
                 Joke of the day:

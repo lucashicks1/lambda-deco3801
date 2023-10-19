@@ -51,6 +51,9 @@ export default function SuggestedTimeWidget() {
     const baseURL = 'https://localhost:8000/display/';
 
     useEffect(() => {
+        const interval = setInterval(()=>{
+            fetchData()
+        },200000)
         /* DEFAULT BEHAVIOUR: GET SINGLE RECOMMENDATION OF NEXT NEAREST TIME */
         const fetchData = async () => {
             const response = await fetch("http://localhost:8000/display/user-free-timeslots");
@@ -71,9 +74,12 @@ export default function SuggestedTimeWidget() {
                 setLoading(false);
             }
         };
+        return () => {
+            clearInterval(interval);
+        }
 
-        fetchData();
-    }, []); // Empty dependency array means this effect runs once when component mounts
+       // fetchData();
+    }); // Empty dependency array means this effect runs once when component mounts
 
 
     return (
