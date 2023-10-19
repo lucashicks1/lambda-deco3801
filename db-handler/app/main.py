@@ -4,7 +4,7 @@ from fastapi import FastAPI, HTTPException, responses
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers import figures_router, whiteboard_router, display_router
 from app.constants import LOGGER_FORMAT, LOGGER_TIME_FORMAT
-from app.dependencies.database import cal_col
+from app.dependencies.database import cal_col, user_col
 from app import utils
 
 tags_metadata = [
@@ -61,6 +61,13 @@ def dump():
     """Private endpoint solely used to dump the current contents of the database.
     Endpoint would not be public facing"""
     return {"body": list(cal_col.find({}, {"_id": 0}))}
+
+@app.get("/users")
+def get_users():
+    """Endpoint that retrieves the names of all the users in the database"""
+    # find() will return a list of all the document
+    # dictionary comprehension to convert list of single-field documents into a list of strings
+    return {"body": [user["user_id"] for user in list(user_col.find({}, {"_id": 0}))]}
 
 
 @app.post("/reset", summary="Resets the state of the database")
