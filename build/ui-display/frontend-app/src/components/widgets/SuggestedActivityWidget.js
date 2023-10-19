@@ -8,16 +8,26 @@ const weatherActivities = {
     'Clouds': 'game of Catan'
 };
 
-const Activities = ({ weatherCondition }) => {
+const weatherConditionText = {
+    'Thunderstorm': 'like there\'s a storm coming',
+    'Drizzle': 'dreary',
+    'Rain': 'rainy',
+    'Clear': 'beautifully clear',
+    'Clouds': 'cloudy'
+};
+
+
+const Activities = ({ currentCondition }) => {
     // hard code this value for now
-    if (!weatherCondition) {
-        weatherCondition = 'Clear';
+    if (!currentCondition) {
+        currentCondition = 'Clouds';
     }
-// Get the corresponding activity based on the weatherCondition
-    const activity = weatherActivities[weatherCondition] || 'movie';
+    // Get the corresponding activity based on the weatherCondition
+    const activity = weatherActivities[currentCondition] || 'movie';
+    const text = weatherConditionText[currentCondition] || 'clear';
 
     return (
-            <h2 className="SuggestedActivity-box">it's looking {weatherCondition.toLowerCase()} today, how about a {activity}?</h2>
+            <h2 className="SuggestedActivity-box">it's looking {text} today, how about a {activity}?</h2>
     );
 }
 
