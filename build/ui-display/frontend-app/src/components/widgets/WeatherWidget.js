@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from 'axios';
 
-
 class WeatherWidget extends Component {
     state = {
         temperature: null,
@@ -36,23 +35,24 @@ class WeatherWidget extends Component {
     };
 
     render() {
-        const { temperature, condition } = this.state;
+        const { temperature, icon, condition } = this.state;
 
         const weatherIcons = {
-            'Thunderstorm': '../../weather-icons/Thunderstorm.png',
-            'Drizzle': '../../weather-icons/Drizzle.png',
-            'Rain': '../../weather-icons/Rain.png',
-            'Clear': '../../weather-icons/Clear.png',
-            'Clouds': '../../weather-icons/Clouds.png'
+            'Thunderstorm': require('../../weather-icons/Thunderstorm.png'),
+            'Drizzle': require('../../weather-icons/Drizzle.png'),
+            'Rain': require('../../weather-icons/Rain.png'),
+            'Clear': require('../../weather-icons/Clear.png'),
+            'Clouds': require('../../weather-icons/Clouds.png')
         };
 
-        const currentWeatherIcon = weatherIcons[condition] || '';
+        const currentWeatherIcon = weatherIcons[condition] || `https://openweathermap.org/img/w/${icon}.png`;
 
         return (
             <div className="Weather-box">
                 <img
-                    src={currentWeatherIcon}
-                    alt={condition}
+                src={`${currentWeatherIcon}`}
+                alt={condition}
+                style={{ width: '150px', height: 'auto' }}
                 />
                 {temperature !== null && (
                     <div>
