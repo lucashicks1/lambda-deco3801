@@ -18,7 +18,7 @@ from PIL import Image
 Point = namedtuple('Point', ['X', 'Y'])
 TimeSlot = namedtuple('TimeSlot', ['top_left', 'bottom_right'])
 
-USER_NAME = "user_3"
+USER_NAME = "family"
 
 
 def main(image: Image):

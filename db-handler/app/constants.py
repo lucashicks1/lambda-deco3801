@@ -8,7 +8,7 @@ END_HOUR = 22
 END_MINUTE = 0
 
 FAMILY_NAME = 'family'
-USERS = ['user_1', 'user_2', 'user_3', 'user_4', FAMILY_NAME]
+USERS = ['Timmy', 'Jimmy', 'Kimmy', 'Timmy_Jr', FAMILY_NAME]
 DAYS = [
     'monday',
     'tuesday',
