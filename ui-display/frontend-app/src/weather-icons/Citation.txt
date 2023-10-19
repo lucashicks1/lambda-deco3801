@@ -1,0 +1,5 @@
+Zhomko, M. (n.d.). Weather icons [Digital]. https://www.figma.com/community/file/1007362387750930023/weather-icons
+
+The images in weather-icons were created by Mariana Khomko, sourced from
+https://www.figma.com/community/file/1007362387750930023/weather-icons and are 
+licensed for free use under Creative Commons (https://creativecommons.org/licenses/by/4.0/).
