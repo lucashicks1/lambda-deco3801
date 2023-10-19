@@ -29,7 +29,7 @@ function App() {
           </div>
         </div>
         <div className="SuggestedTime-box">
-          <SuggestedTimeWidget />
+          {/* <SuggestedTimeWidget /> */}
         </div>
         <div className="shared-div">
           <div className="left-widget">
@@ -40,15 +40,30 @@ function App() {
               src={require('../src/flower-icons/bee.png')}
               style={{width: '100px', height: 'auto'}}
             /> */}
+            <div className="Joke-box">
+              <h3>
+                Joke of the day:
+              </h3>
+              <div>
+                <p className="Joke-Question">
+                  What's a bee's favourite novel?
+                </p>
+              </div>
+              <div>
+                <p className="Joke-Answer">
+                  The Great Gats-bee!
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <div className="Grass-box">
         <div className="Names-box">
-          <h1>  Mum  </h1>
-          <h1>  Dad  </h1>
-          <h1>  Timmy  </h1>
-          <h1>  Sarah  </h1>
+          <h1>  user_1  </h1>
+          <h1>  user_2  </h1>
+          <h1>  user_3  </h1>
+          <h1>  user_4  </h1>
         </div>
         <div className="Names-box">
           <img src={require('../src/flower-icons/3flower.png')} />
