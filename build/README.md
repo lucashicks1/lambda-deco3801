@@ -1,30 +1,97 @@
+# Chime In
+
+<!--toc:start-->
+
+- [Build guide](#build-guide)
+  - [Environment Setup](#environment-setup)
+    - [Python Environment](#python-environment)
+    - [Database Variables](#database-variables)
+    - [Node Requirements](#node-requirements)
+  - [Build Instructions](#build-instructions)
+
+<!--toc:end-->
+
 # Build guide
+
 Please follow these instructions to run the project.
 
-## Initial Environment Setup
-Our project relies on several different libraries in order for it to function. As most of our project is written in Python, there is an [`environment.yaml`](https://github.com/lucashicks1/lambda-deco3801/blob/main/environment.yaml) file that has been created, allowing you to create your own conda virtual environment. You can create and activate this environment with the following:
+## Environment Setup
 
-```
+### Python Environment
+
+Our project relies on different python libraries in order for it to
+function. To make setup easier, we have included an [`environment.yaml`](https://github.com/lucashicks1/lambda-deco3801/blob/main/environment.yaml)
+file. This will allow you to create your own miniconda virtual
+environment. We recommend you look into [their installation instructions](https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html).
+
+You can create and activate this environment with the following:
+
+```sh
 conda env create -f environment.yaml
 conda activate lambda-env
 ```
-Or you can create your own environment and install the packages with
+
+Or you can create your own environment and install the packages with your
+preferred python venv manager by installing the following libraries:
 
 ```
-conda create -n your_env_name
-conda activate your_env_name
-conda install numpy pillow pytesseract matplotlib pymongo requests
-conda install -c conda-forge fastapi pydantic uvicorn-standard
-pip install opencv-python-headless
+numpy >= 1.26.0
+pillow >= 10.0.1
+pytesseract >= 0.3.10
+matplotlib >= 3.7.2
+pymongo >= 4.5.0
+requests >= 2.31.0
+fastapi >= 0.103.2
+pydantic >= 2.4.2
+uvicorn-standard >= 0.23.2
+opencv-python-headless >= 4.8.1.78
 ```
 
-Once this environment is setup, all the needed dependencies for our python components should be installed.
+### Database Variables
 
-## Build Instructions for each project component
-1. [Database Handler](../build/db-handler/README.md)
-2. [Image Recognition](../build/vision/README.md)
-3. [Display](../build/ui-display/frontend-app/README.md)
-4. [Microcontroller](../build/microcontroller/README.md)
-5. [Microcontroller Communication](../build/figurines/README.md)
+To then connect to the database you will need to set the environment variables for
+the username and password as
 
-### If any further details are required, please contact a member of Team \Lambda
+```sh
+export DB_USER=<database-username>
+export DB_PASS=<database-password>
+```
+
+> [!NOTE]
+> If you need access to the server that we are using please message Lucas Hicks
+
+### Node Requirements
+
+We recommend you install [Node Version Manager(NVM)](https://github.com/nvm-sh/nvm)
+to maintain a correct node version. Once NVM is installed we can then run
+
+```sh
+nvm install lts
+nvm use lts
+```
+
+If you don't wish to use NVM then use your chosen package manager to install [Node LTS](https://nodejs.org/en/download).
+
+Then we can install our node packages with:
+
+```
+npm install react --save
+npm install -g serve
+```
+
+This will install all of our node requirements so that you can run the display app.
+
+## Build Instructions
+
+Due to the number of components in this project. It is best to go to the individual
+READMEs for each component individual component. For your convenience we have listed
+these below:
+
+- [Database Handler](../build/db-handler/README.md)
+- [Image Recognition](../build/vision/README.md)
+- [Display](../build/ui-display/frontend-app/README.md)
+- [Microcontroller](../build/microcontroller/README.md)
+- [Microcontroller Communication](../build/figurines/README.md)
+
+> [!IMPORTANT]
+> If any further details are required, please contact a member of Team \\Lambda
