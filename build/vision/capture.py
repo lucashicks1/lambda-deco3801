@@ -151,8 +151,10 @@ def take_image(frame: np.ndarray, motion: MotionInfo):
 
 if __name__ == '__main__':
     cv2.destroyAllWindows()
+    # Path to where we are saving pictures taken for processing
     path = './images/capture.jpg'
     path = os.path.abspath(path)
+    # Path to the processing script
     vision_path = './reader.py'
     vision_path = os.path.abspath(vision_path)
 
