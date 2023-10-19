@@ -1,21 +1,10 @@
 # Chime In
 
-<!--toc:start-->
-
-- [Build guide](#build-guide)
-  - [Environment Setup](#environment-setup)
-    - [Python Environment](#python-environment)
-    - [Database Variables](#database-variables)
-    - [Node Requirements](#node-requirements)
-  - [Build Instructions](#build-instructions)
-
-<!--toc:end-->
-
 # Build guide
 
 Please follow these instructions to run the project.
 
-## Environment Setup
+## Setup and requirements
 
 ### Python Environment
 
@@ -83,6 +72,8 @@ This will install all of our node requirements so that you can run the display a
 
 ## Build Instructions
 
+### Specifics
+
 Due to the number of components in this project. It is best to go to the individual
 READMEs for each component individual component. For your convenience we have listed
 these below:
@@ -92,6 +83,26 @@ these below:
 - [Display](./ui-display/frontend-app/README.md)
 - [Microcontroller](./microcontroller/README.md)
 - [Microcontroller Communication](./figurines/README.md)
+
+### Overall
+
+Generally for running this program however, you should first set up a camera so that it
+is viewing the whiteboard calendar. Ensure the image taken and the calendar itself are as
+level as possible. Then run the [calibration script](./vision/README.md#setup-and-calibration).
+Next you will need multiple terminals as we will run many server based and constant up apps.
+These will run as (in the following order):
+
+1. The [database](./db-handler/README.md#running-the-api) 
+1. The [display](./ui-display/README.md#run)
+1. The [microcontroller communications](./figurines/README.md) (After connecting the microcontroller)
+1. The [input capture](./vision/README.md#Running-capture)
+
+Then everything will be running and communicating with each other.
+
+# Developers
+
+Developed by Alex Viller, Lucas Hicks, David Jeong, Dylan Fleming, Maya Baxter, and Ali Laherty at the University of Queensland.
+Thanks to Rostislav Gusev and the rest of University of Queenslands DECO3801 teaching team for all the support.
 
 > [!IMPORTANT]
 > If any further details are required, please contact a member of Team \\Lambda

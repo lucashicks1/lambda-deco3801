@@ -18,7 +18,7 @@ from PIL import Image
 Point = namedtuple('Point', ['X', 'Y'])
 TimeSlot = namedtuple('TimeSlot', ['top_left', 'bottom_right'])
 
-USER_NAME = "family"
+USER_NAME = "user_3"
 
 
 def main(image: Image):
@@ -66,11 +66,11 @@ def main(image: Image):
     request_body = {"body": coloured_time_slots}
     try:
         requests.post(f"http://127.0.0.1:8000/whiteboard/{USER_NAME}", json=request_body, timeout=30)
+        with open('coloured_time_slots.json', 'w') as json_file:
+            json.dump(coloured_time_slots, json_file, indent=4)
     except requests.exceptions.ConnectionError as e:
         print(f"Error making HTTP request - {e}")
 
-    # with open('coloured_time_slots.json', 'w') as json_file:
-    #     json.dump(coloured_time_slots, json_file, indent=4)
 
 
 def get_info(time_slot_array: np.ndarray) -> (bool, [str], str):
@@ -125,7 +125,7 @@ def get_info(time_slot_array: np.ndarray) -> (bool, [str], str):
     # threshold this for how many pixels need to be coloured to think important
     is_blue = pcent_blue >= 2
     is_red = pcent_red >= 2
-    is_black = pcent_black >= 5
+    is_black = pcent_black >= 20
 
     is_coloured = is_blue or is_red or is_black
     colour = []
@@ -135,7 +135,7 @@ def get_info(time_slot_array: np.ndarray) -> (bool, [str], str):
         colour.append('blue')
     if pcent_red >= 2:
         colour.append('red')
-    if pcent_black >= 18:
+    if pcent_black >= 20:
         colour.append('black')
 
     ocr_result = pytesseract.image_to_string(output_black)
