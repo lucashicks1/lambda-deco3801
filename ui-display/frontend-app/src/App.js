@@ -56,10 +56,10 @@ function App() {
       </div>
       <div className="Grass-box">
         <div className="Names-box">
-          <h1>  user_1  </h1>
-          <h1>  user_2  </h1>
-          <h1>  user_3  </h1>
-          <h1>  user_4  </h1>
+          <h1>  Timmy  </h1>
+          <h1>  Jimmy  </h1>
+          <h1>  Kimmy  </h1>
+          <h1>  Timmy Jr  </h1>
         </div>
         <div className="Names-box">
           <img src={require('../src/flower-icons/3flower.png')} />
@@ -67,7 +67,6 @@ function App() {
           <img src={require('../src/flower-icons/18flower.png')} />
           <img src={require('../src/flower-icons/30flower.png')} />
         </div>
-
       </div>
     </div>
   );
