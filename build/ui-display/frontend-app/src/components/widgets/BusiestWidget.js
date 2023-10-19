@@ -5,11 +5,11 @@ export default function BusiestWidget() {
     const [busiest, setBusiest] = useState("");
     const [loading, setLoading] = useState(true);
 
-    const baseURL = 'https://localhost:3000/display/';
+    const baseURL = 'https://localhost:8000/display/';
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch("http://localhost:3000/display/user-totals");
+            const response = await fetch("http://localhost:8000/display/user-totals");
             const data = await response.json();
             if (data) {
                 const times = Object.values(data);

@@ -3,27 +3,13 @@ import DateWidget from './components/widgets/DateWidget';
 import ClockWidget from './components/widgets/ClockWidget';
 import WeatherWidget from './components/widgets/WeatherWidget';
 import SuggestedActivityWidget from './components/widgets/SuggestedActivityWidget';
+import './font.css';
 import BusiestWidget from './components/widgets/BusiestWidget';
 import SuggestedTimeWidget from './components/widgets/SuggestedTimeWidget';
 
 function App() {
+
   return (
-    // <div className="App">
-    //   <header className="App-header">
-    //     <div className="Clock-box">
-    //     <ClockWidget />
-    //     </div>
-    //     <DateWidget />
-    //   </header>
-    //   <div className="Sky-box">
-    //     <BusiestWidget />
-    //     <SuggestedTimeWidget />
-    //     here's the sky
-    //   </div>
-    //   <div className='Grass-box'>
-    //       here's the grass :D
-    //   </div>
-    // </div>
     <div className="App">
       <div className="Sky-box">
         <div>
@@ -43,11 +29,34 @@ function App() {
           </div>
         </div>
         <div className="SuggestedTime-box">
-          {/* <SuggestedTimeWidget /> */}
+          <SuggestedTimeWidget />
+        </div>
+        <div className="shared-div">
+          <div className="left-widget">
+            <BusiestWidget />
+          </div>
+          <div className="right-widget">
+            {/* <img
+              src={require('../src/flower-icons/bee.png')}
+              style={{width: '100px', height: 'auto'}}
+            /> */}
+          </div>
         </div>
       </div>
       <div className="Grass-box">
-        {/* grass here */}
+        <div className="Names-box">
+          <h1>  Mum  </h1>
+          <h1>  Dad  </h1>
+          <h1>  Timmy  </h1>
+          <h1>  Sarah  </h1>
+        </div>
+        <div className="Names-box">
+          <img src={require('../src/flower-icons/3flower.png')} />
+          <img src={require('../src/flower-icons/15flower.png')} />
+          <img src={require('../src/flower-icons/18flower.png')} />
+          <img src={require('../src/flower-icons/30flower.png')} />
+        </div>
+
       </div>
     </div>
   );

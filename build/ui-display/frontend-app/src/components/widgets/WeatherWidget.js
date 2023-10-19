@@ -37,20 +37,27 @@ class WeatherWidget extends Component {
     render() {
         const { temperature, icon, condition } = this.state;
 
+        const weatherIcons = {
+            'Thunderstorm': require('../../weather-icons/Thunderstorm.png'),
+            'Drizzle': require('../../weather-icons/Drizzle.png'),
+            'Rain': require('../../weather-icons/Rain.png'),
+            'Clear': require('../../weather-icons/Clear.png'),
+            'Clouds': require('../../weather-icons/Clouds.png')
+        };
+
+        const currentWeatherIcon = weatherIcons[condition] || `https://openweathermap.org/img/w/${icon}.png`;
+
         return (
-            <div>
+            <div className="Weather-box">
+                <img
+                src={`${currentWeatherIcon}`}
+                alt={condition}
+                style={{ width: '150px', height: 'auto' }}
+                />
                 {temperature !== null && (
                     <div>
-                        {icon && (
-                            <img
-                                src={`https://openweathermap.org/img/w/${icon}.png`}
-                                alt="Weather Icon"
-                            />
-                        )}
-                        <h1>{temperature}°C</h1>
-                        <h1>
-                            {condition}
-                        </h1>
+                        <h2>{temperature}°C</h2>
+                        <h2>{condition.toLowerCase()}</h2>
                     </div>
                 )}
             </div>

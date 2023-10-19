@@ -1,29 +1,3 @@
-// import React from "react";
-
-// export default function ClockWidget() { 
-//     const Activities = ({ weatherCondition }) => {
-
-//         const weatherActivities = {
-//             'Thunderstorm': 'movie marathon',
-//             'Drizzle': 'bake off',
-//             'Rain': 'trip to the library',
-//             'Clear': 'picnic',
-//             'Clouds': 'game of Catan'
-//         };
-        
-//         const weather = 'Clear';
-//         const activity = weatherActivities[weather] || 'movie';
-//     }
-
-
-    
-//         return (
-//             <div>
-//                 <h1>It's looking {weatherCondition} today, how about a {activity}?</h1>
-//             </div>
-//         );
-// }
-
 import React from 'react';
 
 const weatherActivities = {
@@ -34,18 +8,26 @@ const weatherActivities = {
     'Clouds': 'game of Catan'
 };
 
-const Activities = ({ weatherCondition }) => {
+const weatherConditionText = {
+    'Thunderstorm': 'like there\'s a storm coming',
+    'Drizzle': 'dreary',
+    'Rain': 'rainy',
+    'Clear': 'beautifully clear',
+    'Clouds': 'cloudy'
+};
+
+
+const Activities = ({ currentCondition }) => {
     // hard code this value for now
-    if (!weatherCondition) {
-        weatherCondition = 'Clear';
+    if (!currentCondition) {
+        currentCondition = 'Clouds';
     }
-// Get the corresponding activity based on the weatherCondition
-    const activity = weatherActivities[weatherCondition] || 'movie';
+    // Get the corresponding activity based on the weatherCondition
+    const activity = weatherActivities[currentCondition] || 'movie';
+    const text = weatherConditionText[currentCondition] || 'clear';
 
     return (
-        <div>
-            <h1>It's looking {weatherCondition} today, how about a {activity}?</h1>
-        </div>
+            <h2 className="SuggestedActivity-box">it's looking {text} today, how about a {activity}?</h2>
     );
 }
 
