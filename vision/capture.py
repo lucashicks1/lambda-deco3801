@@ -24,6 +24,7 @@ class MotionInfo:
     This class is used for containing the information about when motion has
     happened etc. Mostly used as a concise way of passing information around
     """
+
     noMotionTime: datetime.timedelta
     noMotionTimeStamp: datetime.datetime
     avg: np.ndarray
@@ -32,6 +33,7 @@ class MotionInfo:
     t: bool
 
 
+# parser setup to read command line optional arguments
 parser = ArgumentParser(description='Capture data, with optional flags')
 parser.add_argument(
     '-v', '--visualise', action='store_true', help='Enable visualiser mode'
@@ -80,34 +82,41 @@ def detect_motion(
     timestamp = datetime.datetime.now()
     if frame is None:
         # implies frame get error. Need to break out of program
+        print('No frame error: Exitting')
         return False
 
+    # convert our image to greyscale and compute a gaussian blue
     grey = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     grey = cv2.GaussianBlur(grey, (21, 21), 0)
 
+    # Generage an average value of grey if none exists first
     if motion.avg is None:
         motion.avg = grey.copy().astype('float')
         return motion
 
+    # calculate the difference between this image and the last one
     cv2.accumulateWeighted(grey, motion.avg, 0.5)
     frameDelta = cv2.absdiff(grey, cv2.convertScaleAbs(motion.avg))
     thresh = cv2.threshold(frameDelta, 15, 255, cv2.THRESH_BINARY)[1]
     thresh = cv2.dilate(thresh, None, iterations=2)
 
+    # find all contours from our image
     (contours, *_) = cv2.findContours(
         thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
     )
 
     for c in contours:
+        # Don't care about contour boxes with area < 500
         if cv2.contourArea(c) < 500:
             continue
         (x, y, w, h) = cv2.boundingRect(c)
         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
         motion.noMotionTimeStamp = datetime.datetime.now()
         motion.thereWasMotion = True
+        # Spots motion as being true. lets boss program know
 
     motion.noMotionTime = timestamp - motion.noMotionTimeStamp
-    if (
+    if (  # delay by 1 second in case movement starts again soon after
         motion.noMotionTime > datetime.timedelta(seconds=1)
         and motion.thereWasMotion is True
     ):
@@ -134,6 +143,7 @@ def take_image(frame: np.ndarray, motion: MotionInfo):
     :param frame: the ndarray created by reading the current frame of the camera
     :param motion: the MotionInfo object with important information
     """
+    # rotate the image based on angle
     if rotation_angle == 90:
         frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
     elif rotation_angle == 180:
@@ -141,8 +151,10 @@ def take_image(frame: np.ndarray, motion: MotionInfo):
     elif rotation_angle == 270:
         frame = cv2.rotate(frame, cv2.ROTATE_90_COUNTERCLOCKWISE)
     cv2.imwrite(path, frame)
+    # resetting motion values to continue running
     motion.thereWasMotion = False
     motion.noMotionTimeStamp = datetime.datetime.now()
+    # runs the reader script using current python environment and path to just taken image
     subprocess.run(f'{python_path} {vision_path} {path}', shell=True)
     # if time option: print time it takes to run reader script
     if motion.t:
