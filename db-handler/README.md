@@ -75,7 +75,7 @@ To run the API, ensure that you are in the [`db-handler`](https://github.com/luc
 
 ### Overview
 
-Several endpoints are exposed by the API allowing for all systems to use the data stored in the database.' A [`openapi.yaml`](./openapi.yaml) file has been created which is an OpenAPI spec outlining each of the endpoints available in the API. Having an API spec is especially important for future implementations as this specification file can be uploaded to an API gateway and request body validation can be done before the request even gets to the individual API. The endpoints available in the API can be categorised into the following categories:
+Several endpoints are exposed by the API allowing for all systems to use the data stored in the database. A [`openapi.yaml`](./openapi.yaml) file has been created which is an OpenAPI spec outlining each of the endpoints available in the API. Having an API spec is especially important for future implementations as this specification file can be uploaded to an API gateway and request body validation can be done before the request even gets to the individual API. The endpoints available in the API can be categorised into the following categories:
 
 ## Database
 
