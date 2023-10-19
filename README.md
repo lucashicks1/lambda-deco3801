@@ -1,7 +1,5 @@
 # Chime In
 
-# Build guide
-
 Please follow these instructions to run the project.
 
 ## Setup and requirements
@@ -23,18 +21,16 @@ conda activate lambda-env
 Or you can create your own environment and install the packages with your
 preferred python venv manager by installing the following libraries:
 
-```
-numpy >= 1.26.0
-pillow >= 10.0.1
-pytesseract >= 0.3.10
-matplotlib >= 3.7.2
-pymongo >= 4.5.0
-requests >= 2.31.0
-fastapi >= 0.103.2
-pydantic >= 2.4.2
-uvicorn-standard >= 0.23.2
-opencv-python-headless >= 4.8.1.78
-```
+	numpy >= 1.26.0
+	pillow >= 10.0.1
+	pytesseract >= 0.3.10
+	matplotlib >= 3.7.2
+	pymongo >= 4.5.0
+	requests >= 2.31.0
+	fastapi >= 0.103.2
+	pydantic >= 2.4.2
+	uvicorn-standard >= 0.23.2
+	opencv-python-headless >= 4.8.1.78
 
 ### Database Variables
 
@@ -58,8 +54,8 @@ to maintain a correct node version. Once NVM is installed we can then run
 nvm install latest
 nvm use latest
 ```
-
-If you don't wish to use NVM then use your chosen package manager to install [Node Latest](https://nodejs.org/en/download).
+> [!NOTE]
+> If you don't wish to use NVM then use your chosen package manager to install [Node Latest](https://nodejs.org/en/download).
 
 Then we can install the required node packages with:
 
@@ -72,7 +68,7 @@ This will install all of our node requirements so that you can run the display a
 
 ## Build Instructions
 
-Generally for running this program however, you should first set up a camera so that it
+Generally for running this program, you should first set up a camera so that it
 is viewing the whiteboard calendar. Ensure the image taken and the calendar itself are as
 level as possible. Then run the [calibration script](./vision/README.md#setup-and-calibration).
 Next you will need multiple terminals as we will run many server based and constant up apps.
