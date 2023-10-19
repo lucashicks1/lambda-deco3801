@@ -74,12 +74,9 @@ export default function SuggestedTimeWidget() {
                 setLoading(false);
             }
         };
-        return () => {
-            clearInterval(interval);
-        }
 
-       // fetchData();
-    }); // Empty dependency array means this effect runs once when component mounts
+       fetchData();
+    }, []); // Empty dependency array means this effect runs once when component mounts
 
 
     return (

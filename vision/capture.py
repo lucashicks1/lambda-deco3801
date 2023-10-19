@@ -108,7 +108,7 @@ def detect_motion(
 
     motion.noMotionTime = timestamp - motion.noMotionTimeStamp
     if (
-        motion.noMotionTime > datetime.timedelta(seconds=3)
+        motion.noMotionTime > datetime.timedelta(seconds=1)
         and motion.thereWasMotion is True
     ):
         take_image(frame, motion)
