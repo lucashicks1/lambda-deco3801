@@ -66,11 +66,11 @@ We recommend you install [Node Version Manager(NVM)](https://github.com/nvm-sh/n
 to maintain a correct node version. Once NVM is installed we can then run
 
 ```sh
-nvm install lts
-nvm use lts
+nvm install latest
+nvm use latest
 ```
 
-If you don't wish to use NVM then use your chosen package manager to install [Node LTS](https://nodejs.org/en/download).
+If you don't wish to use NVM then use your chosen package manager to install [Node Latest](https://nodejs.org/en/download).
 
 Then we can install our node packages with:
 
@@ -87,11 +87,11 @@ Due to the number of components in this project. It is best to go to the individ
 READMEs for each component individual component. For your convenience we have listed
 these below:
 
-- [Database Handler](../build/db-handler/README.md)
-- [Image Recognition](../build/vision/README.md)
-- [Display](../build/ui-display/frontend-app/README.md)
-- [Microcontroller](../build/microcontroller/README.md)
-- [Microcontroller Communication](../build/figurines/README.md)
+- [Database Handler](./db-handler/README.md)
+- [Image Recognition](./vision/README.md)
+- [Display](./ui-display/frontend-app/README.md)
+- [Microcontroller](./microcontroller/README.md)
+- [Microcontroller Communication](./figurines/README.md)
 
 > [!IMPORTANT]
 > If any further details are required, please contact a member of Team \\Lambda
