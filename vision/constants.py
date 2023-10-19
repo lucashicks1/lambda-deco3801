@@ -1,7 +1,9 @@
 import numpy as np
 
+# After activating your python environment. Please replace with result of which python
 python_path = '/Users/alexviller/miniconda3/envs/lambda-env/bin/python'
 
+# The maximum and minimum RGB values to be considered each colour for thresholding
 colour_thresholds = {
     'red_min': np.array([100, 0, 0]),
     'red_max': np.array([255, 100, 100]),
