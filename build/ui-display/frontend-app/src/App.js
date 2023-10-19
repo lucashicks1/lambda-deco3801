@@ -8,23 +8,8 @@ import BusiestWidget from './components/widgets/BusiestWidget';
 import SuggestedTimeWidget from './components/widgets/SuggestedTimeWidget';
 
 function App() {
+
   return (
-    // <div className="App">
-    //   <header className="App-header">
-    //     <div className="Clock-box">
-    //     <ClockWidget />
-    //     </div>
-    //     <DateWidget />
-    //   </header>
-    //   <div className="Sky-box">
-    //     <BusiestWidget />
-    //     <SuggestedTimeWidget />
-    //     here's the sky
-    //   </div>
-    //   <div className='Grass-box'>
-    //       here's the grass :D
-    //   </div>
-    // </div>
     <div className="App">
       <div className="Sky-box">
         <div>
@@ -44,11 +29,16 @@ function App() {
           </div>
         </div>
         <div className="SuggestedTime-box">
-          {/* <SuggestedTimeWidget /> */}
+          <SuggestedTimeWidget />
+        </div>
+        <div className="shared-div">
+          <div className="left-widget">
+            <BusiestWidget />
+          </div>
         </div>
       </div>
       <div className="Grass-box">
-        {/* grass here */}
+      
       </div>
     </div>
   );
