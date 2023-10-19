@@ -50,7 +50,6 @@ export default function SuggestedTimeWidget() {
     const [loading, setLoading] = useState(true);
     const baseURL = 'https://localhost:8000/display/';
 
-
     useEffect(() => {
         /* DEFAULT BEHAVIOUR: GET SINGLE RECOMMENDATION OF NEXT NEAREST TIME */
         const fetchData = async () => {
@@ -78,7 +77,7 @@ export default function SuggestedTimeWidget() {
 
 
     return (
-        <div className="SuggestedTime">
+        <div className="SuggestedTime-box">
             <header>
                 {loading ?
                     <p>Oops! Check back in a sec.</p> :
