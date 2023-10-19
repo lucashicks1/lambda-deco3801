@@ -87,6 +87,17 @@
 
 h1 {
   margin-bottom: 0px;
+  border-radius: 20px;
+  background-color: var(--cream);
+  padding: 10px;
+}
+
+.Names-box {
+  font-family: Nightingale;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 20px;
+  color: var(--darkgrey);
 }
 
 :root {

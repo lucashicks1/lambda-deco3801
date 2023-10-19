@@ -35,10 +35,28 @@ function App() {
           <div className="left-widget">
             <BusiestWidget />
           </div>
+          <div className="right-widget">
+            {/* <img
+              src={require('../src/flower-icons/bee.png')}
+              style={{width: '100px', height: 'auto'}}
+            /> */}
+          </div>
         </div>
       </div>
       <div className="Grass-box">
-      
+        <div className="Names-box">
+          <h1>  Mum  </h1>
+          <h1>  Dad  </h1>
+          <h1>  Timmy  </h1>
+          <h1>  Sarah  </h1>
+        </div>
+        <div className="Names-box">
+          <img src={require('../src/flower-icons/3flower.png')} />
+          <img src={require('../src/flower-icons/15flower.png')} />
+          <img src={require('../src/flower-icons/18flower.png')} />
+          <img src={require('../src/flower-icons/30flower.png')} />
+        </div>
+
       </div>
     </div>
   );
