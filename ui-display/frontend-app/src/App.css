@@ -59,6 +59,7 @@
   justify-content: center;
   align-items: center;
   padding-bottom: 0px;
+  font-family: Nightingale;
   /* border: 1px solid #454545; */
 }
 
@@ -92,12 +93,34 @@ h1 {
   padding: 10px;
 }
 
+h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .Names-box {
   font-family: Nightingale;
   display: flex;
   justify-content: space-evenly;
   font-size: 20px;
   color: var(--darkgrey);
+}
+
+.Joke-Question {
+  font-family: Nightingale;
+  font-size: 15px;
+  justify-content: left;
+}
+
+.Joke-Answer {
+  font-family: Nightingale;
+  font-size: 15px;
+  justify-content: right;
+}
+
+.Joke-box {
+  display: flex;
 }
 
 :root {
