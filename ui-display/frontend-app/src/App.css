@@ -97,6 +97,11 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: Nightingale;
+}
+
+p {
+  font-family: Nightingale;
 }
 
 .Names-box {
