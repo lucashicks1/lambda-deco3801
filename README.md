@@ -54,12 +54,13 @@ to maintain a correct node version. Once NVM is installed we can then run
 nvm install latest
 nvm use latest
 ```
+
 > [!NOTE]
 > If you don't wish to use NVM then use your chosen package manager to install [Node Latest](https://nodejs.org/en/download).
 
 Then we can install the required node packages with:
 
-```
+```sh
 npm install react --save
 npm install -g serve
 ```
@@ -70,14 +71,14 @@ This will install all of our node requirements so that you can run the display a
 
 Generally for running this program, you should first set up a camera so that it
 is viewing the whiteboard calendar. Ensure the image taken and the calendar itself are as
-level as possible. Then run the [calibration script](./vision/README.md#setup-and-calibration).
+level as possible. Then run the [calibration script](https://github.com/lucashicks1/lambda-deco3801/blob/main/vision/README.md#setup-and-calibration).
 Next you will need multiple terminals as we will run many server based and constant up apps.
 These will run as (in the following order):
 
-1. The [database](./db-handler/README.md#running-the-api) 
-1. The [display](./ui-display/README.md#run)
-1. The [microcontroller communications](./figurines/README.md) (After connecting the microcontroller)
-1. The [input capture](./vision/README.md#Running-capture)
+1. The [database](https://github.com/lucashicks1/lambda-deco3801/blob/main/db-handler/README.md#running-the-api) 
+1. The [display](https://github.com/lucashicks1/lambda-deco3801/blob/main//ui-display/README.md#run)
+1. The [microcontroller communications](https://github.com/lucashicks1/lambda-deco3801/blob/main/figurines/README.md) (After connecting the microcontroller)
+1. The [input capture](https://github.com/lucashicks1/lambda-deco3801/blob/main/vision/README.md#Running-capture)
 
 Then everything will be running and communicating with each other.
 
