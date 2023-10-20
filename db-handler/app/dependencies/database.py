@@ -17,7 +17,6 @@ logging.getLogger(__name__).setLevel(logging.DEBUG)
 # Grab db details from environment
 DB_USER = environ.get('DB_USER')
 DB_PASS = environ.get('DB_PASS')
-DB_PASS = environ.get('DB_PASS11')
 
 # Information needed for connecting to local db
 DB_HOST = 'localhost'
