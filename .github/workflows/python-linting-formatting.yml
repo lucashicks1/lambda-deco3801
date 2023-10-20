@@ -15,9 +15,12 @@ jobs:
       with:
         python-version: '3.11'
     - name: Install and run formatter and linter
+    # 1. Configures python path and creates virtual environment
+    # 2. Installs linter and formatter
+    # 3. Lints and format checks each python component
       run: |
         export PYTHONPATH=$GITHUB_PATH
-        python -m venv venv
+        python -m venv venv 
         source ./venv/bin/activate
         pip install --upgrade pip
         pip install blue
