@@ -75,7 +75,7 @@ export default function SuggestedTimeWidget() {
             }
         };
 
-       fetchData();
+        fetchData();
     }, []); // Empty dependency array means this effect runs once when component mounts
 
 
