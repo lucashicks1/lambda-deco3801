@@ -10,7 +10,11 @@
 ## Otherwise
 
 1. Ensure you have the `lambda-env` conda environment you have from [The base readme](../README.md).
-2. Otherwise, you can install the dependencies needed for this script by running `pip install -r requirements.txt`
+2. Otherwise, you can install the dependencies needed for this script by running the following:
+```sh
+pip install -r requirements.txt
+```
+
 3. Then you can start the script after connecting the Seeduino Xiao to a serial port with a
 USB-C to USB-A cable. Starting the script can be done with
 
