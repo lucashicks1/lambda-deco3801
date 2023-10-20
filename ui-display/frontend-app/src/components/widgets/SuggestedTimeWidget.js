@@ -3,27 +3,7 @@ import * as Constants from '../Constants';
 import './Widgets.css';
 
 export default function SuggestedTimeWidget() {
-    
-    /* SETTINGS FOR CONFIG:
-    - how many times to suggest if there's more than 1 appropriate?
-    - what to display if there are none appropriate?
-        - SWITCH to next best times instead?
-        - or explicitly say there's no good times and direct to DIFFERENT widget?
-    - when there's multiple matches, what do we rank by?
-        - next nearest time?
 
-    - if the week is nearly over, do you treat entries like they wrap to the next
-    week coming (e.g. on a friday, stuff written on monday becomes NEXT monday),
-    or just cut the week off after the remaining fri, sat, sun?
-
-    - day the week starts? (remember to update Constants file accordingly.
-        if this is going to change dynamically maybe move that dictionary 
-        to a Utilities file instead).
-
-    - should we report how long eveyrbody is free for, i.e. does it span multiple
-    time slots? or should they just be able to set the minimum number of consecutive
-    time slots required for it to "count"?
-    */
     const currentToTimeSlotNum = () => {
         const now = new Date();
         const hour_slot = now.getHours() * 60 / Constants.TIMESLOT_LEN;
@@ -44,7 +24,6 @@ export default function SuggestedTimeWidget() {
                 timeParts[1])).toLocaleTimeString('en-AU', timeOptions));
         return prettyDate;
     }
-
 
     const [suggestedTime, setSuggestedTime] = useState("");
     const [loading, setLoading] = useState(true);

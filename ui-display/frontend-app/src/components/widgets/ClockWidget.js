@@ -7,11 +7,12 @@ export default function ClockWidget() {
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
+    // refresh every second
     const interval = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
 
-    // Clean up the interval on component unmount
+    // Reset the interval on component unmount
     return () => clearInterval(interval);
   }, []);
 
