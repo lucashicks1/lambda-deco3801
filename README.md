@@ -1,4 +1,4 @@
-# Chime In
+# ChimeIn
 
 # Build guide
 
