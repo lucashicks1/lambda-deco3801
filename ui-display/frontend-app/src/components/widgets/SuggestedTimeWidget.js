@@ -44,7 +44,7 @@ export default function SuggestedTimeWidget() {
         const interval = setInterval(()=>{
             fetchData();
             //fetchTime();
-        },500);
+        },5000);
         /* DEFAULT BEHAVIOUR: GET SINGLE RECOMMENDATION OF NEXT NEAREST TIME */
         const fetchData = async () => {
             console.log('data fetched');
