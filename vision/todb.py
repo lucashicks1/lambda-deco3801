@@ -1,7 +1,7 @@
 import requests
 import json
 
-users = ["Timmy", "Kimmy", "Jimmy", "Timmy_Jr", "family"]
+users = ["Timmy", "Kimmy", "Jimmy", "Timmy_Jr"]
 
 for user in users:
     with open(f'./premade/{user}.json', 'r') as request_body:
