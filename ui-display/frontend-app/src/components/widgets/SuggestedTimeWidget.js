@@ -3,9 +3,14 @@ import * as Constants from '../Constants';
 import './Widgets.css';
 
 export default function SuggestedTimeWidget() {
+    function addSeconds(date, seconds) {
+        date.setSeconds(date.getSeconds() + seconds);
+        return date;
+    }
 
     const currentToTimeSlotNum = () => {
-        const now = new Date();
+        const trueNow = new Date();
+        const now = addSeconds(trueNow, Constants.TIME_DELTA);
         console.log("now:", now);
         const hour_slot = ((now.getHours() * 60) / Constants.TIMESLOT_LEN) - (5 * 60 / Constants.TIMESLOT_LEN);
         console.log("hour", hour_slot);
@@ -21,14 +26,16 @@ export default function SuggestedTimeWidget() {
             hour12: true
         };
         const timeParts = time.split(":");
+        const trueNow = new Date();
         const prettyDate = (day.charAt(0).toUpperCase() 
             + day.slice(1)) + " " 
-            + (new Date(new Date().setHours(timeParts[0], 
+            + (new Date(addSeconds(trueNow, Constants.TIME_DELTA).setHours(timeParts[0], 
                 timeParts[1])).toLocaleTimeString('en-AU', timeOptions));
         return prettyDate;
     }
 
     const [suggestedTime, setSuggestedTime] = useState("");
+    const [timeDelta, setTimeDelta] = useState(0);
     const [loading, setLoading] = useState(true);
     const baseURL = 'https://localhost:8000/display/';
 
@@ -36,7 +43,8 @@ export default function SuggestedTimeWidget() {
     useEffect(() => {
         const interval = setInterval(()=>{
             fetchData();
-        },5000);
+            //fetchTime();
+        },500);
         /* DEFAULT BEHAVIOUR: GET SINGLE RECOMMENDATION OF NEXT NEAREST TIME */
         const fetchData = async () => {
             console.log('data fetched');
@@ -46,7 +54,8 @@ export default function SuggestedTimeWidget() {
                 const timeSlotsAllWeek = Array.from(data.body);
                 // filter out any days already passed
                 // TODO what do we do when the week is nearly over?
-                const dayName = Constants.DAYS[new Date().getDay()];
+                const trueNow = new Date();
+                const dayName = Constants.DAYS[addSeconds(trueNow, Constants.TIME_DELTA).getDay()];
                 console.log(dayName);
                 console.log(Constants.DAY_POSITIONS[dayName]);
                 console.log("today:", currentToTimeSlotNum());
@@ -60,6 +69,19 @@ export default function SuggestedTimeWidget() {
                 setLoading(false);
             }
         };
+
+        /*
+        const fetchTime = async () => {
+            const time = await fetch("../../../time_change.txt");
+            const data = time;
+
+            if (data) {
+                const delta = data.text();
+                console.log("delta", delta);
+                setTimeDelta(delta);
+            }
+
+        }*/
 
         return () => clearInterval(interval);
 

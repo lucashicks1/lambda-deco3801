@@ -1,3 +1,4 @@
+export const TIME_DELTA = 0;
 export const TIMESLOT_LEN = 30;
 export const FAMILY_NAME = "family";
 export const USERS = ["user_1", "user_2", "user_3", "user_4", FAMILY_NAME];
