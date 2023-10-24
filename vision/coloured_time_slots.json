@@ -7,6 +7,18 @@
     },
     {
         "day": "wednesday",
+        "time_slot": 9,
+        "data": "TEST",
+        "colour": "black"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 10,
+        "data": "TEST",
+        "colour": "black"
+    },
+    {
+        "day": "wednesday",
         "time_slot": 12,
         "data": "",
         "colour": "red"
