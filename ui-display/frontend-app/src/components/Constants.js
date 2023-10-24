@@ -1,4 +1,4 @@
-export const TIMESLOT_LEN = 15;
+export const TIMESLOT_LEN = 30;
 export const FAMILY_NAME = "family";
 export const USERS = ["user_1", "user_2", "user_3", "user_4", FAMILY_NAME];
 export const DAYS = ["sunday", "monday", "tuesday", "wednesday", 
