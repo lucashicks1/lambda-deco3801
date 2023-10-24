@@ -1,14 +1,10 @@
-REAL_START = 17
-REAL_END = 20
-FAKE_START = 5
-FAKE_END = 22.5
-
-def in_minutes(hours):
-    return(hours * 60)
-
 if __name__ == "__main__":
-    real_length = in_minutes(REAL_END) - in_minutes(REAL_START)
-    fake_length = in_minutes(FAKE_END) - in_minutes(FAKE_START)
+    time_now = input('what time is it now (hh:mm): ').split(':')
+    time_new = input('what time should it be (hh:mm): ').split(':')
 
-    minutes_per_minute = fake_length / real_length
-    print(minutes_per_minute)
+    time_now = (int(time_now[0]) * 60) + int(time_now[1])
+    time_new = (int(time_new[0]) * 60) + int(time_new[1])
+
+    time_diff = time_new - time_now
+
+    print(time_diff * 60)
