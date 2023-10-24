@@ -110,4 +110,4 @@ dependencies:
   - zstd=1.5.5=hd90d995_0
   - pip:
       - opencv-python-headless==4.8.1.78
-prefix: /opt/homebrew/Caskroom/miniconda/base/envs/lambda-env
+prefix: lambda-env

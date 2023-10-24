@@ -1,5 +1,5 @@
 """Utils file for basic utility functions used throughout the database handler"""
-from datetime import datetime
+from datetime import datetime, timedelta
 import random
 from app import constants
 from app.dependencies import database as db
@@ -12,6 +12,14 @@ def current_to_timeslot() -> str:
         str: string representation of the current timeslot
     """
     now = datetime.now()
+    time_change = 0
+    with open("../../new_time", "r") as time:
+        try:
+            time_change = int(time.read())
+        except:
+            time_change = 0
+
+    now += timedelta(seconds=time_change)
     print(now)
     # Gets current time with minutes rounded down to the closest 15 minute timeslot
     return f'{now.hour:02}:{now.minute // constants.TIMESLOT_LEN * constants.TIMESLOT_LEN:02}'

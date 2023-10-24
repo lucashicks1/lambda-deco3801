@@ -10,6 +10,5 @@ if __name__ == "__main__":
     real_length = in_minutes(REAL_END) - in_minutes(REAL_START)
     fake_length = in_minutes(FAKE_END) - in_minutes(FAKE_START)
 
-    minutes_per_minute = fake_length / real_length 
-
-    
+    minutes_per_minute = fake_length / real_length
+    print(minutes_per_minute)
