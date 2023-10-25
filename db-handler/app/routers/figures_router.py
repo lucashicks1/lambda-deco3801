@@ -29,7 +29,6 @@ def get_available() -> Annotated[dict, Body(examples=[FIGURINES_EXAMPLE])]:
     # users: dict = {}
     time: tuple = utils.current_to_timeslot()
     timeslot_time: str = time[0]
-    timeslot_time = "15:30"
     day: str = time[1]
     _LOGGER.info("Getting availability for %s, %s", day, timeslot_time)
     # Finds the timeslot in the database at the current time

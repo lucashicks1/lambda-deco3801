@@ -1,67 +1,37 @@
 [
     {
-        "day": "monday",
-        "time_slot": 14,
+        "day": "wednesday",
+        "time_slot": 23,
         "data": "",
+        "colour": "red,black"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 24,
+        "data": "",
+        "colour": "red,black"
+    },
+    {
+        "day": "wednesday",
+        "time_slot": 25,
+        "data": "NAY\nth\n",
         "colour": "black"
     },
     {
         "day": "wednesday",
-        "time_slot": 9,
-        "data": "TEST",
-        "colour": "black"
+        "time_slot": 26,
+        "data": "BRU\n",
+        "colour": "red,black"
     },
     {
-        "day": "wednesday",
-        "time_slot": 10,
-        "data": "TEST",
-        "colour": "black"
-    },
-    {
-        "day": "wednesday",
-        "time_slot": 12,
-        "data": "",
-        "colour": "red"
-    },
-    {
-        "day": "wednesday",
-        "time_slot": 13,
-        "data": "",
-        "colour": "red"
-    },
-    {
-        "day": "friday",
-        "time_slot": 12,
-        "data": "",
-        "colour": "black"
-    },
-    {
-        "day": "friday",
-        "time_slot": 17,
-        "data": "",
-        "colour": "black"
-    },
-    {
-        "day": "sunday",
-        "time_slot": 12,
+        "day": "saturday",
+        "time_slot": 34,
         "data": "",
         "colour": "red"
     },
     {
         "day": "sunday",
-        "time_slot": 13,
-        "data": "",
-        "colour": "red"
-    },
-    {
-        "day": "sunday",
-        "time_slot": 14,
-        "data": "",
-        "colour": "red"
-    },
-    {
-        "day": "sunday",
-        "time_slot": 15,
+        "time_slot": 34,
         "data": "",
         "colour": "red"
     }

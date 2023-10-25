@@ -125,7 +125,7 @@ def get_info(time_slot_array: np.ndarray) -> (bool, [str], str):
     # threshold this for how many pixels need to be coloured to think important
     is_blue = pcent_blue >= 2
     is_red = pcent_red >= 2
-    is_black = pcent_black >= 20
+    is_black = pcent_black >= 22
 
     is_coloured = is_blue or is_red or is_black
     colour = []

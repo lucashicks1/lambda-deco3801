@@ -1,5 +1,5 @@
-rotation_angle = 270.0
-left = 20
-top = 4
-time_slot_width = 142.0
-time_slot_height = 47.5
+rotation_angle = 90
+left = 72
+top = 499
+time_slot_width = 120.0
+time_slot_height = 40.0

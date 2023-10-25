@@ -24,7 +24,6 @@ def current_to_timeslot() -> tuple[str, str]:
             time_change = 0
 
     now += timedelta(seconds=time_change)
-    print(now)
     # Gets current time with minutes rounded down to the closest 15 minute timeslot
     return f'{now.hour:02}:{now.minute // constants.TIMESLOT_LEN * constants.TIMESLOT_LEN:02}', str(DAYS[now.weekday()])
 
