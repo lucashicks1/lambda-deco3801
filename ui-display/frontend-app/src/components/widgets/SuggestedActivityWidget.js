@@ -20,7 +20,7 @@ const weatherConditionText = {
 const Activities = ({ currentCondition }) => {
     // hard code this value for now
     if (!currentCondition) {
-        currentCondition = 'Clouds';
+        currentCondition = 'Clear';
     }
     // Get the corresponding activity based on the weatherCondition
     const activity = weatherActivities[currentCondition] || 'movie';

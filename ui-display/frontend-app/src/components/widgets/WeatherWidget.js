@@ -10,7 +10,7 @@ class WeatherWidget extends Component {
 
     componentDidMount() {
         this.fetchWeatherCondition();
-        this.refreshInterval = setInterval(this.fetchWeatherCondition, 3600000);
+        this.refreshInterval = setInterval(this.fetchWeatherCondition, 10000);
     }
 
     componentWillUnmount() {
@@ -19,7 +19,7 @@ class WeatherWidget extends Component {
 
     fetchWeatherCondition = () => {
         const apiKey = 'e032a9d4b172cf16a8f75efac7a4470c';
-        const stLuciaLat = 27.5021;
+        const stLuciaLat = -27.5021;
         const stLuciaLon = 152.9968;
         const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${stLuciaLat}&lon=${stLuciaLon}&appid=${apiKey}&units=metric`;
     
