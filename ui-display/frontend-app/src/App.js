@@ -57,8 +57,8 @@ function App() {
       <div className="Grass-box">
         <div className="Names-box">
           <h1>  Timmy  </h1>
-          <h1>  Jimmy  </h1>
           <h1>  Kimmy  </h1>
+          <h1>  Jimmy  </h1>
           <h1>  Timmy Jr  </h1>
         </div>
         <div className="Names-box">
