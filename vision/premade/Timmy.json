@@ -1,337 +1,415 @@
 [
     {
-        "day": 0,
-        "time_slot": 0,
+        "day": "monday",
+        "time_slot": 8,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 0,
-        "time_slot": 1,
+        "day": "monday",
+        "time_slot": 9,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 0,
-        "time_slot": 2,
+        "day": "monday",
+        "time_slot": 10,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 0,
-        "time_slot": 3,
+        "day": "monday",
+        "time_slot": 11,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 0,
-        "time_slot": 4,
+        "day": "monday",
+        "time_slot": 12,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 0,
-        "time_slot": 5,
+        "day": "monday",
+        "time_slot": 13,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 0,
-        "time_slot": 6,
+        "day": "monday",
+        "time_slot": 14,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 0,
-        "time_slot": 7,
+        "day": "monday",
+        "time_slot": 15,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 1,
-        "time_slot": 0,
+        "day": "monday",
+        "time_slot": 20,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 1,
-        "time_slot": 1,
+        "day": "monday",
+        "time_slot": 21,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 1,
-        "time_slot": 2,
+        "day": "monday",
+        "time_slot": 22,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 1,
-        "time_slot": 3,
+        "day": "monday",
+        "time_slot": 23,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 1,
-        "time_slot": 4,
+        "day": "monday",
+        "time_slot": 24,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 1,
-        "time_slot": 5,
+        "day": "monday",
+        "time_slot": 25,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 1,
-        "time_slot": 6,
+        "day": "tuesday",
+        "time_slot": 8,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 1,
-        "time_slot": 7,
+        "day": "tuesday",
+        "time_slot": 9,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 2,
-        "time_slot": 0,
+        "day": "tuesday",
+        "time_slot": 10,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 2,
-        "time_slot": 1,
+        "day": "tuesday",
+        "time_slot": 11,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 2,
-        "time_slot": 2,
+        "day": "tuesday",
+        "time_slot": 12,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 2,
-        "time_slot": 3,
+        "day": "tuesday",
+        "time_slot": 13,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 2,
-        "time_slot": 4,
+        "day": "tuesday",
+        "time_slot": 14,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 2,
-        "time_slot": 5,
+        "day": "tuesday",
+        "time_slot": 15,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 2,
-        "time_slot": 6,
+        "day": "tuesday",
+        "time_slot": 20,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 2,
-        "time_slot": 7,
+        "day": "tuesday",
+        "time_slot": 21,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 3,
-        "time_slot": 0,
+        "day": "tuesday",
+        "time_slot": 22,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 3,
-        "time_slot": 1,
+        "day": "tuesday",
+        "time_slot": 23,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 3,
-        "time_slot": 2,
+        "day": "tuesday",
+        "time_slot": 24,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 3,
-        "time_slot": 3,
+        "day": "tuesday",
+        "time_slot": 25,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 3,
-        "time_slot": 4,
+        "day": "tuesday",
+        "time_slot": 28,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 3,
-        "time_slot": 5,
+        "day": "tuesday",
+        "time_slot": 29,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 3,
-        "time_slot": 6,
+        "day": "tuesday",
+        "time_slot": 30,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 3,
-        "time_slot": 7,
+        "day": "tuesday",
+        "time_slot": 31,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 4,
-        "time_slot": 0,
+        "day": "tuesday",
+        "time_slot": 32,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 4,
-        "time_slot": 1,
+        "day": "tuesday",
+        "time_slot": 33,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 4,
-        "time_slot": 2,
+        "day": "wednesday",
+        "time_slot": 8,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 4,
-        "time_slot": 3,
+        "day": "wednesday",
+        "time_slot": 9,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 4,
-        "time_slot": 4,
+        "day": "wednesday",
+        "time_slot": 10,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 4,
-        "time_slot": 5,
+        "day": "wednesday",
+        "time_slot": 11,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 4,
-        "time_slot": 6,
+        "day": "wednesday",
+        "time_slot": 12,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 4,
-        "time_slot": 7,
+        "day": "wednesday",
+        "time_slot": 13,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 5,
-        "time_slot": 0,
+        "day": "wednesday",
+        "time_slot": 14,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 5,
-        "time_slot": 1,
+        "day": "wednesday",
+        "time_slot": 15,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 5,
-        "time_slot": 2,
+        "day": "wednesday",
+        "time_slot": 18,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 5,
-        "time_slot": 3,
+        "day": "thursday",
+        "time_slot": 8,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 5,
-        "time_slot": 4,
+        "day": "thursday",
+        "time_slot": 9,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 5,
-        "time_slot": 5,
+        "day": "thursday",
+        "time_slot": 10,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 5,
-        "time_slot": 6,
+        "day": "thursday",
+        "time_slot": 11,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 5,
-        "time_slot": 7,
+        "day": "thursday",
+        "time_slot": 12,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 6,
-        "time_slot": 0,
+        "day": "thursday",
+        "time_slot": 13,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 6,
-        "time_slot": 1,
+        "day": "thursday",
+        "time_slot": 14,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 6,
-        "time_slot": 2,
+        "day": "thursday",
+        "time_slot": 15,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 6,
-        "time_slot": 3,
+        "day": "friday",
+        "time_slot": 8,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 6,
-        "time_slot": 4,
+        "day": "friday",
+        "time_slot": 9,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 6,
-        "time_slot": 5,
+        "day": "friday",
+        "time_slot": 10,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 6,
-        "time_slot": 6,
+        "day": "friday",
+        "time_slot": 11,
         "data": "",
         "colour": "black"
     },
     {
-        "day": 6,
-        "time_slot": 7,
+        "day": "friday",
+        "time_slot": 12,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "friday",
+        "time_slot": 13,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "friday",
+        "time_slot": 14,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "friday",
+        "time_slot": 15,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "friday",
+        "time_slot": 20,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "friday",
+        "time_slot": 21,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "friday",
+        "time_slot": 22,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "friday",
+        "time_slot": 23,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "friday",
+        "time_slot": 24,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "friday",
+        "time_slot": 25,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "saturday",
+        "time_slot": 12,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "saturday",
+        "time_slot": 13,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "saturday",
+        "time_slot": 14,
+        "data": "",
+        "colour": "black"
+    },
+    {
+        "day": "saturday",
+        "time_slot": 15,
         "data": "",
         "colour": "black"
     }
