@@ -13,10 +13,11 @@ def current_to_timeslot() -> str:
     """
     now = datetime.now()
     time_change = 0
-    with open("../../time_change.txt", "r") as time:
+    with open("../time_change.txt", "r") as time:
         try:
             time_change = int(time.read())
         except Exception as _:
+            print("error")
             time_change = 0
 
     now += timedelta(seconds=time_change)
