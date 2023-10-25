@@ -37,6 +37,7 @@ export default function SuggestedTimeWidget() {
     const [suggestedTime, setSuggestedTime] = useState("");
     const [upcomingEvent, setUpcomingEvent] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [nearEnd, setNearEnd] = useState(false);
     const baseURL = 'https://localhost:8000/display/';
 
 
@@ -59,7 +60,8 @@ export default function SuggestedTimeWidget() {
                 console.log(dayName);
                 console.log(Constants.DAY_POSITIONS[dayName]);
                 console.log("today:", currentToTimeSlotNum());
-                    
+                   
+                
                 const timeSlots = timeSlotsAllWeek.filter(timeSlot => 
                     (Constants.DAY_POSITIONS[timeSlot.day] > Constants.DAY_POSITIONS[dayName]) 
                         || (Constants.DAY_POSITIONS[timeSlot.day] === Constants.DAY_POSITIONS[dayName] 
@@ -67,45 +69,57 @@ export default function SuggestedTimeWidget() {
                 console.log(timeSlots);
 
                 let recommendation = timeSlots[0];
-                let recommendations = [];
-                let currentSlot = timeSlots[0];
-                let numberChecked = 0;
-                //console.log("recommendation", recommendations)
-                
-                let consecutiveSlots = 0;
-                while (consecutiveSlots < 3) {
-                    //console.log("day", Constants.DAY_POSITIONS[currentSlot.day]);
-                    const nextSlot = timeSlots.filter(timeSlot => 
-                        (Constants.DAY_POSITIONS[timeSlot.day] === Constants.DAY_POSITIONS[currentSlot.day]) && (timeSlot.slot_num === currentSlot.slot_num + 1)
-                    );
-                    //console.log("nextSlot", nextSlot);
-                    if (nextSlot && nextSlot.length > 0) {
-                        console.log("next", nextSlot);
-                        //recommendations.push(currentSlot);
-                        if (consecutiveSlots == 0) {
-                            recommendation = currentSlot;
-                        }
-                        currentSlot = nextSlot[0];
-                        consecutiveSlots++; 
-                    } else {
-                        consecutiveSlots = 0;
-                        if (numberChecked < timeSlots.length) {
-                            currentSlot = timeSlots[++numberChecked];
+                if (timeSlots && timeSlots.length > 0) {
+                    
+                    let currentSlot = timeSlots[0];
+
+                    let numberChecked = 0;
+                    //console.log("recommendation", recommendations)
+                    
+                    let consecutiveSlots = 0;
+                    while (consecutiveSlots < 3) {
+                        //console.log("day", Constants.DAY_POSITIONS[currentSlot.day]);
+                        const nextSlot = timeSlots.filter(timeSlot => 
+                            (Constants.DAY_POSITIONS[timeSlot.day] === Constants.DAY_POSITIONS[currentSlot.day]) && (timeSlot.slot_num === currentSlot.slot_num + 1)
+                        );
+                        //console.log("nextSlot", nextSlot);
+                        if (nextSlot && nextSlot.length > 0) {
+                            console.log("next", nextSlot);
+                            //recommendations.push(currentSlot);
+                            if (consecutiveSlots == 0) {
+                                recommendation = currentSlot;
+                            }
+                            currentSlot = nextSlot[0];
+                            consecutiveSlots++; 
                         } else {
-                            console.log("no consecutive times found :(");
-                            break;
+                            consecutiveSlots = 0;
+                            if (numberChecked < timeSlots.length) {
+                                currentSlot = timeSlots[++numberChecked];
+                                if (!currentSlot) {
+                                    recommendation = null;
+                                    setNearEnd(true);
+                                    break;
+                                }
+
+                            } else {
+                                console.log("no consecutive times found :(");
+                                setNearEnd(true);
+                                break;
+                            }
                         }
                     }
+                        
+                } else {
+                    setNearEnd(true);
                 }
 
                 //console.log(recommendation);
 
-                if (recommendation) {
+                if (timeSlots && recommendation) {
                     setSuggestedTime(dayAndTimeToDate(recommendation['day'],
                         recommendation['time']));
                     setLoading(false);
-                }
-
+                } 
             }
         };
         const fetchEvents = async () => {
@@ -148,14 +162,21 @@ export default function SuggestedTimeWidget() {
                     <p>Oops! Check back in a sec.</p> :
                     <>
                         <h1>Suggested Time 🪩</h1>
-                        <h3>Everybody is next free {suggestedTime}.</h3>
-                        {upcomingEvent ? 
-                            <p> And good news! 🥳 You've got 
-                                {(upcomingEvent.data && upcomingEvent.data.length > 1) ? ` ${upcomingEvent.data} ` : " something "}
-                                coming up {dayAndTimeToDate(upcomingEvent['day'], upcomingEvent['time'])} 💗
-                            </p> 
-                        : 
-                            <p>Maybe pencil something in!</p>
+                        {nearEnd ? 
+                            <p>Oops! No more times this week suit everybody.
+                                Maybe try again next week!
+                            </p>
+                        :
+                            <>
+                            <h3>Everybody is next free {suggestedTime}.</h3>
+                                {upcomingEvent ?
+                                    <p> And good news! 🥳 You've got
+                                        {(upcomingEvent.data && upcomingEvent.data.length > 1) ? ` ${upcomingEvent.data} ` : " something "}
+                                        coming up {dayAndTimeToDate(upcomingEvent['day'], upcomingEvent['time'])} 💗
+                                    </p>
+                                    :
+                                <p>Maybe pencil something in!</p>}
+                            </>
                         }
                     </>
                 }
