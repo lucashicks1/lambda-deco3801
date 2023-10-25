@@ -1,11 +1,14 @@
 """Utils file for basic utility functions used throughout the database handler"""
 from datetime import datetime, timedelta
 import random
+from typing import Tuple
+
 from app import constants
 from app.dependencies import database as db
+from app.constants import DAYS
 
 
-def current_to_timeslot() -> str:
+def current_to_timeslot() -> tuple[str, str]:
     """Calculates the current timeslot to a string that is used in the database
 
     Returns:
@@ -23,7 +26,7 @@ def current_to_timeslot() -> str:
     now += timedelta(seconds=time_change)
     print(now)
     # Gets current time with minutes rounded down to the closest 15 minute timeslot
-    return f'{now.hour:02}:{now.minute // constants.TIMESLOT_LEN * constants.TIMESLOT_LEN:02}'
+    return f'{now.hour:02}:{now.minute // constants.TIMESLOT_LEN * constants.TIMESLOT_LEN:02}', str(DAYS[now.weekday()])
 
 
 def timeslot_num_to_time(slot_num: int) -> str:

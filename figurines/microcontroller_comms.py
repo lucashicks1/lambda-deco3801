@@ -15,7 +15,7 @@ READ_INTERVAL = 0.1  # Time interval in seconds before reading serial data if se
 
 API_ENDPOINT = "http://127.0.0.1:8000/figurines"  # API Endpoint used to get calendar data
 API_REQUEST_TIMEOUT = 5  # Tiemout value in seconds before request times out
-POLL_DELAY = 15  # Delay in seconds inbetween polling for figurines
+POLL_DELAY = 5  # Delay in seconds inbetween polling for figurines
 
 read_state = True  # Global used to determine read/write state of serial port
 serial_count = 0  # Count of serial reads before switching over to write
@@ -170,6 +170,7 @@ def convert_response(response: dict) -> bytes:
         bytes: bytes to send to the serial port
     """
     _LOGGER.info("Converting response data to bytes")
+    _LOGGER.debug(sorted(response))
     com_string = ''.join(str(response[key]) for key in sorted(response))
     data = 'FIG' + com_string
     return bytes(data, encoding='utf-8')
@@ -211,6 +212,8 @@ def main():
         if serial_port is None:
             _LOGGER.error("Could not find valid serial connection and timed out, try again")
             continue
+
+        _LOGGER.info("Serial port has been found \n")
 
         while serial_port is not None:
             try:

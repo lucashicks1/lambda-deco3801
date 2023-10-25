@@ -6,11 +6,9 @@ from fastapi import Body, APIRouter
 from app.dependencies.database import cal_col, user_col
 from app import utils
 from app.examples.figurines_payloads import FIGURINES_EXAMPLE
-from app.constants import LOGGER_FORMAT, LOGGER_TIME_FORMAT, BUSY, FREE
+from app.constants import LOGGER_FORMAT, LOGGER_TIME_FORMAT, BUSY, FREE, FAMILY_NAME
 
 router = APIRouter(prefix='/figurines', tags=['Figurines'])
-
-
 
 logging.basicConfig(level=logging.INFO, format=LOGGER_FORMAT, datefmt=LOGGER_TIME_FORMAT)
 _LOGGER = logging.getLogger(__name__)
@@ -20,7 +18,7 @@ logging.getLogger(__name__).setLevel(logging.DEBUG)
 @router.get(
     '',
     summary='Gets map of all users and their availability for that timeslot. 1 represents busy, '
-    '0 represents free',
+            '0 represents free',
 )
 def get_available() -> Annotated[dict, Body(examples=[FIGURINES_EXAMPLE])]:
     """Endpoint that determines whether a user is free or not
@@ -28,9 +26,12 @@ def get_available() -> Annotated[dict, Body(examples=[FIGURINES_EXAMPLE])]:
     Returns:
         dict: map, mapping a user to their status
     """
-    users: dict = {}
-    timeslot_time: str = utils.current_to_timeslot()
-    _LOGGER.info("Getting availability for %s", timeslot_time)
+    # users: dict = {}
+    time: tuple = utils.current_to_timeslot()
+    timeslot_time: str = time[0]
+    timeslot_time = "15:30"
+    day: str = time[1]
+    _LOGGER.info("Getting availability for %s, %s", day, timeslot_time)
     # Finds the timeslot in the database at the current time
     booked_timeslot = cal_col.find_one(
         {'day': time_lib.strftime('%A').lower(), 'time': timeslot_time}
@@ -39,15 +40,15 @@ def get_available() -> Annotated[dict, Body(examples=[FIGURINES_EXAMPLE])]:
     # Populates dictionary. 1 if user is booked, 0 is free
     if booked_timeslot is None:
         _LOGGER.info("Current time is not shown on calendar")
-        return {key:BUSY for key in user_col.distinct("user_id")}
-            
-    _LOGGER.debug("Received timeslot back: %s", str(booked_timeslot))
-    booked_users = booked_timeslot.get("booked_users")
+        return {key: BUSY for key in user_col.distinct("user_id")}
 
-    # Populates dictionary. 1 if user is booked, 0 is free
-    return {user:BUSY if user in booked_users else FREE for user in user_col.distinct("user_id")}
+    users: dict = {
+        f"0{FAMILY_NAME}": FREE if FAMILY_NAME in booked_timeslot.get("booked_users") else BUSY,
+        f"1Timmy": BUSY if "Timmy" in booked_timeslot.get("booked_users") else FREE,
+        f"2Kimmy": BUSY if "Kimmy" in booked_timeslot.get("booked_users") else FREE,
+        f"3Jimmy": BUSY if "Jimmy" in booked_timeslot.get("booked_users") else FREE,
+        f"4Timmy_Jr": BUSY if "Timmy_Jr" in booked_timeslot.get("booked_users") else FREE
+    }
 
-    # for user in user_col.distinct('user_id'):
-    #     status = 1 if user in booked_users else 0
-    #     users[user] = status
-    # return users
+    _LOGGER.debug("Sending dict: %s \n", users)
+    return users
