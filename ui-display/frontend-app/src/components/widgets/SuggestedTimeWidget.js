@@ -44,7 +44,7 @@ export default function SuggestedTimeWidget() {
         const interval = setInterval(()=>{
             fetchData();
             //fetchTime();
-        },5000);
+        },50000);
         /* DEFAULT BEHAVIOUR: GET SINGLE RECOMMENDATION OF NEXT NEAREST TIME */
         const fetchData = async () => {
             console.log('data fetched');
@@ -64,25 +64,50 @@ export default function SuggestedTimeWidget() {
                     (Constants.DAY_POSITIONS[timeSlot.day] > Constants.DAY_POSITIONS[dayName]) 
                         || (Constants.DAY_POSITIONS[timeSlot.day] === Constants.DAY_POSITIONS[dayName] 
                             && timeSlot.slot_num > currentToTimeSlotNum()));
-                setSuggestedTime(dayAndTimeToDate(timeSlots[0]['day'],
-                    timeSlots[0]['time']));
-                setLoading(false);
+                console.log(timeSlots);
+
+                let recommendation = timeSlots[0];
+                let recommendations = [];
+                let currentSlot = timeSlots[0];
+                let numberChecked = 0;
+                //console.log("recommendation", recommendations)
+                
+                let consecutiveSlots = 0;
+                while (consecutiveSlots < 3) {
+                    //console.log("day", Constants.DAY_POSITIONS[currentSlot.day]);
+                    const nextSlot = timeSlots.filter(timeSlot => 
+                        (Constants.DAY_POSITIONS[timeSlot.day] === Constants.DAY_POSITIONS[currentSlot.day]) && (timeSlot.slot_num === currentSlot.slot_num + 1)
+                    );
+                    //console.log("nextSlot", nextSlot);
+                    if (nextSlot && nextSlot.length > 0) {
+                        console.log("next", nextSlot);
+                        //recommendations.push(currentSlot);
+                        if (consecutiveSlots == 0) {
+                            recommendation = currentSlot;
+                        }
+                        currentSlot = nextSlot[0];
+                        consecutiveSlots++; 
+                    } else {
+                        consecutiveSlots = 0;
+                        if (numberChecked < timeSlots.length) {
+                            currentSlot = timeSlots[++numberChecked];
+                        } else {
+                            console.log("no consecutive times found :(");
+                            break;
+                        }
+                    }
+                }
+
+                //console.log(recommendation);
+
+                if (recommendation) {
+                    setSuggestedTime(dayAndTimeToDate(recommendation['day'],
+                        recommendation['time']));
+                    setLoading(false);
+                }
+
             }
         };
-
-        /*
-        const fetchTime = async () => {
-            const time = await fetch("../../../time_change.txt");
-            const data = time;
-
-            if (data) {
-                const delta = data.text();
-                console.log("delta", delta);
-                setTimeDelta(delta);
-            }
-
-        }*/
-
         return () => clearInterval(interval);
 
         //fetchData();
