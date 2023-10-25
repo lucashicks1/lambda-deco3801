@@ -35,7 +35,7 @@ export default function SuggestedTimeWidget() {
     }
 
     const [suggestedTime, setSuggestedTime] = useState("");
-    const [timeDelta, setTimeDelta] = useState(0);
+    const [upcomingEvent, setUpcomingEvent] = useState(null);
     const [loading, setLoading] = useState(true);
     const baseURL = 'https://localhost:8000/display/';
 
@@ -43,8 +43,8 @@ export default function SuggestedTimeWidget() {
     useEffect(() => {
         const interval = setInterval(()=>{
             fetchData();
-            //fetchTime();
-        },50000);
+            fetchEvents();
+        },5000);
         /* DEFAULT BEHAVIOUR: GET SINGLE RECOMMENDATION OF NEXT NEAREST TIME */
         const fetchData = async () => {
             console.log('data fetched');
@@ -108,6 +108,33 @@ export default function SuggestedTimeWidget() {
 
             }
         };
+        const fetchEvents = async () => {
+            const response = await fetch("http://localhost:8000/display/family-timeslots");
+            const data = await response.json();
+            if (data && data.body) {
+                const timeSlotsAllWeek = Array.from(data.body);
+                console.log("events:", timeSlotsAllWeek);
+                // filter out any days already passed
+                // TODO what do we do when the week is nearly over?
+                const trueNow = new Date();
+                const dayName = Constants.DAYS[addSeconds(trueNow, Constants.TIME_DELTA).getDay()];
+
+                const timeSlots = timeSlotsAllWeek.filter(timeSlot =>
+                    (Constants.DAY_POSITIONS[timeSlot.day] > Constants.DAY_POSITIONS[dayName])
+                    || (Constants.DAY_POSITIONS[timeSlot.day] === Constants.DAY_POSITIONS[dayName]
+                        && timeSlot.slot_num > currentToTimeSlotNum()));
+                console.log("events filtered", timeSlots);
+
+                if (timeSlots && timeSlots.length > 0) {
+                    console.log("upcoming", timeSlots[0]);
+                    setUpcomingEvent(timeSlots[0]);
+                } else {
+                    console.log("no upcoming events");
+                    setUpcomingEvent(null);
+                }
+
+            }
+        };
         return () => clearInterval(interval);
 
         //fetchData();
@@ -122,6 +149,14 @@ export default function SuggestedTimeWidget() {
                     <>
                         <h1>Suggested Time 🪩</h1>
                         <h3>Everybody is next free {suggestedTime}.</h3>
+                        {upcomingEvent ? 
+                            <p> And good news! 🥳 You've got 
+                                {(upcomingEvent.data && upcomingEvent.data.length > 1) ? ` ${upcomingEvent.data} ` : " something "}
+                                coming up {dayAndTimeToDate(upcomingEvent['day'], upcomingEvent['time'])} 💗
+                            </p> 
+                        : 
+                            <p>Maybe pencil something in!</p>
+                        }
                     </>
                 }
             </header>
