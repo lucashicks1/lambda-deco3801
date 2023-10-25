@@ -37,18 +37,18 @@ function App() {
           </div>
           <div className="right-widget">
             <div className="Joke-box">
-              <h3>
+              <h2>
                 Joke of the day:
-              </h3>
+              </h2>
               <div>
-                <p className="Joke-Question">
+                <h2 className="Joke-Question">
                   What's a bee's favourite novel?
-                </p>
+                </h2>
               </div>
               <div>
-                <p className="Joke-Answer">
+                <h2 className="Joke-Answer">
                   The Great Gats-bee!
-                </p>
+                </h2>
               </div>
             </div>
           </div>
