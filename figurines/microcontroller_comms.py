@@ -26,6 +26,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 _LOGGER = logging.getLogger(__name__)
 logging.getLogger(__name__).setLevel(logging.DEBUG)
 
+
 def check_presence(port: str, interval: int = READ_INTERVAL):
     """Checks the presence of a port, checking if it is still open. This is run on a seperate thread.
     Will also read data from serial port if read_state is set to true
@@ -42,7 +43,7 @@ def check_presence(port: str, interval: int = READ_INTERVAL):
             _LOGGER.error("Status Thread [stopped]")
             _LOGGER.error("PRC [Stopping serial]")
             serial_disconnect(serial_port)
-        
+
         # Reads data from serial port
         if read_state:
             serial_read_data(serial_port)
@@ -83,6 +84,7 @@ def initialise_serial() -> Serial | None:
         _LOGGER.debug(e)
         return None
 
+
 def ping_api() -> dict | None:
     """Sends a GET request to the database API and gets data
 
@@ -101,6 +103,7 @@ def ping_api() -> dict | None:
         _LOGGER.debug(e)
         return None
 
+
 def serial_disconnect(serial_port: Serial):
     """Disconnects the current serial port, flushing the input and output buffers
 
@@ -113,6 +116,7 @@ def serial_disconnect(serial_port: Serial):
     _LOGGER.info("Reset both input and output buffers.")
     serial_port.close()
     _LOGGER.info("Closed serial port.")
+
 
 def serial_send_data(data: dict):
     """Sends figurine data to the serial port
@@ -136,6 +140,7 @@ def serial_send_data(data: dict):
         _LOGGER.error("Encountered serial exception")
         _LOGGER.debug(e)
         serial_port = None
+
 
 def serial_read_data(serial_port: Serial):
     """Reads any data from the serial port and logs it
@@ -169,6 +174,7 @@ def convert_response(response: dict) -> bytes:
     data = 'FIG' + com_string
     return bytes(data, encoding='utf-8')
 
+
 def start_thread(port: str):
     """Starts a thread to then check the ports
 
@@ -185,6 +191,7 @@ def start_thread(port: str):
     except RuntimeError as e:
         _LOGGER.error("Start() method called multiple times on the same thread object")
         _LOGGER.debug(e)
+
 
 def main():
     """Main program loop which will constantly attempt to connect to a serial device and when connected will write/read to serial.
@@ -205,7 +212,6 @@ def main():
             _LOGGER.error("Could not find valid serial connection and timed out, try again")
             continue
 
-    
         while serial_port is not None:
             try:
                 serial_port.read()
@@ -226,14 +232,12 @@ def main():
                 continue
 
             if response is None:
+                _LOGGER.debug("No response")
                 continue
 
             if response != figurine_status:
                 figurine_status = response
                 serial_send_data(response)
-
-
-
 
 
 if __name__ == "__main__":
